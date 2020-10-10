@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Webpack Intro
 
 [See Live Demo](https://webpack-temp.netlify.app/)
@@ -79,3 +80,6 @@ const examplePromise = () => {
 
 - Build Command: `npm run build`
 - Publish directory: `build`
+=======
+# jurassic-world-visitor-dashboard
+>>>>>>> 4071eb613a45f9e62704ba020fdea2e199f1caaf
