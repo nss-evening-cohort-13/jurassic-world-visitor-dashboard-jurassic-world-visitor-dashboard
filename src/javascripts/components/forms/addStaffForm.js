@@ -1,14 +1,17 @@
 import staffData from '../../helpers/data/staffData';
 
 const addStaffForm = () => {
-  $('#app').append(`<form>
+  $('#app').append(`<form id="addStaffForm">
+  <h1>Add a Staff Member</h1>
+  <div id="staffErrorMsg"></div>
+  <div id="staffSuccessMsg"></div>
   <div class="form-group">
     <label for="staffName">Name</label>
-    <input type="text" class="form-control" id="staffName">
+    <input type="text" class="form-control" id="staffName" required>
   </div>
   <div class="form-group">
     <label for="staffImage">Image Link</label>
-    <input type="url" class="form-control" id="staffImage">
+    <input type="url" class="form-control" id="staffImage" required/>
   </div>
   <button type="submit" class="btn btn-outline-dark" id="submitStaff">Submit</button>
 </form>`);
@@ -17,11 +20,27 @@ const addStaffForm = () => {
     e.preventDefault();
 
     const data = {
-      name: $('#staffName').val() || false,
-      imageUrl: $('#staffImage').val() || false
+      name: $('#staffName').val(),
+      imageUrl: $('#staffImage').val()
     };
 
-    staffData.addStaff(data);
+    if (document.getElementById('addStaffForm').checkValidity()) {
+      $('#staffErrorMsg').html('');
+
+      staffData.addStaff(data)
+        .then(() => {
+          $('#staffSuccessMsg').html('<div class="alert alert-success" role="alert">The staff member has been added!</div>');
+        }).catch((error) => console.warn(error));
+
+      setTimeout(() => {
+        $('#staffSuccessMsg').html('');
+      }, 2000);
+
+      $('#staffName').val('');
+      $('#staffImage').val('');
+    } else {
+      $('#staffErrorMsg').html('<div class="alert alert-danger" role="alert">Please fill out all fields correctly.</div>');
+    }
   });
 };
 

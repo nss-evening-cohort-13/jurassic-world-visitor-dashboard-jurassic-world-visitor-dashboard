@@ -4,7 +4,7 @@ const viewHelper = (id) => {
   $('#app').html('');
 
   switch (id) {
-    case 'add-staff-link':
+    case 'staff-link':
       return staffView.staffView();
     default:
       return console.warn('nothing clicked');
