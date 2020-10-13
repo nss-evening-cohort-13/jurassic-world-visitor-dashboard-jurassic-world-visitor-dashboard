@@ -1,7 +1,7 @@
 import rideData from '../../helpers/data/ridesData';
 
 const rideForm = () => {
-  $('#app').append(
+  $('#app').html(
     `<h2>Add A Ride</h2>
             <div id="success-message"></div>
             <form>

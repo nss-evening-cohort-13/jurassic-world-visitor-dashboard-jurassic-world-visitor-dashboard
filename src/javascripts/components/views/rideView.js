@@ -6,7 +6,7 @@ const rideView = () => {
     e.preventDefault();
 
     form.rideForm();
-    $('#new-ride-btn').addClass('disabled');
+    $('.add-ride').addClass('disabled');
   });
 };
 
