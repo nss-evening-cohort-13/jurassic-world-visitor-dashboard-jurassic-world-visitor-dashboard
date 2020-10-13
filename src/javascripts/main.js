@@ -1,8 +1,8 @@
 import '../styles/main.scss';
-import navbar from './components/navbar/navbar';
+import authData from './helpers/data/authData';
 
 const init = () => {
-  navbar.navbar();
+  authData.checkLoginStatus();
 };
 
 init();
