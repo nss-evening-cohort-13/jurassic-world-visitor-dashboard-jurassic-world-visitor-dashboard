@@ -5,7 +5,8 @@
   "main": "src/javascripts/main.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
-    "build": "webpack --mode production --module-bind js=babel-loader"
+    "build": "webpack --mode production --module-bind js=babel-loader",
+    "deploy": "npm run build && firebase deploy"
   },
   "keywords": [],
   "author": "Dana Pham, Deanna Mix, Rob Bandstra, Michael Pfohl",
@@ -34,6 +35,7 @@
     "axios": "0.20.0",
     "bootstrap": "4.5.2",
     "firebase": "^7.21.0",
+    "firebase-tools": "^8.12.1",
     "jquery": "3.5.1",
     "popper.js": "1.16.1"
   }
