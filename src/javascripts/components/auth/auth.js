@@ -19,7 +19,7 @@ const loginButton = () => {
     <li class="nav-item mx-3" id="boards-link">
       <a class="nav-link" href="#">Dinosaurs</a>
     </li>
-    <li class="nav-item mx-3" id="add-board-link">
+    <li class="nav-item mx-3" id="staff-link">
       <a class="nav-link" href="#"> Staff</a>
     </li>
     <li class="nav-item mx-3" id="add-dinn-link">
