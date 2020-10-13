@@ -34,7 +34,7 @@ const loginButton = () => {
   </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
-      <button class="btn btn-outline-danger ml-auto" id="loginBtn" type="button">Login</button>
+      <button class="btn btn-outline-success ml-auto" id="loginBtn" type="button">Login</button>
       </li>
     </ul>
   </div>
