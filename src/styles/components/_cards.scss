@@ -1,0 +1,10 @@
+#cards {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin-top: 20px;    
+}
+
+.card-body {
+    width: 100%;
+}

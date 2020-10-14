@@ -9,4 +9,16 @@ const addStaff = (staffData) => axios.post(`${baseUrl}/staff.json`, staffData)
     axios.patch(`${baseUrl}/staff/${response.data.name}.json`, fbKey);
   }).catch((error) => console.warn(error));
 
-export default { addStaff };
+const getStaff = () => axios.get(`${baseUrl}/staff.json`)
+  .then((response) => {
+    const staffData = response.data;
+    const staff = [];
+    if (staffData) {
+      Object.keys(staffData).forEach((staffId) => {
+        staff.push(staffData[staffId]);
+      });
+    }
+    return staff;
+  }).catch((error) => console.warn(error));
+
+export default { addStaff, getStaff };

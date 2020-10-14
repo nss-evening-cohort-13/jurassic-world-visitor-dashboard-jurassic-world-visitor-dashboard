@@ -1,4 +1,5 @@
 import staffData from '../../helpers/data/staffData';
+import staffCards from '../cards/staffCards';
 
 const addStaffForm = () => {
   $('#app').append(`<form id="addStaffForm">
@@ -31,7 +32,7 @@ const addStaffForm = () => {
           $('#staffSuccessMsg').append('<div class="alert alert-success" role="alert">The staff member has been added!</div>');
           $('#addStaffBtn').removeAttr('disabled');
         }).catch((error) => console.warn(error));
-
+      staffCards.staffCardBuilder();
       setTimeout(() => {
         $('#staffSuccessMsg').html('');
       }, 2000);
