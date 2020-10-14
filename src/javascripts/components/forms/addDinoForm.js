@@ -4,15 +4,13 @@ const addDinoForm = () => {
   $('#app').append(`
   <form id="addDinoForm">
   <h1>Add a Staff Member</h1>
-  <div id="dinoErrorMsg"></div>
-  <div id="dinoSuccessMsg"></div>
   <div class="form-group">
     <label for="dinoName">Name</label>
-    <input type="text" class="form-control" id="dinoName" required>
+    <input type="text" class="form-control" id="dinoName" placeholder="Example: T-Rex" required>
   </div>
   <div class="form-group">
     <label for="dinoImage">Image Link</label>
-    <input type="url" class="form-control" id="dinoImage" required/>
+    <input type="url" class="form-control" id="dinoImage" placeholder="Example: trex.jpg" required/>
   </div>
   <button type="submit" class="btn btn-outline-dark buttons" id="submitDino">Submit</button>
 </form>`);

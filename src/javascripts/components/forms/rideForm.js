@@ -7,11 +7,11 @@ const rideForm = () => {
             <h2>Add A Ride</h2>
               <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="rideName" placeholder="Example: Roller Coaster">
+                <input type="text" class="form-control" id="rideName" placeholder="Example: Roller Coaster" required>
               </div>
               <div class="form-group">
                 <label for="image">Image</label>
-                <input type="url" class="form-control" id="rideImage" placeholder="Example: http://www.google.jpg">
+                <input type="url" class="form-control" id="rideImage" placeholder="Example: rollercoaster.jpg" required>
               </div>
               <button id="add-ride-btn" type="submit" class="btn btn-outline-dark">Submit</button>
             </form>`
@@ -21,8 +21,8 @@ const rideForm = () => {
     e.preventDefault();
 
     const data = {
-      name: $('#name').val(),
-      image: $('#image').val()
+      name: $('#rideName').val(),
+      image: $('#rideImage').val()
     };
 
     if (document.getElementById('addRideForm').checkValidity()) {
