@@ -6,7 +6,7 @@ const rideView = () => {
   const user = firebase.auth().currentUser;
 
   if (user) {
-    $('#app').html('<button id="new-ride-btn" type="submit" class="btn btn-info add-ride"><i class="fas fa-plus-circle"></i>Add a Ride</button>');
+    $('#app').html('<button id="new-ride-btn" type="submit" class="btn btn-outline-dark add-btn">Add a Ride</button>');
     $('#new-ride-btn').on('click', () => {
       form.rideForm();
       $('.add-ride').attr('disabled', true);

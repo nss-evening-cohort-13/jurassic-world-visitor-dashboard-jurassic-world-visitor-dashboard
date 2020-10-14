@@ -15,7 +15,7 @@ const rideForm = () => {
                 <label for="image">Image</label>
                 <input type="url" class="form-control" id="rideImage" placeholder="Example: http://www.google.jpg">
               </div>
-              <button id="add-ride-btn" type="submit" class="btn btn-info"><i class="fas fa-plus-circle"></i>Submit</button>
+              <button id="add-ride-btn" type="submit" class="btn btn-outline-dark">Submit</button>
             </form>`
   );
 
