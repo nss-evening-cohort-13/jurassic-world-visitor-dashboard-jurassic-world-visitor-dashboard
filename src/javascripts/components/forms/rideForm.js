@@ -27,19 +27,17 @@ const rideForm = () => {
 
     if (document.getElementById('addRideForm').checkValidity()) {
       $('#rideErrorMessage').html('');
+
       rideData.addRide(data)
         .then(() => {
           $('#addRideForm').remove();
           $('#rideSuccessMessage').html('<div class="alert alert-success" role="alert">Your Ride Was Added!</div>');
           $('#new-ride-btn').removeAttr('disabled');
-          $('#cards').append(rideCards.rideCardBuilder(rideObj));
         }).catch((error) => console.warn(error));
 
       setTimeout(() => {
         $('#rideSuccessMessage').html('');
       }, 3000);
-      $('#rideName').val('');
-      $('#rideImage').val('');
     } else {
       $('#rideErrorMessage').html('<div class="alert alert-danger" role="alert">Please complete all fields correctly.</div>');
     }
