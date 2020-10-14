@@ -8,6 +8,7 @@ const vendorView = () => {
   if (user) {
     $('#app').html(`
       <div id="add-vendor-div">
+      <div id="success-message"></div>
       <button type="button" class="btn btn-outline-dark" id="add-vendor-btn">Add a Vendor</button>
       </div>`);
 

@@ -1,22 +1,21 @@
 import vendorData from '../../helpers/data/vendorData';
 
 const vendorForm = () => {
-  $('#app').append(`<form id="addVendorForm">
+  $('#app').append(`
    <h2>Add A Vendor to The Park!</h2>
-  <div id="success-message"></div>
-  <form>
+  <form id="addVendorForm">
     <div id="error-message"></div>
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" placeholder="Example: Lisa">
+      <input type="text" class="form-control" id="name" placeholder="Example: Lisa" required>
     </div>
     <div class="form-group">
       <label for="image">Image</label>
-      <input type="url" class="form-control" id="role" placeholder="Enter Image URL">
+      <input type="url" class="form-control" id="role" placeholder="Enter Image URL" required>
     </div>
     <div class="form-group">
       <label for="location">Location</label>
-      <input type="text" class="form-control" id="location" placeholder="Example: Nashville">
+      <input type="text" class="form-control" id="location" placeholder="Example: Nashville" required>
     </div>
     <button id="submit-vendor-btn" type="submit" class="btn btn-info"><i class="fas fa-plus-circle"></i> Add Vendor</button>
   </form>`);
@@ -25,7 +24,7 @@ const vendorForm = () => {
 
     const data = {
       name: $('#name').val(),
-      image: $('#image').val(),
+      imageUrl: $('#image').val(),
       location: $('#location').val()
     };
 
