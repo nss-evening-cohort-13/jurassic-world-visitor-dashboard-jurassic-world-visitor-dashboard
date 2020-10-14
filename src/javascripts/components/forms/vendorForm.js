@@ -2,8 +2,8 @@ import vendorData from '../../helpers/data/vendorData';
 
 const vendorForm = () => {
   $('#app').append(`
-   <h2>Add A Vendor to The Park!</h2>
   <form id="addVendorForm">
+    <h2>Add A Vendor to The Park!</h2>
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text" class="form-control" id="name" placeholder="Example: Lisa" required>
@@ -32,7 +32,9 @@ const vendorForm = () => {
 
       vendorData.addVendor(data)
         .then(() => {
+          $('#addVendorForm').remove();
           $('#success-message').html('<div class="alert alert-success" role="alert">The vendor has been added!</div>');
+          $('#add-vendor-btn').removeAttr('disabled');
         }).catch((error) => console.warn(error));
 
       setTimeout(() => {

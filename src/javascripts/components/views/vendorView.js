@@ -10,7 +10,7 @@ const vendorView = () => {
       <div id="add-vendor-div">
       <div id="success-message"></div>
       <div id="error-message"></div>
-      <button type="button" class="add-btn btn-outline-dark" id="add-vendor-btn">Add a Vendor</button>
+      <button type="button" class="add-btn btn btn-outline-dark" id="add-vendor-btn">Add a Vendor</button>
       </div>`);
 
     $('#add-vendor-btn').on('click', () => {
