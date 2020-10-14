@@ -3,7 +3,7 @@ import vendorData from '../../helpers/data/vendorData';
 const vendorForm = () => {
   $('#app').append(`
   <form id="addVendorForm">
-    <h2>Add A Vendor to The Park!</h2>
+    <h2>Add a Vendor</h2>
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text" class="form-control" id="name" placeholder="Example: Lisa" required>

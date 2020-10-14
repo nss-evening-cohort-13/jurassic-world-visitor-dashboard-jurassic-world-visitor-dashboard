@@ -20,7 +20,7 @@ const navbar = () => {
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item mx-3" id="dino-link">
-          <a class="nav-link" href="#">Dinosaurs</a>
+          <a class="nav-link" href="#"> Dinos</a>
         </li>
         <li class="nav-item mx-3" id="staff-link">
           <a class="nav-link" href="#"> Staff</a>
