@@ -7,6 +7,7 @@ const dinoView = () => {
   if (user) {
     $('#app').html(`<div id="addDinoDiv">
       <div id="dinoSuccessMsg"></div>
+      <div id="dinoErrorMsg"></div>
       <button type="button" class="btn btn-outline-dark add-btn" id="addDinoBtn">Add a Dino</button>
       </div>`);
     $('#addDinoBtn').on('click', () => {
