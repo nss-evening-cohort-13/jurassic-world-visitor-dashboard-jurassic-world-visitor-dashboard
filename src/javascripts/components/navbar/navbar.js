@@ -28,7 +28,7 @@ const navbar = () => {
         <li class="nav-item mx-3" id="add-dinn-link">
           <a class="nav-link" href="#"> Rides</a>
         </li>
-        <li class="nav-item mx-3" id="add-vendor-link">
+        <li class="nav-item mx-3" id="vendor-link">
           <a class="nav-link" href="#"> Vendors</a>
         </li>
         <li class="nav-item mx-3" id="add-dinn-link">
