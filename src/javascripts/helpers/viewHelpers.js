@@ -1,5 +1,6 @@
 import staffView from '../components/views/staffView';
 import vendorView from '../components/views/vendorView';
+import rideView from '../components/views/rideView';
 import dinoView from '../components/views/dinoView';
 
 const viewHelper = (id) => {
@@ -10,6 +11,8 @@ const viewHelper = (id) => {
       return staffView.staffView();
     case 'vendor-link':
       return vendorView.vendorView();
+    case 'rides-link':
+      return rideView.rideView();
     case 'dino-link':
       return dinoView.dinoView();
     default:

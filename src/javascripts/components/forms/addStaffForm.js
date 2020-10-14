@@ -3,15 +3,13 @@ import staffData from '../../helpers/data/staffData';
 const addStaffForm = () => {
   $('#app').append(`<form id="addStaffForm">
   <h1>Add a Staff Member</h1>
-  <div id="staffErrorMsg"></div>
-  <div id="staffSuccessMsg"></div>
   <div class="form-group">
     <label for="staffName">Name</label>
-    <input type="text" class="form-control" id="staffName" required>
+    <input type="text" class="form-control" id="staffName" placeholder="Example: Bob" required>
   </div>
   <div class="form-group">
     <label for="staffImage">Image Link</label>
-    <input type="url" class="form-control" id="staffImage" required/>
+    <input type="url" class="form-control" id="staffImage" placeholder="Example: bob.jpg" required/>
   </div>
   <button type="submit" class="btn btn-outline-dark" id="submitStaff">Submit</button>
 </form>`);
