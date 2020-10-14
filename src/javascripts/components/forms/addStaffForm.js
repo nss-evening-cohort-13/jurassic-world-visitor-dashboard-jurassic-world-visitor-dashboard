@@ -20,24 +20,32 @@ const addStaffForm = () => {
 
     const data = {
       name: $('#staffName').val(),
-      imageUrl: $('#staffImage').val()
+      imageUrl: $('#staffImage').val(),
     };
 
     if (document.getElementById('addStaffForm').checkValidity()) {
       $('#staffErrorMsg').html('');
 
-      staffData.addStaff(data)
-        .then(() => {
-          $('#addStaffForm').remove();
-          $('#staffSuccessMsg').append('<div class="alert alert-success" role="alert">The staff member has been added!</div>');
-          $('#addStaffBtn').removeAttr('disabled');
-        }).catch((error) => console.warn(error));
-      staffCards.staffCardBuilder();
+      staffData
+        .addStaff(data)
+        .then((response) => {
+          if (response.status === 200) {
+            $('#addStaffForm').remove();
+            $('#staffSuccessMsg').append(
+              '<div class="alert alert-success" role="alert">The staff member has been added!</div>'
+            );
+            $('#addStaffBtn').removeAttr('disabled');
+            staffCards.staffCardBuilder();
+          }
+        })
+        .catch((error) => console.warn(error));
       setTimeout(() => {
         $('#staffSuccessMsg').html('');
       }, 2000);
     } else {
-      $('#staffErrorMsg').html('<div class="alert alert-danger" role="alert">Please fill out all fields correctly.</div>');
+      $('#staffErrorMsg').html(
+        '<div class="alert alert-danger" role="alert">Please fill out all fields correctly.</div>'
+      );
     }
   });
 };

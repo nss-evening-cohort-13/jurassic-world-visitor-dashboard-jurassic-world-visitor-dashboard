@@ -25,6 +25,7 @@ const staffCardBuilder = (e) => {
     })
     .catch((error) => console.warn(error));
   e.stopImmediatePropogation();
+  window.location.reload();
 };
 
 export default { staffCardBuilder };

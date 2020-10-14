@@ -3,11 +3,13 @@ import apiKeys from '../apiKeys.json';
 
 const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
-const addStaff = (staffData) => axios.post(`${baseUrl}/staff.json`, staffData)
-  .then((response) => {
+const addStaff = (staffData) => new Promise((resolve, reject) => {
+  axios.post(`${baseUrl}/staff.json`, staffData).then((response) => {
     const fbKey = { staffId: response.data.name };
     axios.patch(`${baseUrl}/staff/${response.data.name}.json`, fbKey);
-  }).catch((error) => console.warn(error));
+    resolve(response);
+  }).catch((error) => reject(error));
+});
 
 const getStaff = () => axios.get(`${baseUrl}/staff.json`)
   .then((response) => {
