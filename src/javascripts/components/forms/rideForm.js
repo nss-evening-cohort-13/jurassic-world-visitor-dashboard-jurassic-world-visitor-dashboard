@@ -11,7 +11,7 @@ const rideForm = () => {
               </div>
               <div class="form-group">
                 <label for="image">Image</label>
-                <input type="url" class="form-control" id="rideImage" placeholder="Example: rollercoaster.jpg" required>
+                <input type="url" class="form-control" id="rideImage" placeholder="Example: https://www.images.com/rollercoaster.jpg" required>
               </div>
               <button id="add-ride-btn" type="submit" class="btn btn-outline-dark">Submit</button>
             </form>`
