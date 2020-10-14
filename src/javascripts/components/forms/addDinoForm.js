@@ -3,7 +3,7 @@ import dinoData from '../../helpers/data/dinoData';
 const addDinoForm = () => {
   $('#app').append(`
   <form id="addDinoForm">
-  <h1>Add a Staff Member</h1>
+  <h1>Add a Dino</h1>
   <div class="form-group">
     <label for="dinoName">Name</label>
     <input type="text" class="form-control" id="dinoName" placeholder="Example: T-Rex" required>

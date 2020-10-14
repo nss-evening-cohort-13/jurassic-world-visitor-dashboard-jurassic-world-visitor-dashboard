@@ -2,6 +2,7 @@ import staffView from '../components/views/staffView';
 import vendorView from '../components/views/vendorView';
 import rideView from '../components/views/rideView';
 import dinoView from '../components/views/dinoView';
+import equipmentView from '../components/views/equipmentView';
 
 const viewHelper = (id) => {
   $('#app').html('');
@@ -15,6 +16,8 @@ const viewHelper = (id) => {
       return rideView.rideView();
     case 'dino-link':
       return dinoView.dinoView();
+    case 'equipment-link':
+      return equipmentView.equipmentView();
     default:
       return console.warn('nothing clicked');
   }

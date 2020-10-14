@@ -4,7 +4,7 @@ const rideForm = () => {
   $('#app').append(
     `
             <form id="addRideForm">
-            <h2>Add A Ride</h2>
+            <h2>Add a Ride</h2>
               <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="rideName" placeholder="Example: Roller Coaster" required>
