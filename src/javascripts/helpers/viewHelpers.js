@@ -1,8 +1,12 @@
+import staffView from '../components/views/staffView';
 import rideView from '../components/views/rideView';
 
 const viewHelper = (id) => {
   $('#app').html('');
+
   switch (id) {
+    case 'staff-link':
+      return staffView.staffView();
     case 'rides-link':
       return rideView.rideView();
     default:
@@ -10,11 +14,10 @@ const viewHelper = (id) => {
   }
 };
 
-const viewListener = (view) => {
-  viewHelper(view);
+const viewListeners = () => {
   $('body').on('click', 'li.nav-item', (e) => {
     viewHelper(e.currentTarget.id);
   });
 };
 
-export default { viewListener };
+export default { viewListeners };
