@@ -9,7 +9,7 @@ const addRide = (data) => new Promise((resolve, reject) => {
     .then((response) => {
       const update = { rideId: response.data.name };
       axios.patch(`${baseUrl}/rides/${response.data.name}.json`, update);
-      resolve(response.statusText);
+      resolve(response);
     })
     .catch((error) => reject(error));
 });

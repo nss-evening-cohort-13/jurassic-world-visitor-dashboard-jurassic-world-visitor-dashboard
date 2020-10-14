@@ -22,24 +22,39 @@ const rideForm = () => {
 
     const data = {
       name: $('#rideName').val(),
-      image: $('#rideImage').val()
+      image: $('#rideImage').val(),
     };
 
     if (document.getElementById('addRideForm').checkValidity()) {
       $('#rideErrorMessage').html('');
 
-      rideData.addRide(data)
-        .then(() => {
-          $('#addRideForm').remove();
-          $('#rideSuccessMessage').html('<div class="alert alert-success" role="alert">Your Ride Was Added!</div>');
-          $('#new-ride-btn').removeAttr('disabled');
-        }).catch((error) => console.warn(error));
+      rideData
+        .addRide(data)
+        .then((response) => {
+          if (response.statusText === 'OK') {
+            $('#addRideForm').remove();
+            $('#rideSuccessMessage').html(
+              '<div class="alert alert-success" role="alert">Your Ride Was Added!</div>'
+            );
+            $('#new-ride-btn').removeAttr('disabled');
+            $('#cards')
+              .append(`<div class="card" id="${response.data.name}" style="width: 18rem;">
+            <img src="${data.image}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <p class="card-text">${data.name}</p>
+            </div>
+          </div>`);
+          }
+        })
+        .catch((error) => console.warn(error));
 
       setTimeout(() => {
         $('#rideSuccessMessage').html('');
       }, 3000);
     } else {
-      $('#rideErrorMessage').html('<div class="alert alert-danger" role="alert">Please complete all fields correctly.</div>');
+      $('#rideErrorMessage').html(
+        '<div class="alert alert-danger" role="alert">Please complete all fields correctly.</div>'
+      );
     }
   });
 };
