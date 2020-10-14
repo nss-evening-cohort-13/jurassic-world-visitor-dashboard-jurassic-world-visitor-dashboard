@@ -8,6 +8,7 @@ const staffView = () => {
   if (user) {
     $('#app').html(`
     <div id="addStaffDiv">
+    <div id="staffSuccessMsg"></div>
     <button type="button" class="btn btn-outline-dark" id="addStaffBtn">Add a Staff Member</button>
     </div>`);
 
