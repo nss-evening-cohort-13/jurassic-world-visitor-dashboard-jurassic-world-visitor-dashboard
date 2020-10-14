@@ -32,6 +32,7 @@ const rideForm = () => {
           $('#addRideForm').remove();
           $('#rideSuccessMessage').html('<div class="alert alert-success" role="alert">Your Ride Was Added!</div>');
           $('#new-ride-btn').removeAttr('disabled');
+          $('#cards').append(rideCards.rideCardBuilder(rideObj));
         }).catch((error) => console.warn(error));
 
       setTimeout(() => {
