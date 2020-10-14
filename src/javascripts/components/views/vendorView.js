@@ -1,10 +1,19 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import vendorForm from '../forms/vendorForm';
+import vendorCard from '../cards/vendorCards';
+import vendorData from '../../helpers/data/vendorData';
 
 const vendorView = () => {
   const user = firebase.auth().currentUser;
 
+  vendorData.getVendors().then((response) => {
+    if (response.length) {
+      response.forEach((vendor) => {
+        $('#cards').append(vendorCard.vendorMaker(vendor));
+      });
+    }
+  });
   if (user) {
     $('#app').html(`
       <div id="add-vendor-div">
