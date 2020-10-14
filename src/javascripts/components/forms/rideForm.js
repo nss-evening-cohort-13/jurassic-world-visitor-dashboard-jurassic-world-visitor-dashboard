@@ -3,10 +3,8 @@ import rideData from '../../helpers/data/ridesData';
 const rideForm = () => {
   $('#app').append(
     `
-            <div id="success-message"></div>
             <form id="addRideForm">
             <h2>Add A Ride</h2>
-              <div id="error-message"></div>
               <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="rideName" placeholder="Example: Roller Coaster">
@@ -28,21 +26,21 @@ const rideForm = () => {
     };
 
     if (document.getElementById('addRideForm').checkValidity()) {
-      $('#error-message').html('');
+      $('#rideErrorMessage').html('');
       rideData.addRide(data)
         .then(() => {
           $('#addRideForm').remove();
-          $('#success-message').html('<div class="alert alert-success" role="alert">Your Ride Was Added!</div>');
-          $('.add-ride').attr('disabled', false);
+          $('#rideSuccessMessage').html('<div class="alert alert-success" role="alert">Your Ride Was Added!</div>');
+          $('#new-ride-btn').removeAttr('disabled');
         }).catch((error) => console.warn(error));
 
       setTimeout(() => {
-        $('#success-message').html('');
+        $('#rideSuccessMessage').html('');
       }, 3000);
       $('#rideName').val('');
       $('#rideImage').val('');
     } else {
-      $('#error-message').html('<div class="alert alert-danger" role="alert">Please complete all fields correctly.</div>');
+      $('#rideErrorMessage').html('<div class="alert alert-danger" role="alert">Please complete all fields correctly.</div>');
     }
   });
 };

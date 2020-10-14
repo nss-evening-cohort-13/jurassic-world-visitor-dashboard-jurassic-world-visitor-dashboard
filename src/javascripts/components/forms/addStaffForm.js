@@ -3,8 +3,6 @@ import staffData from '../../helpers/data/staffData';
 const addStaffForm = () => {
   $('#app').append(`<form id="addStaffForm">
   <h1>Add a Staff Member</h1>
-  <div id="staffErrorMsg"></div>
-  <div id="staffSuccessMsg"></div>
   <div class="form-group">
     <label for="staffName">Name</label>
     <input type="text" class="form-control" id="staffName" required>

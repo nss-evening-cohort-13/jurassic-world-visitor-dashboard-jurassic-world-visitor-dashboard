@@ -2,7 +2,6 @@ import dinoData from '../../helpers/data/dinoData';
 
 const addDinoForm = () => {
   $('#app').append(`
-  <div id="dinoErrorMsg"></div>
   <form id="addDinoForm">
   <h1>Add a Staff Member</h1>
   <div id="dinoErrorMsg"></div>
