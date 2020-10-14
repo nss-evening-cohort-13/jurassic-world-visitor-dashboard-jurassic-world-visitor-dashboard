@@ -4,14 +4,13 @@ const vendorForm = () => {
   $('#app').append(`
    <h2>Add A Vendor to The Park!</h2>
   <form id="addVendorForm">
-    <div id="error-message"></div>
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text" class="form-control" id="name" placeholder="Example: Lisa" required>
     </div>
     <div class="form-group">
       <label for="image">Image</label>
-      <input type="url" class="form-control" id="role" placeholder="Enter Image URL" required>
+      <input type="url" class="form-control" id="image" placeholder="Enter Image URL" required>
     </div>
     <div class="form-group">
       <label for="location">Location</label>
