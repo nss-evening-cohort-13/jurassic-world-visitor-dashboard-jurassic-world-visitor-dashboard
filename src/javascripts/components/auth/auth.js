@@ -16,19 +16,19 @@ const loginButton = () => {
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
   <ul class="navbar-nav mr-auto">
-    <li class="nav-item mx-3" id="boards-link">
+    <li class="nav-item mx-3" id="dino-link">
       <a class="nav-link" href="#">Dinosaurs</a>
     </li>
-    <li class="nav-item mx-3" id="add-board-link">
+    <li class="nav-item mx-3" id="staff-link">
       <a class="nav-link" href="#"> Staff</a>
     </li>
-    <li class="nav-item mx-3" id="add-dinn-link">
+    <li class="nav-item mx-3" id="rides-link">
       <a class="nav-link" href="#"> Rides</a>
     </li>
-    <li class="nav-item mx-3" id="add-dinn-link">
+    <li class="nav-item mx-3" id="vendors-link">
       <a class="nav-link" href="#"> Vendors</a>
     </li>
-    <li class="nav-item mx-3" id="add-dinn-link">
+    <li class="nav-item mx-3" id="equipment-link">
       <a class="nav-link" href="#"> Equipment</a>
     </li>
   </ul>
