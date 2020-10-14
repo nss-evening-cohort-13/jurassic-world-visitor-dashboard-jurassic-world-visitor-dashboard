@@ -27,15 +27,14 @@ const addStaffForm = () => {
 
       staffData.addStaff(data)
         .then(() => {
-          $('#staffSuccessMsg').html('<div class="alert alert-success" role="alert">The staff member has been added!</div>');
+          $('#addStaffForm').remove();
+          $('#staffSuccessMsg').append('<div class="alert alert-success" role="alert">The staff member has been added!</div>');
+          $('#addStaffBtn').removeAttr('disabled');
         }).catch((error) => console.warn(error));
 
       setTimeout(() => {
         $('#staffSuccessMsg').html('');
       }, 2000);
-
-      $('#staffName').val('');
-      $('#staffImage').val('');
     } else {
       $('#staffErrorMsg').html('<div class="alert alert-danger" role="alert">Please fill out all fields correctly.</div>');
     }
