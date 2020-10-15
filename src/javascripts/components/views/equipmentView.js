@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import equipmentForm from '../forms/addEquipmentForm';
+import equipmentCards from '../cards/equipmentCards';
 
 const equipmentView = () => {
   const user = firebase.auth().currentUser;
@@ -17,6 +18,7 @@ const equipmentView = () => {
   } else {
     $('#app').html('<h1>Display equipment only</h1>');
   }
+  equipmentCards.equipmentCardBuilder();
 };
 
 export default { equipmentView };
