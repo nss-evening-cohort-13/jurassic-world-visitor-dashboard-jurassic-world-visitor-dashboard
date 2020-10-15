@@ -24,7 +24,8 @@ const viewHelper = (id) => {
   }
 };
 
-const viewListeners = () => {
+const viewListeners = (view) => {
+  viewHelper(view);
   $('body').on('click', 'li.nav-item', (e) => {
     viewHelper(e.currentTarget.id);
     e.stopImmediatePropagation();
