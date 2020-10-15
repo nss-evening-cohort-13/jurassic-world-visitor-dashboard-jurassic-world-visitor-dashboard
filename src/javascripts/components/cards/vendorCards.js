@@ -5,7 +5,6 @@ const vendorMaker = (vendorObject) => {
       <h5 class="card-title">${vendorObject.name}</h5>
     </div>
   </div>`;
-
   return domString;
 };
 

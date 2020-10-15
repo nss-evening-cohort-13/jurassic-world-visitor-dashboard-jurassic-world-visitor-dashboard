@@ -1,5 +1,4 @@
 import vendorData from '../../helpers/data/vendorData';
-import vendorCards from '../cards/vendorCards';
 
 const vendorForm = () => {
   $('#app').append(`
@@ -21,7 +20,6 @@ const vendorForm = () => {
     const data = {
       name: $('#name').val(),
       imageUrl: $('#image').val(),
-      location: $('#location').val()
     };
 
     if (document.getElementById('addVendorForm').checkValidity()) {
@@ -33,7 +31,12 @@ const vendorForm = () => {
             $('#addVendorForm').remove();
             $('#success-message').html('<div class="alert alert-success" role="alert">The vendor has been added!</div>');
             $('#add-vendor-btn').removeAttr('disabled');
-            $('#cards').append(vendorCards.vendorMaker());
+            $('#cards').append(`<div class="card board" style="width: 18rem;" id="${data.vendorId}">
+            <img src="${data.imageUrl}" id="${data.firebaseKey}" class="card-img-top see-dinns" alt="${data.name}">
+            <div class="card-body">
+              <h5 class="card-title">${data.name}</h5>
+            </div>
+          </div>`);
           }
         }).catch((error) => console.warn(error));
 
@@ -43,7 +46,6 @@ const vendorForm = () => {
 
       $('#name').val('');
       $('#image').val('');
-      $('#location').val('');
     } else {
       $('#error-message').html('<div class="alert alert-danger" role="alert">Please fill out all fields correctly.</div>');
     }
