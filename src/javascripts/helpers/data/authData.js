@@ -8,10 +8,10 @@ const checkLoginStatus = () => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       navbar.navbar();
-      viewHelpers.viewListeners();
+      viewHelpers.viewListeners('dino-link');
     } else {
       auth.loginButton();
-      viewHelpers.viewListeners();
+      viewHelpers.viewListeners('dino-link');
     }
   });
 };

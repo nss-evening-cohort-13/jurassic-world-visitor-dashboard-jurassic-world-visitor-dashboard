@@ -6,6 +6,7 @@ import equipmentView from '../components/views/equipmentView';
 
 const viewHelper = (id) => {
   $('#app').html('');
+  $('#cards').html('');
 
   switch (id) {
     case 'staff-link':
@@ -23,9 +24,11 @@ const viewHelper = (id) => {
   }
 };
 
-const viewListeners = () => {
+const viewListeners = (view) => {
+  viewHelper(view);
   $('body').on('click', 'li.nav-item', (e) => {
     viewHelper(e.currentTarget.id);
+    e.stopImmediatePropagation();
   });
 };
 
