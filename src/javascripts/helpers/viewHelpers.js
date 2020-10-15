@@ -27,6 +27,7 @@ const viewHelper = (id) => {
 const viewListeners = () => {
   $('body').on('click', 'li.nav-item', (e) => {
     viewHelper(e.currentTarget.id);
+    e.stopImmediatePropogation();
   });
 };
 

@@ -1,4 +1,5 @@
 import dinoData from '../../helpers/data/dinoData';
+import dinoCards from '../cards/dinoCards';
 
 const addDinoForm = () => {
   $('#app').append(`
@@ -19,22 +20,31 @@ const addDinoForm = () => {
     e.preventDefault();
     const data = {
       name: $('#dinoName').val(),
-      imageUrl: $('#dinoImage').val()
+      imageUrl: $('#dinoImage').val(),
     };
     if (document.querySelector('#addDinoForm').checkValidity()) {
       $('#dinoErrorMsg').html('');
-      dinoData.addDino(data)
-        .then(() => {
-          $('#addDinoForm').remove();
-          $('#dinoSuccessMsg').html('<div class="alert alert-success" role="alert">The dino has been added!</div>');
-          $('#addDinoBtn').removeAttr('disabled');
-        }).catch((error) => console.warn(error));
+      dinoData
+        .addDino(data)
+        .then((response) => {
+          if (response.status === 200) {
+            $('#addDinoForm').remove();
+            $('#dinoSuccessMsg').append(
+              '<div class="alert alert-success" role="alert">The dino has been added!</div>'
+            );
+            $('#addDinoBtn').removeAttr('disabled');
+            dinoCards.dinoCardBuilder();
+          }
+        })
+        .catch((error) => console.warn(error));
 
       setTimeout(() => {
         $('#dinoSuccessMsg').html('');
       }, 3000);
     } else {
-      $('#dinoErrorMsg').html('<div class="alert alert-danger" role="alert">Please fill out all fields correctly.</div>');
+      $('#dinoErrorMsg').html(
+        '<div class="alert alert-danger" role="alert">Please fill out all fields correctly.</div>'
+      );
     }
   });
 };
