@@ -12,7 +12,7 @@ const dinoCardView = (dinoObject) => {
   return domString;
 };
 
-const dinoCardBuilder = (e) => {
+const dinoCardBuilder = () => {
   $('#cards').html('');
   dinoData
     .getDino()
@@ -26,8 +26,6 @@ const dinoCardBuilder = (e) => {
       });
     })
     .catch((error) => console.warn(error));
-  e.stopImmediatePropogation();
-  window.location.reload();
 };
 
 export default { dinoCardBuilder };
