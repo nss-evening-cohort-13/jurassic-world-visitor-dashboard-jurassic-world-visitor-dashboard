@@ -11,7 +11,7 @@ const rideForm = () => {
               </div>
               <div class="form-group">
                 <label for="image">Image</label>
-                <input type="url" class="form-control" id="rideImage" placeholder="Example: rollercoaster.jpg" required>
+                <input type="url" class="form-control" id="rideImage" placeholder="Example: https://www.images.com/rollercoaster.jpg" required>
               </div>
               <button id="add-ride-btn" type="submit" class="btn btn-outline-dark">Submit</button>
             </form>`
@@ -22,25 +22,39 @@ const rideForm = () => {
 
     const data = {
       name: $('#rideName').val(),
-      image: $('#rideImage').val()
+      image: $('#rideImage').val(),
     };
 
     if (document.getElementById('addRideForm').checkValidity()) {
       $('#rideErrorMessage').html('');
-      rideData.addRide(data)
-        .then(() => {
-          $('#addRideForm').remove();
-          $('#rideSuccessMessage').html('<div class="alert alert-success" role="alert">Your Ride Was Added!</div>');
-          $('#new-ride-btn').removeAttr('disabled');
-        }).catch((error) => console.warn(error));
+
+      rideData
+        .addRide(data)
+        .then((response) => {
+          if (response.statusText === 'OK') {
+            $('#addRideForm').remove();
+            $('#rideSuccessMessage').html(
+              '<div class="alert alert-success" role="alert">Your Ride Was Added!</div>'
+            );
+            $('#new-ride-btn').removeAttr('disabled');
+            $('#cards')
+              .append(`<div class="card card-body" id="${response.data.name}" style="width: 18rem;">
+                        <img src="${data.image}" class="card-img-top" alt="...">
+                        <div>
+                          <h3 class="card-header">${data.name}</h3>
+                        </div>
+                      </div>`);
+          }
+        })
+        .catch((error) => console.warn(error));
 
       setTimeout(() => {
         $('#rideSuccessMessage').html('');
       }, 3000);
-      $('#rideName').val('');
-      $('#rideImage').val('');
     } else {
-      $('#rideErrorMessage').html('<div class="alert alert-danger" role="alert">Please complete all fields correctly.</div>');
+      $('#rideErrorMessage').html(
+        '<div class="alert alert-danger" role="alert">Please complete all fields correctly.</div>'
+      );
     }
   });
 };

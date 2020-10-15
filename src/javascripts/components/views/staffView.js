@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import staffForm from '../forms/addStaffForm';
+import cards from '../cards/staffCards';
 
 const staffView = () => {
   const user = firebase.auth().currentUser;
@@ -20,6 +21,7 @@ const staffView = () => {
   } else {
     $('#app').html('<h1>Display staff only</h1>');
   }
+  cards.staffCardBuilder();
 };
 
 export default { staffView };

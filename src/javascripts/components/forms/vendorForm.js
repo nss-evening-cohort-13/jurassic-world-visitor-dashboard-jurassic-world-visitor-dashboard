@@ -31,10 +31,10 @@ const vendorForm = () => {
             $('#addVendorForm').remove();
             $('#success-message').html('<div class="alert alert-success" role="alert">The vendor has been added!</div>');
             $('#add-vendor-btn').removeAttr('disabled');
-            $('#cards').append(`<div class="card board" style="width: 18rem;" id="${data.vendorId}">
-            <img src="${data.imageUrl}" id="${data.firebaseKey}" class="card-img-top see-dinns" alt="${data.name}">
-            <div class="card-body">
-              <h5 class="card-title">${data.name}</h5>
+            $('#cards').append(`<div class="card card-body" style="width: 18rem;" id="${data.vendorId}">
+            <img src="${data.imageUrl}" id="${data.firebaseKey}" class="card-img-top card-img" alt="${data.name}">
+            <div>
+              <h3 class="card-header">${data.name}</h3>
             </div>
           </div>`);
           }
