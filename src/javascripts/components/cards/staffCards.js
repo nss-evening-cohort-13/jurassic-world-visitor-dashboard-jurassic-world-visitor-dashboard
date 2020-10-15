@@ -10,7 +10,7 @@ const staffCardMaker = (staffObject) => {
   return domString;
 };
 
-const staffCardBuilder = (e) => {
+const staffCardBuilder = () => {
   $('#cards').html('');
   staffData
     .getStaff()
@@ -24,8 +24,6 @@ const staffCardBuilder = (e) => {
       });
     })
     .catch((error) => console.warn(error));
-  e.stopImmediatePropogation();
-  window.location.reload();
 };
 
 export default { staffCardBuilder };
