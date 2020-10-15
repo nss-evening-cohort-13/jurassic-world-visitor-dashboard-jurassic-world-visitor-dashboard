@@ -1,10 +1,12 @@
 import staffData from '../../helpers/data/staffData';
 
 const staffCardMaker = (staffObject) => {
-  const domString = `<div class="card m-2" style="width: 18rem;" id="${staffObject.firebaseKey}">
-    <div class="card-body">
-      <h5 class="card-title">${staffObject.name}</h5>
-      <img src="${staffObject.image}" alt="${staffObject.name}">
+  const domString = `<div class="card card-body" id="${staffObject.firebaseKey}">
+    <div>
+      <img src="${staffObject.image}" class="card-img-top" alt="${staffObject.name}">
+      <div>
+        <h3 class="card-text card-header">${staffObject.name}</h3>
+      </div>
     </div>
   </div>`;
   return domString;

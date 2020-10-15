@@ -20,7 +20,7 @@ const addStaffForm = () => {
 
     const data = {
       name: $('#staffName').val(),
-      imageUrl: $('#staffImage').val(),
+      image: $('#staffImage').val(),
     };
 
     if (document.getElementById('addStaffForm').checkValidity()) {
