@@ -1,17 +1,18 @@
 import dinoData from '../../helpers/data/dinoData';
 
 const dinoCardView = (dinoObject) => {
-  const domString = `<div class="card" id="${dinoObject.dinoId}" style="width: 18rem;">
-    <img src="${dinoObject.imageUrl}" class="card-img-top" alt="${dinoObject.name}">
-    <div class="card-body">
-      <p class="card-text">${dinoObject.name}</p>
-    </div>
-  </div>`;
-
+  const domString = `<div class="card card-body" id="${dinoObject.firebaseKey}">
+      <div>
+        <img src="${dinoObject.imageUrl}" class="card-img-top" alt="${dinoObject.name}">
+        <div>
+          <h3 class="card-text card-header">${dinoObject.name}</h3>
+        </div>
+      </div>
+    </div>`;
   return domString;
 };
 
-const dinoCardBuilder = () => {
+const dinoCardBuilder = (e) => {
   $('#cards').html('');
   dinoData
     .getDino()
@@ -25,6 +26,7 @@ const dinoCardBuilder = () => {
       });
     })
     .catch((error) => console.warn(error));
+  e.stopImmediatePropogation();
   window.location.reload();
 };
 
