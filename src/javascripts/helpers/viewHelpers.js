@@ -7,6 +7,10 @@ import equipmentView from '../components/views/equipmentView';
 const viewHelper = (id) => {
   $('#app').html('');
   $('#cards').html('');
+<<<<<<< HEAD
+=======
+
+>>>>>>> development
   switch (id) {
     case 'staff-link':
       return staffView.staffView();
