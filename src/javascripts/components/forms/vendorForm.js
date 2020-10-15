@@ -1,4 +1,5 @@
 import vendorData from '../../helpers/data/vendorData';
+import vendorCards from '../cards/vendorCards';
 
 const vendorForm = () => {
   $('#app').append(`
@@ -11,10 +12,6 @@ const vendorForm = () => {
     <div class="form-group">
       <label for="image">Image</label>
       <input type="url" class="form-control" id="image" placeholder="Enter Image URL" required>
-    </div>
-    <div class="form-group">
-      <label for="location">Location</label>
-      <input type="text" class="form-control" id="location" placeholder="Example: Nashville" required>
     </div>
     <button id="submit-vendor-btn" type="submit" class="btn btn-info"><i class="fas fa-plus-circle"></i> Add Vendor</button>
   </form>`);
@@ -31,10 +28,13 @@ const vendorForm = () => {
       $('#error-message').html('');
 
       vendorData.addVendor(data)
-        .then(() => {
-          $('#addVendorForm').remove();
-          $('#success-message').html('<div class="alert alert-success" role="alert">The vendor has been added!</div>');
-          $('#add-vendor-btn').removeAttr('disabled');
+        .then((response) => {
+          if (response.statusText === 'OK') {
+            $('#addVendorForm').remove();
+            $('#success-message').html('<div class="alert alert-success" role="alert">The vendor has been added!</div>');
+            $('#add-vendor-btn').removeAttr('disabled');
+            $('#cards').append(vendorCards.vendorMaker());
+          }
         }).catch((error) => console.warn(error));
 
       setTimeout(() => {

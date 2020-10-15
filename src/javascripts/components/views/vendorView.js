@@ -7,13 +7,6 @@ import vendorData from '../../helpers/data/vendorData';
 const vendorView = () => {
   const user = firebase.auth().currentUser;
 
-  vendorData.getVendors().then((response) => {
-    if (response.length) {
-      response.forEach((vendor) => {
-        $('#cards').append(vendorCard.vendorMaker(vendor));
-      });
-    }
-  });
   if (user) {
     $('#app').html(`
       <div id="add-vendor-div">
@@ -29,6 +22,13 @@ const vendorView = () => {
   } else {
     $('#app').html('<h1>Display Vendor only</h1>');
   }
+  vendorData.getVendors().then((response) => {
+    if (response.length) {
+      response.forEach((vendor) => {
+        $('#cards').append(vendorCard.vendorMaker(vendor));
+      });
+    }
+  });
 };
 
 export default { vendorView };

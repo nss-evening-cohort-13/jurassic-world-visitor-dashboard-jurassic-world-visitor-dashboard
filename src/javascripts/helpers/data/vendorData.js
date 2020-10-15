@@ -5,7 +5,7 @@ const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
 const getVendors = () => new Promise((resolve, reject) => {
   axios
-    .get(`${baseUrl}/vendors.json`)
+    .get(`${baseUrl}/vendor.json`)
     .then((response) => {
       const vendors = response.data;
       const vendorsArray = [];
@@ -19,10 +19,13 @@ const getVendors = () => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const addVendor = (vendorData) => axios.post(`${baseUrl}/vendor.json`, vendorData)
-  .then((response) => {
-    const firebaseKey = { vendorId: response.data.name };
-    axios.patch(`${baseUrl}/vendor/${response.data.name}.json`, firebaseKey);
-  }).catch((error) => console.warn(error));
+const addVendor = (vendorData) => new Promise((resolve, reject) => {
+  axios.post(`${baseUrl}/vendor.json`, vendorData)
+    .then((response) => {
+      const firebaseKey = { vendorId: response.data.name };
+      axios.patch(`${baseUrl}/vendor/${response.data.name}.json`, firebaseKey);
+      resolve(response);
+    }).catch((error) => reject(error));
+});
 
 export default { addVendor, getVendors };
