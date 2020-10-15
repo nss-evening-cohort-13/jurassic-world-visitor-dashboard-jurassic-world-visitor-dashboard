@@ -32,7 +32,7 @@ const rideView = () => {
       .then((response) => {
         if (response.length) {
           response.forEach((rideObj) => {
-            $('#cards').append(rideCards.rideCardBuilder(rideObj));
+            $('#cards').append(rideCards.unauthRideCardBuilder(rideObj));
           });
         } else {
           $('#cards').html('<h2>You have not yet added a ride.</h2>');
