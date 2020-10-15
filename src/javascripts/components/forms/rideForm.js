@@ -38,12 +38,12 @@ const rideForm = () => {
             );
             $('#new-ride-btn').removeAttr('disabled');
             $('#cards')
-              .append(`<div class="card" id="${response.data.name}" style="width: 18rem;">
-            <img src="${data.image}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <p class="card-text">${data.name}</p>
-            </div>
-          </div>`);
+              .append(`<div class="card card-body" id="${response.data.name}" style="width: 18rem;">
+                        <img src="${data.image}" class="card-img-top" alt="...">
+                        <div>
+                          <h3 class="card-header">${data.name}</h3>
+                        </div>
+                      </div>`);
           }
         })
         .catch((error) => console.warn(error));
