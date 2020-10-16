@@ -28,4 +28,15 @@ const getDino = () => axios
   })
   .catch((error) => console.warn(error));
 
-export default { addDino, getDino };
+const getSingleDino = (dinoFirebaseKey) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/dinos/${dinoFirebaseKey}.json`).then((response) => {
+    const thisDino = response.data;
+    resolve(thisDino);
+  }).catch((error) => reject(error));
+});
+
+const editDino = (firebaseKey, dinoObject) => axios.patch(`${baseUrl}/dinos/${firebaseKey}.json`, dinoObject);
+
+export default {
+  addDino, getDino, editDino, getSingleDino
+};
