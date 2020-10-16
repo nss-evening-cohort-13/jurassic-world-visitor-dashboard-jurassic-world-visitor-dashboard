@@ -1,4 +1,5 @@
 import equipmentData from '../../helpers/data/equipmentData';
+import equipmentCards from '../cards/equipmentCards';
 
 const addEquipmentForm = () => {
   $('#app').append(`
@@ -19,22 +20,31 @@ const addEquipmentForm = () => {
     e.preventDefault();
     const data = {
       name: $('#equipmentName').val(),
-      imageUrl: $('#equipmentImage').val()
+      imageUrl: $('#equipmentImage').val(),
     };
     if (document.querySelector('#addEquipmentForm').checkValidity()) {
       $('#equipmentErrorMsg').html('');
-      equipmentData.addEquipment(data)
-        .then(() => {
-          $('#addEquipmentForm').remove();
-          $('#equipmentSuccessMsg').html('<div class="alert alert-success" role="alert">The equipment has been added!</div>');
-          $('#addEquipmentBtn').removeAttr('disabled');
-        }).catch((error) => console.warn(error));
+      equipmentData
+        .addEquipment(data)
+        .then((response) => {
+          if (response.status === 200) {
+            $('#addEquipmentForm').remove();
+            $('#equipmentSuccessMsg').append(
+              '<div class="alert alert-success" role="alert">The equipment has been added!</div>'
+            );
+            $('#addEquipmentBtn').removeAttr('disabled');
+            equipmentCards.equipmentCardBuilder();
+          }
+        })
+        .catch((error) => console.warn(error));
 
       setTimeout(() => {
         $('#equipmentSuccessMsg').html('');
       }, 3000);
     } else {
-      $('#equipmentErrorMsg').html('<div class="alert alert-danger" role="alert">Please fill out all fields correctly.</div>');
+      $('#equipmentErrorMsg').html(
+        '<div class="alert alert-danger" role="alert">Please fill out all fields correctly.</div>'
+      );
     }
   });
 };

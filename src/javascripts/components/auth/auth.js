@@ -25,7 +25,7 @@ const loginButton = () => {
     <li class="nav-item mx-3" id="rides-link">
       <a class="nav-link" href="#"> Rides</a>
     </li>
-    <li class="nav-item mx-3" id="vendors-link">
+    <li class="nav-item mx-3" id="vendor-link">
       <a class="nav-link" href="#"> Vendors</a>
     </li>
     <li class="nav-item mx-3" id="equipment-link">

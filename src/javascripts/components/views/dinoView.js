@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import dinoForm from '../forms/addDinoForm';
+import dinoCards from '../cards/dinoCards';
 
 const dinoView = () => {
   const user = firebase.auth().currentUser;
@@ -17,6 +18,7 @@ const dinoView = () => {
   } else {
     $('#app').html('<h1>Display dinos only</h1>');
   }
+  dinoCards.dinoCardBuilder();
 };
 
 export default { dinoView };
