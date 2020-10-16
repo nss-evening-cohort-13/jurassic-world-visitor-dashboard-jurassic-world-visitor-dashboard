@@ -14,8 +14,6 @@ const addRide = (data) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const deleteRides = (firebaseKey) => axios.delete(`${baseUrl}/rides/${firebaseKey}.json`);
-
 const getAllRides = () => new Promise((resolve, reject) => {
   axios.get(`${baseUrl}/rides.json`).then((response) => {
     const rideObjects = response.data;
@@ -29,4 +27,4 @@ const getAllRides = () => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-export default { addRide, getAllRides, deleteRides };
+export default { addRide, getAllRides };
