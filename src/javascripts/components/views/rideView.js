@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import form from '../forms/rideForm';
-import rideData from '../../helpers/data/ridesData';
+import form from '../forms/addRideForm';
+import rideData from '../../helpers/data/rideData';
 import rideCards from '../cards/rideCards';
 
 const rideView = () => {

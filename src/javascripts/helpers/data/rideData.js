@@ -27,4 +27,6 @@ const getAllRides = () => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-export default { addRide, getAllRides };
+const editRide = (firebaseKey, rideObject) => axios.patch(`${baseUrl}/rides/${firebaseKey}.json`, rideObject);
+
+export default { addRide, getAllRides, editRide };

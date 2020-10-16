@@ -3,8 +3,8 @@ const rideCardBuilder = (rideObject) => {
   <img src="${rideObject.image}" class="card-img-top" alt="...">
   <div>
     <h3 class="card-header">${rideObject.name}</h3>
-    <button type="button" class="btn btn-warning">Edit</button>
-    <button type="button" class="btn btn-danger">Delete</button>
+    <button type="button" class="btn btn-warning" id="${rideObject.rideId}">Edit</button>
+    <button type="button" class="btn btn-danger" id="${rideObject.rideId}">Delete</button>
   </div>
 </div>`;
 
