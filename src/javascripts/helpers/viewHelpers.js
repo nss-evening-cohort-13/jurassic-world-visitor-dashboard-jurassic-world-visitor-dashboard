@@ -4,6 +4,7 @@ import rideView from '../components/views/rideView';
 import dinoView from '../components/views/dinoView';
 import equipmentView from '../components/views/equipmentView';
 import editVendorForm from '../components/forms/editVendorForm';
+import updateDinoView from '../components/views/updateDinoView';
 
 const viewHelper = (id, arg) => {
   $('#app').html('');
@@ -22,6 +23,8 @@ const viewHelper = (id, arg) => {
       return equipmentView.equipmentView();
     case 'edit-vendor':
       return editVendorForm.editVendorForm(arg);
+    case 'update-dino-link':
+      return updateDinoView.updateDinoView(arg);
     default:
       return console.warn('nothing clicked');
   }
@@ -36,6 +39,10 @@ const viewListeners = (view) => {
   $('body').on('click', 'button.edit-vendor', (e) => {
     viewHelper('edit-vendor', e.currentTarget.id);
     e.stopImmediatePropagation();
+  });
+  $('body').on('click', '.update-dino', (e) => {
+    const dinoFirebaseKey = e.currentTarget.id;
+    viewHelper('update-dino-link', dinoFirebaseKey);
   });
 };
 

@@ -1,7 +1,22 @@
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import dinoData from '../../helpers/data/dinoData';
 
-const dinoCardView = (dinoObject) => {
-  const domString = `<div class="card card-body" id="${dinoObject.firebaseKey}">
+const authedDinoCardView = (dinoObject) => {
+  const domString = `<div class="card card-body" id="${dinoObject.dinoId}">
+      <div>
+        <img src="${dinoObject.imageUrl}" class="card-img-top" alt="${dinoObject.name}">
+        <div>
+          <h3 class="card-text card-header">${dinoObject.name}</h3>
+        </div>
+        <button type="button" id="${dinoObject.dinoId}" class="btn btn-info update-dino">Edit</button>
+      </div>
+    </div>`;
+  return domString;
+};
+
+const unauthedDinoCardView = (dinoObject) => {
+  const domString = `<div class="card card-body" id="${dinoObject.dinoId}">
       <div>
         <img src="${dinoObject.imageUrl}" class="card-img-top" alt="${dinoObject.name}">
         <div>
@@ -13,13 +28,18 @@ const dinoCardView = (dinoObject) => {
 };
 
 const dinoCardBuilder = () => {
+  const user = firebase.auth().currentUser;
   $('#cards').html('');
   dinoData
     .getDino()
     .then((response) => {
       response.forEach((item) => {
         if (response.length) {
-          $('#cards').append(dinoCardView(item));
+          if (user) {
+            $('#cards').append(authedDinoCardView(item));
+          } else {
+            $('#cards').append(unauthedDinoCardView(item));
+          }
         } else {
           $('#cards').append('<h2> NO DINOS!</H2>');
         }
