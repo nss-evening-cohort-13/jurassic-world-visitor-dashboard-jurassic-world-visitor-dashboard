@@ -28,7 +28,6 @@ const vendorForm = () => {
       vendorData.addVendor(data)
         .then((response) => {
           if (response.statusText === 'OK') {
-            console.log(response.data.name);
             $('#addVendorForm').remove();
             $('#success-message').html('<div class="alert alert-success" role="alert">The vendor has been added!</div>');
             $('#add-vendor-btn').removeAttr('disabled');
