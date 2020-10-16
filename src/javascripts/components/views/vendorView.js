@@ -19,16 +19,22 @@ const vendorView = () => {
       vendorForm.vendorForm();
       $('#add-vendor-btn').attr('disabled', true);
     });
+    vendorData.getVendors().then((response) => {
+      if (response.length) {
+        response.forEach((vendor) => {
+          $('#cards').append(vendorCard.authedVendorMaker(vendor));
+        });
+      }
+    });
   } else {
-    $('#app').html('<h1>Display Vendor only</h1>');
+    vendorData.getVendors().then((response) => {
+      if (response.length) {
+        response.forEach((vendor) => {
+          $('#cards').append(vendorCard.unauthedVendorMaker(vendor));
+        });
+      }
+    });
   }
-  vendorData.getVendors().then((response) => {
-    if (response.length) {
-      response.forEach((vendor) => {
-        $('#cards').append(vendorCard.vendorMaker(vendor));
-      });
-    }
-  });
 };
 
 export default { vendorView };
