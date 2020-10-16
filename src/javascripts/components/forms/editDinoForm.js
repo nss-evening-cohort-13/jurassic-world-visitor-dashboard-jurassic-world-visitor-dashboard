@@ -1,7 +1,10 @@
 import dinoData from '../../helpers/data/dinoData';
 import dinoCards from '../cards/dinoCards';
+import dinoView from '../views/dinoView';
 
 const editDinoForm = (dinoObject) => {
+  dinoView.dinoView();
+  $('#addDinoBtn').attr('disabled', true);
   $('#app').append(`
   <form id="editDinoForm">
   <h1>Edit Dino</h1>
@@ -32,6 +35,7 @@ const editDinoForm = (dinoObject) => {
             $('#dinoSuccessMsg').append(
               '<div class="alert alert-success" role="alert">The dino has been updated!</div>'
             );
+            $('#addDinoBtn').removeAttr('disabled');
             dinoCards.dinoCardBuilder();
           }
         })
