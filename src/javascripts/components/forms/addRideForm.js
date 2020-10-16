@@ -1,5 +1,5 @@
 import rideData from '../../helpers/data/rideData';
-import cards from '../cards/rideCards';
+// import cards from '../cards/rideCards';
 
 const rideForm = () => {
   $('#app').append(
@@ -38,7 +38,14 @@ const rideForm = () => {
               '<div class="alert alert-success" role="alert">Your Ride Was Added!</div>'
             );
             $('#new-ride-btn').removeAttr('disabled');
-            cards.rideCardBuilder();
+            $('#cards').append(`<div class="card card-body" style="width: 18rem;" id="${response.data.name}">
+            <img src="${data.image}" id="${data.firebaseKey}" class="card-img-top card-img" alt="${data.name}">
+            <div>
+              <h3 class="card-header">${data.name}</h3>
+              <button type="button" class="btn btn-light update-ride" id="${response.data.name}">Edit</button>
+              <button type="button" class="btn btn-light" id="${response.data.name}">Delete</button>
+            </div>
+          </div>`);
           }
         })
         .catch((error) => console.warn(error));
