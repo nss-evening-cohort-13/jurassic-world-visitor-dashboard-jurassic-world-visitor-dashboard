@@ -28,4 +28,16 @@ const addVendor = (vendorData) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
-export default { addVendor, getVendors };
+const getSingleVendor = (vendorId) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/vendor/${vendorId}.json`)
+    .then((response) => {
+      resolve(response.data);
+    })
+    .catch((error) => reject(error));
+});
+
+const updateVendor = (vendorId, vendorObj) => axios.patch(`${baseUrl}/vendor/${vendorId}.json`, vendorObj);
+
+export default {
+  addVendor, getVendors, getSingleVendor, updateVendor
+};
