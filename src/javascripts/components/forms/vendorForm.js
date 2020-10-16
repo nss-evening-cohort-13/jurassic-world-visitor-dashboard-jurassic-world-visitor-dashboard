@@ -28,13 +28,15 @@ const vendorForm = () => {
       vendorData.addVendor(data)
         .then((response) => {
           if (response.statusText === 'OK') {
+            console.log(response.data.name);
             $('#addVendorForm').remove();
             $('#success-message').html('<div class="alert alert-success" role="alert">The vendor has been added!</div>');
             $('#add-vendor-btn').removeAttr('disabled');
-            $('#cards').append(`<div class="card card-body" style="width: 18rem;" id="${data.vendorId}">
+            $('#cards').append(`<div class="card card-body" style="width: 18rem;" id="${response.data.name}">
             <img src="${data.imageUrl}" id="${data.firebaseKey}" class="card-img-top card-img" alt="${data.name}">
             <div>
               <h3 class="card-header">${data.name}</h3>
+              <button type="button" class="btn btn-light edit-vendor" id="${response.data.name}">Edit</button>
             </div>
           </div>`);
           }
