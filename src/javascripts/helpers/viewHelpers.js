@@ -35,6 +35,7 @@ const viewListeners = (view) => {
   });
   $('body').on('click', 'button.edit-vendor', (e) => {
     viewHelper('edit-vendor', e.currentTarget.id);
+    e.stopImmediatePropagation();
   });
 };
 
