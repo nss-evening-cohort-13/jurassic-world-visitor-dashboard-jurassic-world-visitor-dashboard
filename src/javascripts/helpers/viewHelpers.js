@@ -4,6 +4,7 @@ import rideView from '../components/views/rideView';
 import dinoView from '../components/views/dinoView';
 import equipmentView from '../components/views/equipmentView';
 import updateDinoView from '../components/views/updateDinoView';
+import updateRideView from '../components/views/updateRideView';
 
 const viewHelper = (id, arg) => {
   $('#app').html('');
@@ -22,6 +23,8 @@ const viewHelper = (id, arg) => {
       return equipmentView.equipmentView();
     case 'update-dino-link':
       return updateDinoView.updateDinoView(arg);
+    case 'update-ride-link':
+      return updateRideView.updateRideView(arg);
     default:
       return console.warn('nothing clicked');
   }
@@ -36,6 +39,11 @@ const viewListeners = (view) => {
   $('body').on('click', '.update-dino', (e) => {
     const dinoFirebaseKey = e.currentTarget.id;
     viewHelper('update-dino-link', dinoFirebaseKey);
+    e.stopImmediatePropagation();
+  });
+  $('body').on('click', '.update-ride', (e) => {
+    const rideFirebaseKey = e.currentTarget.id;
+    viewHelper('update-ride-link', rideFirebaseKey);
     e.stopImmediatePropagation();
   });
 };

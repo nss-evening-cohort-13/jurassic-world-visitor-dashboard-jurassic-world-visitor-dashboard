@@ -1,4 +1,5 @@
-import rideData from '../../helpers/data/ridesData';
+import rideData from '../../helpers/data/rideData';
+import cards from '../cards/rideCards';
 
 const rideForm = () => {
   $('#app').append(
@@ -37,13 +38,7 @@ const rideForm = () => {
               '<div class="alert alert-success" role="alert">Your Ride Was Added!</div>'
             );
             $('#new-ride-btn').removeAttr('disabled');
-            $('#cards')
-              .append(`<div class="card card-body" id="${response.data.name}" style="width: 18rem;">
-                        <img src="${data.image}" class="card-img-top" alt="...">
-                        <div>
-                          <h3 class="card-header">${data.name}</h3>
-                        </div>
-                      </div>`);
+            cards.rideCardBuilder();
           }
         })
         .catch((error) => console.warn(error));

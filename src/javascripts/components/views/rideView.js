@@ -1,7 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import form from '../forms/addRideForm';
-import rideData from '../../helpers/data/rideData';
 import rideCards from '../cards/rideCards';
 
 const rideView = () => {
@@ -17,28 +16,8 @@ const rideView = () => {
       form.rideForm();
       $('#new-ride-btn').attr('disabled', true);
     });
-    rideData.getAllRides()
-      .then((response) => {
-        if (response.length) {
-          response.forEach((rideObj) => {
-            $('#cards').append(rideCards.rideCardBuilder(rideObj));
-          });
-        } else {
-          $('#cards').html('<h2>You have not yet added a ride.</h2>');
-        }
-      });
-  } else {
-    rideData.getAllRides()
-      .then((response) => {
-        if (response.length) {
-          response.forEach((rideObj) => {
-            $('#cards').append(rideCards.unauthRideCardBuilder(rideObj));
-          });
-        } else {
-          $('#cards').html('<h2>You have not yet added a ride.</h2>');
-        }
-      });
   }
+  rideCards.rideCardBuilder();
 };
 
 export default { rideView };
