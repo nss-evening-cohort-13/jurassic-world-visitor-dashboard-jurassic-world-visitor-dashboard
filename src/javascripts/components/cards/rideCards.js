@@ -11,7 +11,6 @@ const rideCardBuilder = (rideObject) => {
 </div>`;
 
   $('body').on('click', '.delete-rides', (e) => {
-    console.warn('click', e);
     e.stopImmediatePropagation();
     const firebaseKey = e.currentTarget.id;
     $(`.card#${firebaseKey}`).remove();

@@ -22,6 +22,7 @@ const addDinoForm = () => {
       name: $('#dinoName').val(),
       imageUrl: $('#dinoImage').val(),
     };
+
     if (document.querySelector('#addDinoForm').checkValidity()) {
       $('#dinoErrorMsg').html('');
       dinoData
