@@ -9,7 +9,7 @@ const authedDinoCardView = (dinoObject) => {
         <div>
           <h3 class="card-text card-header">${dinoObject.name}</h3>
         </div>
-        <button type="button" id="${dinoObject.dinoId}" class="btn btn-info update-dino">Edit</button>
+        <button type="button" id="${dinoObject.dinoId}" class="btn btn-info update-dino card-btns"><i class="fas fa-pen"></i></button>
       </div>
     </div>`;
   return domString;
