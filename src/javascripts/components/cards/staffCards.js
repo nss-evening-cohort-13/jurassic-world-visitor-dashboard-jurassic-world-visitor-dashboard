@@ -15,7 +15,7 @@ const authedStaffCardMaker = (staffObject) => {
 
 const unauthedStaffMaker = (staffObject) => {
   const domString = `<div class="card card-body" style="width: 18rem;" id="${staffObject.staffId}">
-    <img src="${staffObject.imageUrl}" id="${staffObject.firebaseKey}" class="card-img-top card-img" alt="${staffObject.name}">
+    <img src="${staffObject.image}" id="${staffObject.firebaseKey}" class="card-img-top card-img" alt="${staffObject.name}">
     <div>
       <h3 class="card-header">${staffObject.name}</h3>
     </div>
