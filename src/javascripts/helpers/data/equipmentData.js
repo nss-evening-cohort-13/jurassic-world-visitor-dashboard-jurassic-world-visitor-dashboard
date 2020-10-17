@@ -37,6 +37,8 @@ const getSingleEquipment = (equipmentFirebaseKey) => new Promise((resolve, rejec
 
 const editEquipment = (firebaseKey, equipmentObject) => axios.patch(`${baseUrl}/equipment/${firebaseKey}.json`, equipmentObject);
 
+const deleteEquipment = (equipmentId) => axios.delete(`${baseUrl}/equipment/${equipmentId}.json`);
+
 export default {
-  addEquipment, getEquipment, getSingleEquipment, editEquipment
+  addEquipment, getEquipment, getSingleEquipment, editEquipment, deleteEquipment
 };

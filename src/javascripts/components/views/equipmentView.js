@@ -15,10 +15,10 @@ const equipmentView = () => {
       equipmentForm.addEquipmentForm();
       $('#addEquipmentBtn').attr('disabled', true);
     });
+    equipmentCards.equipmentCardBuilder();
   } else {
-    $('#app').html('<h1>Display equipment only</h1>');
+    equipmentCards.equipmentCardBuilder();
   }
-  equipmentCards.equipmentCardBuilder();
 };
 
 export default { equipmentView };
