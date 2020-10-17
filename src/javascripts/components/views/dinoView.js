@@ -15,10 +15,10 @@ const dinoView = () => {
       dinoForm.addDinoForm();
       $('#addDinoBtn').attr('disabled', true);
     });
+    dinoCards.dinoCardBuilder();
   } else {
-    $('#app').html('<h1>Display dinos only</h1>');
+    dinoCards.dinoCardBuilder();
   }
-  dinoCards.dinoCardBuilder();
 };
 
 export default { dinoView };
