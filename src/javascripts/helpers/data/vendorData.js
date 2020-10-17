@@ -38,6 +38,10 @@ const getSingleVendor = (vendorId) => new Promise((resolve, reject) => {
 
 const updateVendor = (vendorId, vendorObj) => axios.patch(`${baseUrl}/vendor/${vendorId}.json`, vendorObj);
 
+const deleteVendor = (vendorId) => {
+  axios.delete(`${baseUrl}/vendor/${vendorId}.json`);
+};
+
 export default {
-  addVendor, getVendors, getSingleVendor, updateVendor
+  addVendor, getVendors, getSingleVendor, updateVendor, deleteVendor
 };
