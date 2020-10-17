@@ -1,7 +1,8 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import staffForm from '../forms/addStaffForm';
-import cards from '../cards/staffCards';
+import staffCards from '../cards/staffCards';
+import staffData from '../../helpers/data/staffData';
 
 const staffView = () => {
   const user = firebase.auth().currentUser;
@@ -18,10 +19,17 @@ const staffView = () => {
       staffForm.addStaffForm();
       $('#addStaffBtn').attr('disabled', true);
     });
+    staffData.getStaff().then((response) => {
+      if (response.length) {
+        response.forEach((staff) => {
+          $('#cards').append(staffCards.authedStaffCardMaker(staff));
+        });
+      }
+    });
   } else {
     $('#app').html('<h1>Display staff only</h1>');
   }
-  cards.staffCardBuilder();
+  staffCards.staffCardBuilder();
 };
 
 export default { staffView };
