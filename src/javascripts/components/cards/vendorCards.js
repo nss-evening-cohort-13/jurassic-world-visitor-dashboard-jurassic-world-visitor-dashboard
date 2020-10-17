@@ -5,12 +5,8 @@ const authedVendorMaker = (vendorObject) => {
     <img src="${vendorObject.imageUrl}" id="${vendorObject.firebaseKey}" class="card-img-top card-img" alt="${vendorObject.name}">
     <div>
       <h3 class="card-header">${vendorObject.name}</h3>
-<<<<<<< HEAD
-      <button type="button" class="btn btn-light edit-vendor" id="${vendorObject.vendorId}">Edit</button>
-      <button type="button" class="btn btn-light delete-vendor" id="${vendorObject.vendorId}">Delete</button>
-=======
       <button type="button" class="btn btn-light edit-vendor card-btns" id="${vendorObject.vendorId}"><i class="fas fa-pen"></i></button>
->>>>>>> development
+      <button type="button" class="btn btn-light delete-vendor card-btns" id="${vendorObject.vendorId}"><i class="fas fa-trash-alt"></i></button>
     </div>
   </div>`;
   $('body').on('click', '.delete-vendor', (e) => {
