@@ -5,7 +5,9 @@ import dinoView from '../components/views/dinoView';
 import equipmentView from '../components/views/equipmentView';
 import updateEquipmentView from '../components/views/updateEquipmentView';
 import editVendorForm from '../components/forms/editVendorForm';
+import editStaffForm from '../components/forms/editStaffForm';
 import updateDinoView from '../components/views/updateDinoView';
+import updateRideView from '../components/views/updateRideView';
 
 const viewHelper = (id, arg) => {
   $('#app').html('');
@@ -26,8 +28,12 @@ const viewHelper = (id, arg) => {
       return updateEquipmentView.updateEquipmentView(arg);
     case 'edit-vendor':
       return editVendorForm.editVendorForm(arg);
+    case 'edit-staff':
+      return editStaffForm.editStaffForm(arg);
     case 'update-dino-link':
       return updateDinoView.updateDinoView(arg);
+    case 'update-ride-link':
+      return updateRideView.updateRideView(arg);
     default:
       return console.warn('nothing clicked');
   }
@@ -48,9 +54,18 @@ const viewListeners = (view) => {
     viewHelper('edit-vendor', e.currentTarget.id);
     e.stopImmediatePropagation();
   });
+  $('body').on('click', 'button.edit-staff', (e) => {
+    viewHelper('edit-staff', e.currentTarget.id);
+    e.stopImmediatePropagation();
+  });
   $('body').on('click', '.update-dino', (e) => {
     const dinoFirebaseKey = e.currentTarget.id;
     viewHelper('update-dino-link', dinoFirebaseKey);
+    e.stopImmediatePropagation();
+  });
+  $('body').on('click', '.update-ride', (e) => {
+    const rideFirebaseKey = e.currentTarget.id;
+    viewHelper('update-ride-link', rideFirebaseKey);
     e.stopImmediatePropagation();
   });
 };
