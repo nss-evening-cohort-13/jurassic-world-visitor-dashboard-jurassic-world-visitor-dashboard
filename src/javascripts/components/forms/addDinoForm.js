@@ -1,5 +1,4 @@
 import dinoData from '../../helpers/data/dinoData';
-import dinoCards from '../cards/dinoCards';
 
 const addDinoForm = () => {
   $('#app').append(`
@@ -33,7 +32,15 @@ const addDinoForm = () => {
               '<div class="alert alert-success" role="alert">The dino has been added!</div>'
             );
             $('#addDinoBtn').removeAttr('disabled');
-            dinoCards.dinoCardBuilder();
+            $('#cards').append(`<div class="card card-body" id="${response.data.name}">
+            <div>
+              <img src="${data.imageUrl}" class="card-img-top" alt="${data.name}">
+              <div>
+                <h3 class="card-text card-header">${data.name}</h3>
+              </div>
+              <button type="button" id="${response.data.name}" class="btn btn-info update-dino">Edit</button>
+            </div>
+          </div>`);
           }
         })
         .catch((error) => console.warn(error));
