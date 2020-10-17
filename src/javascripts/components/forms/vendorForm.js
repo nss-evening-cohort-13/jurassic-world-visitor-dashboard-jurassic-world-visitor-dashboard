@@ -36,6 +36,7 @@ const vendorForm = () => {
             <div>
               <h3 class="card-header">${data.name}</h3>
               <button type="button" class="btn btn-light edit-vendor" id="${response.data.name}">Edit</button>
+              <button type="button" class="btn btn-light delete-vendor" id="${response.data.name}">Delete</button>
             </div>
           </div>`);
           }
