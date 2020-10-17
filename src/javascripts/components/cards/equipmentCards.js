@@ -9,7 +9,7 @@ const authedEquipmentCardView = (equipmentObject) => {
         <div>
           <h3 class="card-text card-header">${equipmentObject.name}</h3>
         </div>
-        <button type="button" id="${equipmentObject.equipmentId}" class="btn btn-info update-equipment">Edit</button>
+        <button type="button" id="${equipmentObject.equipmentId}" class="btn btn-info update-equipment card-btns"><i class="fas fa-pen"></i></button>
       </div>
     </div>`;
   return domString;
