@@ -39,7 +39,6 @@ const staffCardBuilder = () => {
     .getStaff()
     .then((response) => {
       response.forEach((item) => {
-        console.warn(item);
         if (response.length) {
           $('#cards').append(authedStaffCardMaker(item));
         } else {
