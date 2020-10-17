@@ -29,4 +29,24 @@ const getAllRides = () => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
+<<<<<<< HEAD:src/javascripts/helpers/data/ridesData.js
 export default { addRide, getAllRides, deleteRides };
+=======
+const getSingleRide = (rideFirebaseKey) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/rides/${rideFirebaseKey}.json`).then((response) => {
+    const thisRide = response.data;
+    resolve(thisRide);
+  }).catch((error) => reject(error));
+});
+
+const editRide = (firebaseKey, rideObject) => new Promise((resolve, reject) => {
+  axios.patch(`${baseUrl}/rides/${firebaseKey}.json`, rideObject)
+    .then((response) => {
+      resolve(response);
+    }).catch((error) => reject(error));
+});
+
+export default {
+  addRide, getAllRides, editRide, getSingleRide
+};
+>>>>>>> e9eaa22e1f3d326c761d15b46dbadf7ea2401d1d:src/javascripts/helpers/data/rideData.js

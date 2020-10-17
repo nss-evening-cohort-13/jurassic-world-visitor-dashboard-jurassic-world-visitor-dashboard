@@ -1,7 +1,21 @@
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import equipmentData from '../../helpers/data/equipmentData';
 
-const equipmentCardView = (equipmentObject) => {
-  const domString = `<div class="card card-body" id="${equipmentObject.firebaseKey}">
+const authedEquipmentCardView = (equipmentObject) => {
+  const domString = `<div>
+        <img src="${equipmentObject.imageUrl}" class="card-img-top" alt="${equipmentObject.name}">
+        <div>
+          <h3 class="card-text card-header">${equipmentObject.name}</h3>
+        </div>
+        <button type="button" id="${equipmentObject.equipmentId}" class="btn btn-info update-equipment">Edit</button>
+      </div>
+    </div>`;
+  return domString;
+};
+
+const unauthedEquipmentCardView = (equipmentObject) => {
+  const domString = `
       <div>
         <img src="${equipmentObject.imageUrl}" class="card-img-top" alt="${equipmentObject.name}">
         <div>
@@ -13,13 +27,18 @@ const equipmentCardView = (equipmentObject) => {
 };
 
 const equipmentCardBuilder = () => {
+  const user = firebase.auth().currentUser;
   $('#cards').html('');
   equipmentData
     .getEquipment()
     .then((response) => {
       response.forEach((item) => {
         if (response.length) {
-          $('#cards').append(equipmentCardView(item));
+          if (user) {
+            $('#cards').append(`<div class="card card-body" id="${item.equipmentId}"> ${authedEquipmentCardView(item)}`);
+          } else {
+            $('#cards').append(`<div class="card card-body" id="${item.equipmentId}"> ${unauthedEquipmentCardView(item)}`);
+          }
         } else {
           $('#cards').append('<h2> NO DINOS!</H2>');
         }
