@@ -29,9 +29,6 @@ const getAllRides = () => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-<<<<<<< HEAD:src/javascripts/helpers/data/ridesData.js
-export default { addRide, getAllRides, deleteRides };
-=======
 const getSingleRide = (rideFirebaseKey) => new Promise((resolve, reject) => {
   axios.get(`${baseUrl}/rides/${rideFirebaseKey}.json`).then((response) => {
     const thisRide = response.data;
@@ -47,6 +44,5 @@ const editRide = (firebaseKey, rideObject) => new Promise((resolve, reject) => {
 });
 
 export default {
-  addRide, getAllRides, editRide, getSingleRide
+  addRide, getAllRides, editRide, getSingleRide, deleteRides
 };
->>>>>>> e9eaa22e1f3d326c761d15b46dbadf7ea2401d1d:src/javascripts/helpers/data/rideData.js
