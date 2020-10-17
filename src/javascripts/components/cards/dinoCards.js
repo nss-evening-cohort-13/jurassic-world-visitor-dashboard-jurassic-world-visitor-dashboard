@@ -15,8 +15,9 @@ const authedDinoCardView = (dinoObject) => {
     </div>`;
 
   $('body').on('click', 'button.delete-dino', (e) => {
-    $(`.card#${e.currentTarget.id}`).remove();
-    dinoData.deleteDino(e.currentTarget.id);
+    const firebaseKey = e.currentTarget.id;
+    $(`.card#${firebaseKey}`).remove();
+    dinoData.deleteDino(firebaseKey);
   });
 
   return domString;

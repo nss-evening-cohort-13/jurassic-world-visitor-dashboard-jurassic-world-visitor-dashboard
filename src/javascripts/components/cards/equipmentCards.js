@@ -14,8 +14,9 @@ const authedEquipmentCardView = (equipmentObject) => {
       </div>
     </div>`;
   $('body').on('click', 'button.delete-equipment', (e) => {
-    $(`.card#${e.currentTarget.id}`).remove();
-    equipmentData.deleteEquipment(e.currentTarget.id);
+    const firebaseKey = e.currentTarget.id;
+    $(`.card#${firebaseKey}`).remove();
+    equipmentData.deleteEquipment(firebaseKey);
   });
   return domString;
 };
