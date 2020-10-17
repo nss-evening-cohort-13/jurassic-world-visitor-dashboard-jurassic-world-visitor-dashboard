@@ -8,8 +8,11 @@ const addStaff = (staffData) => new Promise((resolve, reject) => {
     .post(`${baseUrl}/staff.json`, staffData)
     .then((response) => {
       const fbKey = { staffId: response.data.name };
-      axios.patch(`${baseUrl}/staff/${response.data.name}.json`, fbKey);
-      resolve(response);
+      axios
+        .patch(`${baseUrl}/staff/${response.data.name}.json`, fbKey)
+        .then(() => {
+          resolve(response);
+        });
     })
     .catch((error) => reject(error));
 });
