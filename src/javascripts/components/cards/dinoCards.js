@@ -9,9 +9,16 @@ const authedDinoCardView = (dinoObject) => {
         <div>
           <h3 class="card-text card-header">${dinoObject.name}</h3>
         </div>
-        <button type="button" id="${dinoObject.dinoId}" class="btn btn-info update-dino">Edit</button>
+        <button type="button" id="${dinoObject.dinoId}" class="btn btn-info update-dino"><i class="fas fa-pen"></i></button>
+        <button type="button" id="${dinoObject.dinoId}" class="btn btn-info delete-dino"><i class="fas fa-trash-alt"></i></button>
       </div>
     </div>`;
+
+  $('body').on('click', 'button.delete-dino', (e) => {
+    $(`.card#${e.currentTarget.id}`).remove();
+    dinoData.deleteDino(e.currentTarget.id);
+  });
+
   return domString;
 };
 
