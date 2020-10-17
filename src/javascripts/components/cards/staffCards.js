@@ -18,7 +18,6 @@ const authedStaffCardMaker = (staffObject) => {
     $(`.card#${firebaseKey}`).remove();
     staffData.deleteStaff(firebaseKey);
   });
-
   return domString;
 };
 

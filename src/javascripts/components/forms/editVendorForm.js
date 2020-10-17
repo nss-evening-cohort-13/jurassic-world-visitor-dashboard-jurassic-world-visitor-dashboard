@@ -35,6 +35,7 @@ const editVendorForm = (vendorId) => {
   vendorData.getSingleVendor(vendorId)
     .then((response) => {
       vendorView.vendorView();
+      $('#add-vendor-btn').attr('disabled', true);
       $('#app').append(`
       <form id="editVendorForm">
         <h2>Edit a Vendor</h2>

@@ -11,7 +11,7 @@ const submitUpdatedStaff = (staffId) => {
     };
 
     if (document.getElementById('editStaffForm').checkValidity()) {
-      $('#error-message').html('');
+      $('#staffErrorMsg').html('');
 
       staffData.updateStaff(staffId, data)
         .then((response) => {
@@ -23,10 +23,10 @@ const submitUpdatedStaff = (staffId) => {
         }).catch((error) => console.warn(error));
 
       setTimeout(() => {
-        $('#success-message').html('');
+        $('#staffSuccessMsg').html('');
       }, 2000);
     } else {
-      $('#error-message').html('<div class="alert alert-danger" role="alert">Please fill out all fields correctly.</div>');
+      $('#staffErrorMsg').html('<div class="alert alert-danger" role="alert">Please fill out all fields correctly.</div>');
     }
   });
 };
