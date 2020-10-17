@@ -14,7 +14,7 @@ const editRideForm = (rideObject) => {
   </div>
   <div class="form-group">
     <label for="rideImage">Image Link</label>
-    <input type="url" class="form-control" id="dinoImage" value="${rideObject.image}" required/>
+    <input type="url" class="form-control" id="rideImage" value="${rideObject.image}" required/>
   </div>
   <button type="submit" class="btn btn-outline-dark buttons" id="submitEditRide">Update</button>
 </form>`);
