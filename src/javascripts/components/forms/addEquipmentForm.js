@@ -38,7 +38,8 @@ const addEquipmentForm = () => {
               <div>
                 <h3 class="card-text card-header">${data.name}</h3>
               </div>
-              <button type="button" id="${response.data.name}" class="btn btn-info update-equipment">Edit</button>
+              <button type="button" id="${response.data.name}" class="btn btn-info update-equipment card-btns"><i class="fas fa-pen"></i></button>
+              <button type="button" id="${response.data.name}" class="btn btn-info delete-equipment card-btns"><i class="fas fa-trash-alt"></i></button>
             </div>
           </div>`);
           }

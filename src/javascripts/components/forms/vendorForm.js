@@ -35,7 +35,8 @@ const vendorForm = () => {
             <img src="${data.imageUrl}" id="${data.firebaseKey}" class="card-img-top card-img" alt="${data.name}">
             <div>
               <h3 class="card-header">${data.name}</h3>
-              <button type="button" class="btn btn-light edit-vendor" id="${response.data.name}">Edit</button>
+              <button type="button" class="btn btn-light edit-vendor card-btns" id="${response.data.name}"><i class="fas fa-pen"></i></button>
+              <button type="button" class="btn btn-light delete-vendor card-btns" id="${response.data.name}"><i class="fas fa-trash-alt"></i></button>
             </div>
           </div>`);
           }

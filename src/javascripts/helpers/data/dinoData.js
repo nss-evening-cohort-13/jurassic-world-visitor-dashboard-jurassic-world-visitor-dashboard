@@ -37,6 +37,8 @@ const getSingleDino = (dinoFirebaseKey) => new Promise((resolve, reject) => {
 
 const editDino = (firebaseKey, dinoObject) => axios.patch(`${baseUrl}/dinos/${firebaseKey}.json`, dinoObject);
 
+const deleteDino = (dinoId) => axios.delete(`${baseUrl}/dinos/${dinoId}.json`);
+
 export default {
-  addDino, getDino, editDino, getSingleDino
+  addDino, getDino, editDino, getSingleDino, deleteDino
 };

@@ -21,6 +21,7 @@ const addDinoForm = () => {
       name: $('#dinoName').val(),
       imageUrl: $('#dinoImage').val(),
     };
+
     if (document.querySelector('#addDinoForm').checkValidity()) {
       $('#dinoErrorMsg').html('');
       dinoData
@@ -38,7 +39,8 @@ const addDinoForm = () => {
               <div>
                 <h3 class="card-text card-header">${data.name}</h3>
               </div>
-              <button type="button" id="${response.data.name}" class="btn btn-info update-dino">Edit</button>
+              <button type="button" id="${response.data.name}" class="btn btn-info update-dino card-btns"><i class="fas fa-pen"></i></button>
+              <button type="button" id="${response.data.name}" class="btn btn-info delete-dino card-btns"><i class="fas fa-trash-alt"></i></button>
             </div>
           </div>`);
           }

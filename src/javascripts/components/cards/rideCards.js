@@ -7,10 +7,17 @@ const rideCardMaker = (rideObject) => {
   <img src="${rideObject.image}" class="card-img-top" alt="...">
   <div>
     <h3 class="card-header">${rideObject.name}</h3>
-    <button type="button" class="btn btn-light update-ride" id="${rideObject.rideId}">Edit</button>
-    <button type="button" class="btn btn-light" id="${rideObject.rideId}">Delete</button>
+    <button type="button" class="btn btn-light update-ride card-btns" id="${rideObject.rideId}"><i class="fas fa-pen"></i></button>
+    <button type="button" class="btn btn-light delete-rides card-btns" id="${rideObject.rideId}"><i class="fas fa-trash-alt"></i></button>
   </div>
 </div>`;
+
+  $('body').on('click', '.delete-rides', (e) => {
+    e.stopImmediatePropagation();
+    const firebaseKey = e.currentTarget.id;
+    $(`.card#${firebaseKey}`).remove();
+    rideData.deleteRides(firebaseKey);
+  });
 
   return domString;
 };
@@ -19,7 +26,8 @@ const unauthRideCardMaker = (rideObject) => {
   const domString = `<div class="card card-body" id="${rideObject.rideId}" style="width: 18rem;">
   <img src="${rideObject.image}" class="card-img-top" alt="...">
   <div>
-    <h3 class="card-header">${rideObject.name}</h3>
+    <h3 class="card-header">${rideObject.name}
+    </h3>
   </div>
 </div>`;
 
