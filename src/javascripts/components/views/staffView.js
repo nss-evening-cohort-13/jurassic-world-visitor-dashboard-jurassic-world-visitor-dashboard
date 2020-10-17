@@ -27,9 +27,14 @@ const staffView = () => {
       }
     });
   } else {
-    $('#app').html('<h1>Display staff only</h1>');
+    staffData.getStaff().then((response) => {
+      if (response.length) {
+        response.forEach((staff) => {
+          $('#cards').append(staffCards.unauthedStaffMaker(staff));
+        });
+      }
+    });
   }
-  staffCards.staffCardBuilder();
 };
 
 export default { staffView };

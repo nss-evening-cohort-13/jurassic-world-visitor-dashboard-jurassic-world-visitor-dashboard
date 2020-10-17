@@ -35,6 +35,7 @@ const editStaffForm = (staffId) => {
   staffData.getSingleStaff(staffId)
     .then((response) => {
       staffView.staffView();
+      $('#addStaffBtn').attr('disabled', true);
       $('#app').append(`
       <form id="editStaffForm">
         <h2>Edit a Staff Member</h2>
