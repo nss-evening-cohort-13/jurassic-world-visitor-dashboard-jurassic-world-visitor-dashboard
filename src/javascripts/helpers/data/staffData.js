@@ -31,6 +31,8 @@ const getStaff = () => axios
   })
   .catch((error) => console.warn(error));
 
+const deleteStaff = (firebaseKey) => axios.delete(`${baseUrl}/staff/${firebaseKey}.json`);
+
 const getSingleStaff = (staffId) => new Promise((resolve, reject) => {
   axios
     .get(`${baseUrl}/staff/${staffId}.json`)
@@ -43,5 +45,5 @@ const getSingleStaff = (staffId) => new Promise((resolve, reject) => {
 const updateStaff = (staffId, staffObj) => axios.patch(`${baseUrl}/staff/${staffId}.json`, staffObj);
 
 export default {
-  addStaff, getStaff, getSingleStaff, updateStaff
+  addStaff, getStaff, getSingleStaff, updateStaff, deleteStaff
 };

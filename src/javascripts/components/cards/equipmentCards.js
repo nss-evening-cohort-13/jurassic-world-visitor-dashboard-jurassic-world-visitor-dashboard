@@ -3,7 +3,8 @@ import 'firebase/auth';
 import equipmentData from '../../helpers/data/equipmentData';
 
 const authedEquipmentCardView = (equipmentObject) => {
-  const domString = `<div>
+  const domString = `<div class="card card-body" id="${equipmentObject.equipmentId}">
+      <div>
         <img src="${equipmentObject.imageUrl}" class="card-img-top" alt="${equipmentObject.name}">
         <div>
           <h3 class="card-text card-header">${equipmentObject.name}</h3>
@@ -20,7 +21,7 @@ const authedEquipmentCardView = (equipmentObject) => {
 };
 
 const unauthedEquipmentCardView = (equipmentObject) => {
-  const domString = `
+  const domString = `<div class="card card-body" id="${equipmentObject.equipmentId}">
       <div>
         <img src="${equipmentObject.imageUrl}" class="card-img-top" alt="${equipmentObject.name}">
         <div>
@@ -40,9 +41,9 @@ const equipmentCardBuilder = () => {
       response.forEach((item) => {
         if (response.length) {
           if (user) {
-            $('#cards').append(`<div class="card card-body" id="${item.equipmentId}"> ${authedEquipmentCardView(item)}`);
+            $('#cards').append(authedEquipmentCardView(item));
           } else {
-            $('#cards').append(`<div class="card card-body" id="${item.equipmentId}"> ${unauthedEquipmentCardView(item)}`);
+            $('#cards').append(unauthedEquipmentCardView(item));
           }
         } else {
           $('#cards').append('<h2> NO DINOS!</H2>');
