@@ -28,4 +28,15 @@ const getEquipment = () => axios
   })
   .catch((error) => console.warn(error));
 
-export default { addEquipment, getEquipment };
+const getSingleEquipment = (equipmentFirebaseKey) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/equipment/${equipmentFirebaseKey}.json`).then((response) => {
+    const thisEquipment = response.data;
+    resolve(thisEquipment);
+  }).catch((error) => reject(error));
+});
+
+const editEquipment = (firebaseKey, equipmentObject) => axios.patch(`${baseUrl}/equipment/${firebaseKey}.json`, equipmentObject);
+
+export default {
+  addEquipment, getEquipment, getSingleEquipment, editEquipment
+};

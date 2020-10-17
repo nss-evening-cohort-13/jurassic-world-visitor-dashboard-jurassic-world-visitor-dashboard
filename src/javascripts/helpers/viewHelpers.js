@@ -3,6 +3,7 @@ import vendorView from '../components/views/vendorView';
 import rideView from '../components/views/rideView';
 import dinoView from '../components/views/dinoView';
 import equipmentView from '../components/views/equipmentView';
+import updateEquipmentView from '../components/views/updateEquipmentView';
 import editVendorForm from '../components/forms/editVendorForm';
 import updateDinoView from '../components/views/updateDinoView';
 
@@ -21,6 +22,8 @@ const viewHelper = (id, arg) => {
       return dinoView.dinoView();
     case 'equipment-link':
       return equipmentView.equipmentView();
+    case 'update-equipment-link':
+      return updateEquipmentView.updateEquipmentView(arg);
     case 'edit-vendor':
       return editVendorForm.editVendorForm(arg);
     case 'update-dino-link':
@@ -36,6 +39,11 @@ const viewListeners = (view) => {
     viewHelper(e.currentTarget.id);
     e.stopImmediatePropagation();
   });
+  $('body').on('click', '.update-equipment', (e) => {
+    const equipmentFirebaseKey = e.currentTarget.id;
+    viewHelper('update-equipment-link', equipmentFirebaseKey);
+    e.stopImmediatePropagation();
+  });
   $('body').on('click', 'button.edit-vendor', (e) => {
     viewHelper('edit-vendor', e.currentTarget.id);
     e.stopImmediatePropagation();
@@ -43,6 +51,7 @@ const viewListeners = (view) => {
   $('body').on('click', '.update-dino', (e) => {
     const dinoFirebaseKey = e.currentTarget.id;
     viewHelper('update-dino-link', dinoFirebaseKey);
+    e.stopImmediatePropagation();
   });
 };
 
