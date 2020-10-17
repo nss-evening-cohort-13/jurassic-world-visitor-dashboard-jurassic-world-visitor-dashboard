@@ -1,15 +1,24 @@
 import staffData from '../../helpers/data/staffData';
 
 const authedStaffCardMaker = (staffObject) => {
-  const domString = `<div class="card card-body" id="${staffObject.firebaseKey}">
+  const domString = `<div class="card card-body" id="${staffObject.staffId}">
     <div>
       <img src="${staffObject.image}" class="card-img-top" alt="${staffObject.name}">
       <div>
         <h3 class="card-text card-header">${staffObject.name}</h3>
         <button type="button" class="btn btn-light edit-staff" id="${staffObject.staffId}">Edit</button>
+        <button type="button" class="btn btn-light delete-staff" id="${staffObject.staffId}">Delete</button>
       </div>
     </div>
   </div>`;
+
+  $('body').on('click', '.delete-staff', (e) => {
+    e.stopImmediatePropagation();
+    const firebaseKey = e.currentTarget.id;
+    $(`.card#${firebaseKey}`).remove();
+    staffData.deleteStaff(firebaseKey);
+  });
+
   return domString;
 };
 
