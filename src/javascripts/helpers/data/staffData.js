@@ -45,12 +45,5 @@ const getSingleStaff = (staffId) => new Promise((resolve, reject) => {
 const updateStaff = (staffId, staffObj) => axios.patch(`${baseUrl}/staff/${staffId}.json`, staffObj);
 
 export default {
-<<<<<<< HEAD
-  addStaff,
-  getStaff,
-  getSingleStaff,
-  updateStaff,
-=======
   addStaff, getStaff, getSingleStaff, updateStaff, deleteStaff
->>>>>>> development
 };
