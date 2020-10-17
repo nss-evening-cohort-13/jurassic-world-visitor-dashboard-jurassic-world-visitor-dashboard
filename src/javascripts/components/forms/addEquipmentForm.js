@@ -1,5 +1,4 @@
 import equipmentData from '../../helpers/data/equipmentData';
-import equipmentCards from '../cards/equipmentCards';
 
 const addEquipmentForm = () => {
   $('#app').append(`
@@ -33,7 +32,15 @@ const addEquipmentForm = () => {
               '<div class="alert alert-success" role="alert">The equipment has been added!</div>'
             );
             $('#addEquipmentBtn').removeAttr('disabled');
-            equipmentCards.equipmentCardBuilder();
+            $('#cards').append(`<div class="card card-body" id="${response.data.name}">
+            <div>
+              <img src="${data.imageUrl}" class="card-img-top" alt="${data.name}">
+              <div>
+                <h3 class="card-text card-header">${data.name}</h3>
+              </div>
+              <button type="button" id="${response.data.name}" class="btn btn-info update-equipment">Edit</button>
+            </div>
+          </div>`);
           }
         })
         .catch((error) => console.warn(error));
