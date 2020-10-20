@@ -1,7 +1,7 @@
 import 'bootstrap';
 
 const chaosView = () => {
-  $('#toast').html(`<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+  $('#toast').html(`<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000"">
   <div class="toast-header">
     <strong class="mr-auto">Chaos Monkey has struck</strong>
     <small>11 mins ago</small>
