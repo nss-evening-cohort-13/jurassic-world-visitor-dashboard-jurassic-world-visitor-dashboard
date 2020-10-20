@@ -9,6 +9,7 @@ const checkLoginStatus = () => {
     if (user) {
       navbar.navbar();
       viewHelpers.viewListeners('dino-link');
+      viewHelpers.toastView();
     } else {
       auth.loginButton();
       viewHelpers.viewListeners('dino-link');
