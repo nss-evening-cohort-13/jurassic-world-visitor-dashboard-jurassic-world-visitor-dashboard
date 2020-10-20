@@ -113,6 +113,7 @@ You are tasked with creating a dashboard to maintain the greatest biological exp
 ### Description
 After the first group of developers mysteriously disappeared in a freak accident (conveniently right before the checks cleared), you'll need to pick up where they left off.  The higher-ups really like the dashboard the last team built, but also want to keep track of the staff, and want to know the schedule of each staff.  They should be able to assign a staff member to a dinosaur, or a vendor, as well as the ability to assign equipment to a staff member.  The Chaos Monkey doesn't really appreciate all the micro-management, and has developed more heinous ways to cause trouble.  The higher-ups are starting to understand the impact that introducing a Chaos Monkey has on the park, and has tasked you with creating a system that will alert the park manager when and where the Chaos Monkey strikes.  
 
+
 ### Requirements
 - Chaos Monkey Requirements: 
   - When Chaos Monkey kidnaps staff member, remove them from the roster and any assigned roles/equipment/dinos
@@ -129,13 +130,15 @@ After the first group of developers mysteriously disappeared in a freak accident
   - Breakout alarm - if a dinosaur doesn't have enough keepers, alert the user
   - Keep a log of all the Chaos Monkey incidents
   - Test Equipment, I should have a button that tests all of my equipment and alerts the user of each equipment that's broken.
-  
+
 ### User Stories
 
 #### Chaos Monkey
 - As a user, when the Chaos Monkey kidnaps an employee, they should be automatically unassigned from their station and removed from the staff list.  They're not coming back.
 - As a user, when the Chaos Monkey breaks a ride, the ride should no longer be operational
 - As a user, when the Chaos Monkey breaks a piece of equipment, any assigned staff can no longer use it and are unassigned.
+
+=======
 
 #### Scheduling 
 - As a user, I should be able to assign a staff member to either a dinosaur, a ride, or a vendor
@@ -148,3 +151,4 @@ After the first group of developers mysteriously disappeared in a freak accident
 - As a user, I should be alerted whenever there is a dinosaur that has less than 2 handlers
 - As a user, I should be alerted when the Chaos Monkey strikes, including info on what it did, and to whom.
 - As a user, I should be able to test all the equipment.  When I click the button, I should be alerted to each broken piece of equipment
+

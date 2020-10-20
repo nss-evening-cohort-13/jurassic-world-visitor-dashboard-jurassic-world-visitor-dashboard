@@ -8,10 +8,18 @@ import editVendorForm from '../components/forms/editVendorForm';
 import editStaffForm from '../components/forms/editStaffForm';
 import updateDinoView from '../components/views/updateDinoView';
 import updateRideView from '../components/views/updateRideView';
+import chaosView from '../components/views/chaosView';
+
+const toastView = () => {
+  $('body').on('click', 'p.nav-item', () => {
+    chaosView.chaosView();
+  });
+};
 
 const viewHelper = (id, arg) => {
   $('#app').html('');
   $('#cards').html('');
+  $('#toast').html('');
 
   switch (id) {
     case 'staff-link':
@@ -70,4 +78,4 @@ const viewListeners = (view) => {
   });
 };
 
-export default { viewListeners };
+export default { viewListeners, toastView };
