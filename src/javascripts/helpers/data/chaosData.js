@@ -5,7 +5,6 @@ const randomEquipment = (category) => new Promise((resolve, reject) => {
   axios
     .get(`https://nutshell-part-two.firebaseio.com/${category}.json`)
     .then((response) => {
-      console.warn(response);
       const arrayLength = Object.values(response.data).length;
       const randomNumber = Math.floor(Math.random() * arrayLength);
       const choatic = Object.values(response.data)[randomNumber];
