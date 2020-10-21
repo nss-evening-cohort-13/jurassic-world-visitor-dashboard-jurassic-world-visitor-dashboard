@@ -2,14 +2,16 @@
 import axios from 'axios';
 
 const randomEquipment = (category) => new Promise((resolve, reject) => {
-  axios.get(`https://nutshell-part-two.firebaseio.com/${category}.json`)
+  axios
+    .get(`https://nutshell-part-two.firebaseio.com/${category}.json`)
     .then((response) => {
       console.warn(response);
       const arrayLength = Object.values(response.data).length;
       const randomNumber = Math.floor(Math.random() * arrayLength);
       const choatic = Object.values(response.data)[randomNumber];
       resolve(choatic.name);
-    }).catch((error) => reject(error));
+    })
+    .catch((error) => reject(error));
 
   // equipmentData
   //   .getEquipment()
@@ -27,16 +29,19 @@ const chaosMonkey = () => new Promise((resolve, reject) => {
   const category = chaosArray[Math.floor(Math.random() * 3)];
 
   // TODO: Update the string/resolve based on the selected category
-  randomEquipment(category).then((response) => {
-    // let selectedCat = ""
-    // if staff
-    //   selectedCat = ...
-    // else if equeueMicrotask...
-    //   ...
+  randomEquipment(category)
+    .then((response) => {
+      let selectedCat = `broken the ${response}`;
+      if (category === 'staff') {
+        selectedCat = `kidnapped ${response}`;
+      }
+      //   selectedCat = ...
+      // else if equeueMicrotask...
+      //   ...
 
-
-    resolve(response);
-  }).catch((error) => reject(error));
+      resolve(selectedCat);
+    })
+    .catch((error) => reject(error));
 
   // let x;
   // if (category === 0) {
