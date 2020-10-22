@@ -131,7 +131,7 @@ After the first group of developers mysteriously disappeared in a freak accident
   - Keep a log of all the Chaos Monkey incidents
   - Test Equipment, I should have a button that tests all of my equipment and alerts the user of each equipment that's broken.
 
-### User Stories
+## User Stories
 
 #### Chaos Monkey
 - As a user, when the Chaos Monkey kidnaps an employee, they should be automatically unassigned from their station and removed from the staff list.  They're not coming back.
