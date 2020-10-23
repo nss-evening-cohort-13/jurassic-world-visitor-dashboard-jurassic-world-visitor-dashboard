@@ -1,13 +1,14 @@
 import vendorData from '../../helpers/data/vendorData';
 import vendorView from '../views/vendorView';
+import staffData from '../../helpers/data/staffData';
 
 const submitUpdatedVendor = (vendorId) => {
   $('#submit-vendor-btn').on('click', (e) => {
     e.preventDefault();
-
     const data = {
       name: $('#name').val(),
       imageUrl: $('#image').val(),
+      staffId: $('#staff').val(),
     };
 
     if (document.getElementById('editVendorForm').checkValidity()) {
@@ -47,10 +48,25 @@ const editVendorForm = (vendorId) => {
           <label for="image">Image</label>
           <input type="url" class="form-control" id="image" placeholder="Enter Image URL" value="${response.imageUrl}" required>
         </div>
+        <div class="form-group">
+         <label for="staff">Staff</label>
+          <select class="form-control" id="staff">
+          <option value="">Select Staff</option>
+         </select>
+        </div>
         <button id="submit-vendor-btn" type="submit" class="btn btn-info"><i class="fas fa-plus-circle"></i> Update Vendor</button>
       </form>`);
       submitUpdatedVendor(vendorId);
-    }).catch((error) => console.warn(error));
+    });
+  staffData.getStaff().then((response) => {
+    response.forEach((item) => {
+      $('select').append(
+        `<option value="${item.staffId}" ${
+          vendorId.staffId === item.staffId ? "selected ='selected'" : ''
+        }>${item.name}</option>`
+      );
+    });
+  }).catch((error) => console.warn(error));
 };
 
 export default { editVendorForm };
