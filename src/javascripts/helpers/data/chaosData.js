@@ -2,7 +2,7 @@ import axios from 'axios';
 import staffData from './staffData';
 
 //  Gets data from firebase based on category specified in chaosMonkey
-const randomEquipment = (category) => new Promise((resolve, reject) => {
+const randomItem = (category) => new Promise((resolve, reject) => {
   axios
     .get(`https://nutshell-part-two.firebaseio.com/${category}.json`)
     .then((response) => {
@@ -26,8 +26,8 @@ const chaosMonkey = () => new Promise((resolve, reject) => {
   const chaosArray = ['staff', 'equipment', 'rides'];
   const category = chaosArray[Math.floor(Math.random() * 3)];
 
-  // then it passes that category into randomEquipment so that the correct database node can be returned
-  randomEquipment(category)
+  // then it passes that category into randomItem so that the correct database node can be returned
+  randomItem(category)
     .then((response) => {
       //  a variable called selectedCat is defined here and defaults to broken the (name of object) since both rides and equipment break
       let selectedCat = `broken the ${response.name}`;
