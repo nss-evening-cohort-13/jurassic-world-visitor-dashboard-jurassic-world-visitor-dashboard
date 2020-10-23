@@ -42,8 +42,17 @@ const getSingleStaff = (staffId) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+const getSingleStaffByStaffId = (staffId) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/staff.json?orderBy="staffId"&equalTo="${staffId}"`)
+    .then((response) => {
+      const staff = Object.values(response.data);
+      const thisStaff = staff[0];
+      resolve(thisStaff);
+    }).catch((error) => reject(error));
+});
+
 const updateStaff = (staffId, staffObj) => axios.patch(`${baseUrl}/staff/${staffId}.json`, staffObj);
 
 export default {
-  addStaff, getStaff, getSingleStaff, updateStaff, deleteStaff
+  addStaff, getStaff, getSingleStaff, updateStaff, deleteStaff, getSingleStaffByStaffId
 };

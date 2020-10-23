@@ -1,6 +1,7 @@
 import rideData from '../../helpers/data/rideData';
 import rideCards from '../cards/rideCards';
 import rideView from '../views/rideView';
+import staffData from '../../helpers/data/staffData';
 
 const editRideForm = (rideObject) => {
   rideView.rideView();
@@ -16,14 +17,29 @@ const editRideForm = (rideObject) => {
     <label for="rideImage">Image Link</label>
     <input type="url" class="form-control" id="rideImage" value="${rideObject.image}" required/>
   </div>
+  <div class="form-group">
+  <label for="staff">Staff</label>
+    <select class="form-control" id="staff">
+      <option value="">Select Staff</option>
+    </select>
+</div>
   <button type="submit" class="btn btn-outline-dark buttons" id="submitEditRide">Update</button>
 </form>`);
-
+  staffData.getStaff().then((response) => {
+    response.forEach((item) => {
+      $('select').append(
+        `<option value="${item.staffId}" ${
+          rideObject.staffId === item.staffId ? "selected ='selected'" : ''
+        }>${item.name}</option>`
+      );
+    });
+  });
   $('#submitEditRide').on('click', (e) => {
     e.preventDefault();
     const data = {
       name: $('#rideName').val(),
       image: $('#rideImage').val(),
+      staffId: $('#staff').val(),
     };
     if (document.querySelector('#editRideForm').checkValidity()) {
       $('#rideErrorMessage').html('');

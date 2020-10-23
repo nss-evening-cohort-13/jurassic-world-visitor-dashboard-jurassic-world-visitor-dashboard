@@ -36,6 +36,21 @@ const getSingleRide = (rideFirebaseKey) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
+const getStaffRides = (staffUid) => new Promise((resolve, reject) => {
+  axios
+    .get(`${baseUrl}/rides.json?orderBy="staffUid"&equalTo="${staffUid}"`)
+    .then((response) => {
+      const staffRides = response.data;
+      const rides = [];
+      if (staffRides) {
+        Object.keys(staffRides).forEach((rideId) => {
+          rides.push(staffRides[rideId]);
+        });
+      }
+      resolve(rides);
+    }).catch((error) => reject(error));
+});
+
 const editRide = (firebaseKey, rideObject) => new Promise((resolve, reject) => {
   axios.patch(`${baseUrl}/rides/${firebaseKey}.json`, rideObject)
     .then((response) => {
@@ -44,5 +59,5 @@ const editRide = (firebaseKey, rideObject) => new Promise((resolve, reject) => {
 });
 
 export default {
-  addRide, getAllRides, editRide, getSingleRide, deleteRides
+  addRide, getAllRides, editRide, getSingleRide, deleteRides, getStaffRides
 };

@@ -1,13 +1,18 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import dinoData from '../../helpers/data/dinoData';
+import mergedData from '../../helpers/data/mergedData';
 
 const authedDinoCardView = (dinoObject) => {
+  console.warn(dinoObject);
   const domString = `<div class="card card-body" id="${dinoObject.dinoId}">
       <div>
         <img src="${dinoObject.imageUrl}" class="card-img-top" alt="${dinoObject.name}">
         <div>
           <h3 class="card-text card-header">${dinoObject.name}</h3>
+        </div>
+        <div>
+          <h6 class="card-text card-header">Staff 1: ${dinoObject.staffName}</h6>
         </div>
         <button type="button" id="${dinoObject.dinoId}" class="btn btn-info update-dino card-btns"><i class="fas fa-pen"></i></button>
         <button type="button" id="${dinoObject.dinoId}" class="btn btn-info delete-dino card-btns"><i class="fas fa-trash-alt"></i></button>
@@ -38,8 +43,8 @@ const unauthedDinoCardView = (dinoObject) => {
 const dinoCardBuilder = () => {
   const user = firebase.auth().currentUser;
   $('#cards').html('');
-  dinoData
-    .getDino()
+  mergedData
+    .getDataForDinosView()
     .then((response) => {
       response.forEach((item) => {
         if (response.length) {

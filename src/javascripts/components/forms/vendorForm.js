@@ -1,4 +1,5 @@
 import vendorData from '../../helpers/data/vendorData';
+import staffData from '../../helpers/data/staffData';
 
 const vendorForm = () => {
   $('#app').append(`
@@ -12,14 +13,26 @@ const vendorForm = () => {
       <label for="image">Image</label>
       <input type="url" class="form-control" id="image" placeholder="Enter Image URL" required>
     </div>
+    <label for="staff">Staff</label>
+    <select class="form-control" id="staff">
+      <option value="">Select Staff</option>
+    </select>
+    </div>
     <button id="submit-vendor-btn" type="submit" class="btn btn-info"><i class="fas fa-plus-circle"></i> Add Vendor</button>
   </form>`);
+  staffData.getStaff().then((response) => {
+    console.warn(response);
+    response.forEach((item) => {
+      $('select').append(`<option value="${item.staffId}">${item.name}</option>`);
+    });
+  });
   $('#submit-vendor-btn').on('click', (e) => {
     e.preventDefault();
 
     const data = {
       name: $('#name').val(),
       imageUrl: $('#image').val(),
+      staffId: $('#staff').val(),
     };
 
     if (document.getElementById('addVendorForm').checkValidity()) {

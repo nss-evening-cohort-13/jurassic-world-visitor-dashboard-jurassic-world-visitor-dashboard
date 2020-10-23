@@ -1,5 +1,5 @@
 import rideData from '../../helpers/data/rideData';
-// import cards from '../cards/rideCards';
+import staffData from '../../helpers/data/staffData';
 
 const rideForm = () => {
   $('#app').append(
@@ -14,16 +14,27 @@ const rideForm = () => {
                 <label for="image">Image</label>
                 <input type="url" class="form-control" id="rideImage" placeholder="Example: https://www.images.com/rollercoaster.jpg" required>
               </div>
+              <div class="form-group">
+              <label for="staff">Staff</label>
+              <select class="form-control" id="staff">
+                  <option value="">Select Staff</option>
+               </select>
+                 </div>
               <button id="add-ride-btn" type="submit" class="btn btn-outline-dark">Submit</button>
             </form>`
   );
-
+  staffData.getStaff().then((response) => {
+    response.forEach((item) => {
+      $('select').append(`<option value="${item.staffId}">${item.name}</option>`);
+    });
+  });
   $('#add-ride-btn').on('click', (e) => {
     e.preventDefault();
 
     const data = {
       name: $('#rideName').val(),
       image: $('#rideImage').val(),
+      staffId: $('#staff').val(),
     };
 
     if (document.getElementById('addRideForm').checkValidity()) {
