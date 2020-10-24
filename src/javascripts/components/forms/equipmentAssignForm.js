@@ -17,18 +17,28 @@ const assignToolForm = (staffObj) => {
       <button id="assign-equip-btn" type="submit" class="btn btn-info">Submit</button>
   </form>`);
 
-  equipmentData.getEquipment().then((response) => {
-    response.forEach((resp) => {
-      $('select').append(
-        `<option value="${resp.equipmentId}">${resp.name}</option>`
-      );
+  equipmentData.getEquipment().then((equipmentResponse) => {
+    staffData.getStaff().then((staffResponse) => {
+      staffResponse.forEach((staffItem) => {
+        equipmentResponse.forEach((equipmentItem) => {
+          if (staffItem.equipmentName !== equipmentItem.name) {
+            const listOfItems = [];
+            listOfItems.push(equipmentItem.name);
+            console.warn(listOfItems);
+            $('#select').append(
+              `<option value="${equipmentItem.name}">${equipmentItem.name}</option>`
+            );
+          }
+        });
+      });
     });
   });
+
   $('#assign-equip-btn').on('click', (e) => {
     e.preventDefault();
 
     const information = {
-      equipmentId: $('#tool').val() || false,
+      equipmentName: $('#tool').val() || false,
     };
 
     if (Object.values(information).includes(false)) {
@@ -43,15 +53,10 @@ const assignToolForm = (staffObj) => {
           $('#user-message').html(
             '<div class="alert alert-success" role="alert">Equipment Assigned!</div>'
           );
+          $('#cards').html('');
+          staffView.staffView();
         })
         .catch((error) => console.warn(error));
-      setTimeout(() => {
-        $('#user-message').html('');
-      }, 2000);
-      $('#name').val('');
-      $('#picture').val('');
-      $('#site').val('');
-      $('#board').val('');
     }
   });
 };

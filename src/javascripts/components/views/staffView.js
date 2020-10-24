@@ -24,6 +24,9 @@ const staffView = () => {
       if (response.length) {
         response.forEach((staff) => {
           $('#cards').append(staffCards.authedStaffCardMaker(staff));
+          if (staff.equipmentName) {
+            $(`.assigned-equipment#${staff.staffId}`).html(`<i class="fas fa-toolbox"></i> Assigned ${staff.equipmentName}`);
+          }
         });
       }
     });

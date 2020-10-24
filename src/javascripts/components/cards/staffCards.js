@@ -13,7 +13,7 @@ const authedStaffCardMaker = (staffObject) => {
                             <button type="button" class="btn btn-light card-btns assign-tools-staff" id="${staffObject.staffId}"><i class="fas fa-tools"></i></button>
                         </div>
                         <div class="card-body assigned-equipment" id="${staffObject.staffId}">
-                        No Assigned Tools
+                        No Assigned Equipment!
                         </div>
                       </div>
                     </div>`;

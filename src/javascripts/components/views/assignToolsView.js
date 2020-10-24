@@ -1,8 +1,8 @@
 import staffData from '../../helpers/data/staffData';
 import form from '../forms/equipmentAssignForm';
 
-const assignTools = (dinoFirebaseKey) => {
-  staffData.getSingleStaff(dinoFirebaseKey).then((response) => {
+const assignTools = (FirebaseKey) => {
+  staffData.getSingleStaff(FirebaseKey).then((response) => {
     form.assignToolForm(response);
   });
 };
