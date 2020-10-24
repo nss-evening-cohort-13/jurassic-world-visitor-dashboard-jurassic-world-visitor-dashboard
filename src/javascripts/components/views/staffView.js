@@ -37,7 +37,7 @@ const staffView = () => {
             </div>
             `);
             $('body').on('click', '.unassign-stafftools-btn', (e) => {
-              const equipId = staff.eqipmentId;
+              const equipId = staff.equipmentId;
               e.stopImmediatePropagation();
               const firebaseKey = e.currentTarget.id;
               // firebaseKey is the staff UID!!!
