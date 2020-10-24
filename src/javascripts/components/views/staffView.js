@@ -26,6 +26,7 @@ const staffView = () => {
     staffData.getStaff().then((response) => {
       if (response.length) {
         response.forEach((staff) => {
+          const equipId = staff.equipmentId;
           $('#cards').append(staffCards.authedStaffCardMaker(staff));
           if (staff.equipmentName) {
             $(`.assigned-equipment#${staff.staffId}`).html(`
@@ -36,8 +37,7 @@ const staffView = () => {
             <button type="button" class="btn btn-light card-btns unassign-stafftools-btn" id="${staff.staffId}"><i class="fas fa-minus-square"></i></button>
             </div>
             `);
-            $('body').on('click', '.unassign-stafftools-btn', (e) => {
-              const equipId = staff.equipmentId;
+            $(`.unassign-stafftools-btn#${staff.staffId}`).on('click', (e) => {
               e.stopImmediatePropagation();
               const firebaseKey = e.currentTarget.id;
               // firebaseKey is the staff UID!!!
