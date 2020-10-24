@@ -21,7 +21,6 @@ const vendorForm = () => {
     <button id="submit-vendor-btn" type="submit" class="btn btn-info"><i class="fas fa-plus-circle"></i> Add Vendor</button>
   </form>`);
   staffData.getStaff().then((response) => {
-    console.warn(response);
     response.forEach((item) => {
       $('select').append(`<option value="${item.staffId}">${item.name}</option>`);
     });

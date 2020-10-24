@@ -1,5 +1,6 @@
 import dinoData from '../../helpers/data/dinoData';
 import staffData from '../../helpers/data/staffData';
+import dinoCards from '../cards/dinoCards';
 
 const addDinoForm = () => {
   $('#app').append(`
@@ -14,15 +15,14 @@ const addDinoForm = () => {
     <input type="url" class="form-control" id="dinoImage" placeholder="Example: trex.jpg" required/>
   </div>
   <div class="form-group">
-  <label for="staff">Staff</label>
-    <select class="form-control" id="staff">
-      <option value="">Select Staff</option>
-    </select>
-</div>
+              <label for="staff">Staff</label>
+              <select class="form-control" id="staff">
+                  <option value="">Select Staff</option>
+               </select>
+                 </div>
   <button type="submit" class="btn btn-outline-dark buttons" id="submitDino">Submit</button>
 </form>`);
   staffData.getStaff().then((response) => {
-    console.warn(response);
     response.forEach((item) => {
       $('select').append(`<option value="${item.staffId}">${item.name}</option>`);
     });
@@ -56,6 +56,7 @@ const addDinoForm = () => {
               <button type="button" id="${response.data.name}" class="btn btn-info delete-dino card-btns"><i class="fas fa-trash-alt"></i></button>
             </div>
           </div>`);
+            dinoCards.dinoCardBuilder();
           }
         })
         .catch((error) => console.warn(error));

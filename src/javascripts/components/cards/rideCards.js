@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import rideData from '../../helpers/data/rideData';
+import mergedData from '../../helpers/data/mergedData';
 
 const rideCardMaker = (rideObject) => {
   const domString = `<div class="card card-body" id="${rideObject.rideId}" style="width: 18rem;">
@@ -8,7 +9,7 @@ const rideCardMaker = (rideObject) => {
   <div>
     <h3 class="card-header">${rideObject.name}</h3>
     <div>
-          <h6 class="card-text card-header">Staff 1: ${rideObject.staffName}</h6>
+          <h6 class="card-text card-header">Staff: ${rideObject.staffName}</h6>
     </div>
     <button type="button" class="btn btn-light update-ride card-btns" id="${rideObject.rideId}"><i class="fas fa-pen"></i></button>
     <button type="button" class="btn btn-light delete-rides card-btns" id="${rideObject.rideId}"><i class="fas fa-trash-alt"></i></button>
@@ -40,8 +41,8 @@ const unauthRideCardMaker = (rideObject) => {
 const rideCardBuilder = () => {
   const user = firebase.auth().currentUser;
   $('#cards').html('');
-  rideData
-    .getAllRides()
+  mergedData
+    .getDataForRidesView()
     .then((response) => {
       response.forEach((item) => {
         if (response.length) {

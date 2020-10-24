@@ -1,10 +1,8 @@
 import dinoData from '../../helpers/data/dinoData';
 import dinoCards from '../cards/dinoCards';
-import dinoView from '../views/dinoView';
 import staffData from '../../helpers/data/staffData';
 
 const editDinoForm = (dinoObject) => {
-  dinoView.dinoView();
   $('#addDinoBtn').attr('disabled', true);
   $('#app').append(`
   <form id="editDinoForm">
@@ -57,7 +55,6 @@ const editDinoForm = (dinoObject) => {
           }
         })
         .catch((error) => console.warn(error));
-
       setTimeout(() => {
         $('#dinoSuccessMsg').html('');
       }, 3000);

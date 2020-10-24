@@ -1,5 +1,6 @@
 import rideData from '../../helpers/data/rideData';
 import staffData from '../../helpers/data/staffData';
+import rideCards from '../cards/rideCards';
 
 const rideForm = () => {
   $('#app').append(
@@ -57,6 +58,7 @@ const rideForm = () => {
               <button type="button" class="btn btn-light delete-rides card-btns" id="${response.data.name}"><i class="fas fa-trash-alt"></i></button>
             </div>
           </div>`);
+            rideCards.rideCardBuilder();
           }
         })
         .catch((error) => console.warn(error));

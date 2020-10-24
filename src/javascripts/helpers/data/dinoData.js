@@ -14,19 +14,21 @@ const addDino = (dinoData) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const getDino = () => axios
-  .get(`${baseUrl}/dinos.json`)
-  .then((response) => {
-    const dinoData = response.data;
-    const dinos = [];
-    if (dinoData) {
-      Object.keys(dinoData).forEach((dinoId) => {
-        dinos.push(dinoData[dinoId]);
-      });
-    }
-    return dinos;
-  })
-  .catch((error) => console.warn(error));
+const getDino = () => new Promise((resolve, reject) => {
+  axios
+    .get(`${baseUrl}/dinos.json`)
+    .then((response) => {
+      const dinoData = response.data;
+      const dinos = [];
+      if (dinoData) {
+        Object.keys(dinoData).forEach((dinoId) => {
+          dinos.push(dinoData[dinoId]);
+        });
+      }
+      resolve(dinos);
+    })
+    .catch((error) => reject(error));
+});
 
 const getStaffDinos = (staffId) => new Promise((resolve, reject) => {
   axios
