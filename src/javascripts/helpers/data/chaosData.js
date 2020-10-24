@@ -27,7 +27,7 @@ const chaosMonkey = () => new Promise((resolve, reject) => {
   const category = chaosArray[Math.floor(Math.random() * 3)];
 
   // then it passes that category into randomItem so that the correct database node can be returned
-  randomItem(category)
+  randomItem('rides')
     .then((response) => {
       //  a variable called selectedCat is defined here and defaults to broken the (name of object) since both rides and equipment break
       let selectedCat = `broken the ${response.name}`;
@@ -47,6 +47,13 @@ const chaosMonkey = () => new Promise((resolve, reject) => {
         } else {
           resolve(selectedCat);
         }
+      } if (category === 'equipment') {
+        selectedCat = `broken the ${response.name}`;
+        $(`.button-body#${response.equipmentId}`).addClass('invisible');
+        resolve(selectedCat);
+      } else if (category === 'rides') {
+        $(`.button-body#${response.rideId}`).addClass('invisible');
+        $(`.card#${response.rideId}`).addClass('card-fade');
       }
     })
     .catch((error) => reject(error));

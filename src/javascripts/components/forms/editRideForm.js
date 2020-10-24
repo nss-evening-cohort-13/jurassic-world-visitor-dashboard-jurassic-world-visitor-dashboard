@@ -16,7 +16,9 @@ const editRideForm = (rideObject) => {
     <label for="rideImage">Image Link</label>
     <input type="url" class="form-control" id="rideImage" value="${rideObject.image}" required/>
   </div>
+  <div class="button-body id="${rideObject.rideId}">
   <button type="submit" class="btn btn-outline-dark buttons" id="submitEditRide">Update</button>
+  </div>
 </form>`);
 
   $('#submitEditRide').on('click', (e) => {
