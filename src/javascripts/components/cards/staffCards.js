@@ -33,8 +33,8 @@ const unauthedStaffMaker = (staffObject) => {
     <div>
       <h3 class="card-header">${staffObject.name}</h3>
     </div>
-    <div class="card-body" id="assigned-equipment">
-      No Assigned Tools
+    <div class="card-body assigned-equipment" id="${staffObject.staffId}">
+      No Assigned Equipment!
     </div>
   </div>`;
   return domString;

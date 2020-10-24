@@ -17,55 +17,26 @@ const assignToolForm = (staffObj) => {
       <button id="assign-equip-btn" type="submit" class="btn btn-info">Submit</button>
   </form>`);
 
-  const listOfEquipment = [];
-  const listOfStaffEquip = [];
-  equipmentData.getEquipment().then((equipmentResponse) => {
-    console.warn(listOfEquipment);
-    equipmentResponse.forEach((equipItem) => {
-      listOfEquipment.push(equipItem.name);
-    });
-  });
-  staffData.getStaff().then((staffResponse) => {
-    console.warn(listOfStaffEquip);
-    staffResponse.forEach((staffItem) => {
-      if (staffItem.equipmentName) {
-        listOfStaffEquip.push(staffItem.equipmentName);
+  equipmentData.getEquipment().then((response) => {
+    response.forEach((resp) => {
+      if (!(resp.staffId)) {
+        $('select').append(`<option value="${resp.equipmentId}">${resp.name}</option>`);
       }
     });
   });
-  const combinedArray = listOfEquipment.filter(
-    (value) => !listOfStaffEquip.includes(value)
-  );
-  console.warn(combinedArray);
-  combinedArray.forEach((item) => {
-    console.warn(item);
-  });
-
-  // $('#select').append(
-  //   `<option value="${equipInArray}">${equipInArray}</option>`
-  // );
-  // equipmentData.getEquipment().then((equipmentResponse) => {
-  //   staffData.getStaff().then((staffResponse) => {
-  //     staffResponse.forEach((staffItem) => {
-  //       equipmentResponse.forEach((equipmentItem) => {
-  //         if (staffItem.equipmentName !== equipmentItem.name) {
-  //           const listOfItems = [];
-  //           listOfItems.push(equipmentItem.name);
-  //           console.warn(listOfItems);
-  //           $('#select').append(
-  //             `<option value="${equipmentItem.name}">${equipmentItem.name}</option>`
-  //           );
-  //         }
-  //       });
-  //     });
-  //   });
-  // });
 
   $('#assign-equip-btn').on('click', (e) => {
     e.preventDefault();
 
     const information = {
-      equipmentName: $('#tool').val() || false,
+      equipmentName: $('select option:selected').text() || false,
+      equipmentId: $('select').val(),
+    };
+
+    const firebaseKey = $('#tool').val();
+
+    const equipmentObject = {
+      staffId: staffObj.staffId,
     };
 
     if (Object.values(information).includes(false)) {
@@ -74,6 +45,7 @@ const assignToolForm = (staffObj) => {
       );
     } else {
       $('#user-message').html('');
+      equipmentData.editEquipment(firebaseKey, equipmentObject);
       staffData
         .updateStaff(staffObj.staffId, information)
         .then(() => {
