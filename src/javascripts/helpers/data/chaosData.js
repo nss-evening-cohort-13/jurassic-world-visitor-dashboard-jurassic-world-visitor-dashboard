@@ -49,9 +49,11 @@ const chaosMonkey = () => new Promise((resolve, reject) => {
         }
       } if (category === 'equipment') {
         selectedCat = `broken the ${response.name}`;
+        // if the category of equipment is called then the buttons on the card selected will be invisible and not able to click.
         $(`.button-body#${response.equipmentId}`).addClass('invisible');
         resolve(selectedCat);
       } else if (category === 'rides') {
+        // if the category of equipment is called then the buttons on the card selected will be invisible and not able to click. as well as the selected card faded to show that the ride is inoperable.
         $(`.button-body#${response.rideId}`).addClass('invisible');
         $(`.card#${response.rideId}`).addClass('card-fade');
       }
