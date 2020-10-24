@@ -17,22 +17,49 @@ const assignToolForm = (staffObj) => {
       <button id="assign-equip-btn" type="submit" class="btn btn-info">Submit</button>
   </form>`);
 
+  const listOfEquipment = [];
+  const listOfStaffEquip = [];
   equipmentData.getEquipment().then((equipmentResponse) => {
+    equipmentResponse.forEach((equipItem) => {
+      listOfEquipment.push(equipItem.name);
+    });
     staffData.getStaff().then((staffResponse) => {
       staffResponse.forEach((staffItem) => {
-        equipmentResponse.forEach((equipmentItem) => {
-          if (staffItem.equipmentName !== equipmentItem.name) {
-            const listOfItems = [];
-            listOfItems.push(equipmentItem.name);
-            console.warn(listOfItems);
-            $('#select').append(
-              `<option value="${equipmentItem.name}">${equipmentItem.name}</option>`
-            );
-          }
-        });
+        if (staffItem.equipmentName) {
+          listOfStaffEquip.push(staffItem.equipmentName);
+        }
+      });
+    });
+    listOfEquipment.forEach((equipInArray) => {
+      listOfStaffEquip.forEach((staffInArray) => {
+        if (equipInArray !== staffInArray) {
+          const listOfCombinedEquipment = [];
+          listOfCombinedEquipment.push(staffInArray);
+          console.warn(listOfCombinedEquipment);
+          $('#select').append(
+            `<option value="${equipInArray}">${equipInArray}</option>`
+          );
+        }
       });
     });
   });
+
+  // equipmentData.getEquipment().then((equipmentResponse) => {
+  //   staffData.getStaff().then((staffResponse) => {
+  //     staffResponse.forEach((staffItem) => {
+  //       equipmentResponse.forEach((equipmentItem) => {
+  //         if (staffItem.equipmentName !== equipmentItem.name) {
+  //           const listOfItems = [];
+  //           listOfItems.push(equipmentItem.name);
+  //           console.warn(listOfItems);
+  //           $('#select').append(
+  //             `<option value="${equipmentItem.name}">${equipmentItem.name}</option>`
+  //           );
+  //         }
+  //       });
+  //     });
+  //   });
+  // });
 
   $('#assign-equip-btn').on('click', (e) => {
     e.preventDefault();
