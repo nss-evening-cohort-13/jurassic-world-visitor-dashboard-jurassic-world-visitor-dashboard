@@ -20,30 +20,30 @@ const assignToolForm = (staffObj) => {
   const listOfEquipment = [];
   const listOfStaffEquip = [];
   equipmentData.getEquipment().then((equipmentResponse) => {
+    console.warn(listOfEquipment);
     equipmentResponse.forEach((equipItem) => {
       listOfEquipment.push(equipItem.name);
     });
-    staffData.getStaff().then((staffResponse) => {
-      staffResponse.forEach((staffItem) => {
-        if (staffItem.equipmentName) {
-          listOfStaffEquip.push(staffItem.equipmentName);
-        }
-      });
-    });
-    listOfEquipment.forEach((equipInArray) => {
-      listOfStaffEquip.forEach((staffInArray) => {
-        if (equipInArray !== staffInArray) {
-          const listOfCombinedEquipment = [];
-          listOfCombinedEquipment.push(staffInArray);
-          console.warn(listOfCombinedEquipment);
-          $('#select').append(
-            `<option value="${equipInArray}">${equipInArray}</option>`
-          );
-        }
-      });
+  });
+  staffData.getStaff().then((staffResponse) => {
+    console.warn(listOfStaffEquip);
+    staffResponse.forEach((staffItem) => {
+      if (staffItem.equipmentName) {
+        listOfStaffEquip.push(staffItem.equipmentName);
+      }
     });
   });
+  const combinedArray = listOfEquipment.filter(
+    (value) => !listOfStaffEquip.includes(value)
+  );
+  console.warn(combinedArray);
+  combinedArray.forEach((item) => {
+    console.warn(item);
+  });
 
+  // $('#select').append(
+  //   `<option value="${equipInArray}">${equipInArray}</option>`
+  // );
   // equipmentData.getEquipment().then((equipmentResponse) => {
   //   staffData.getStaff().then((staffResponse) => {
   //     staffResponse.forEach((staffItem) => {
