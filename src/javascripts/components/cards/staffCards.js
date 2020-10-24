@@ -10,6 +10,10 @@ const authedStaffCardMaker = (staffObject) => {
                             <h3 class="card-text card-header staff-name">${staffObject.name}</h3>
                             <button type="button" class="btn btn-light card-btns edit-staff" id="${staffObject.staffId}"><i class="fas fa-pen"></i></button>
                             <button type="button" class="btn btn-light card-btns delete-staff" id="${staffObject.staffId}"><i class="fas fa-trash-alt"></i></button>
+                            <button type="button" class="btn btn-light card-btns assign-tools-staff" id="${staffObject.staffId}"><i class="fas fa-tools"></i></button>
+                        </div>
+                        <div class="card-body assigned-equipment" id="${staffObject.staffId}">
+                        No Assigned Tools
                         </div>
                       </div>
                     </div>`;
@@ -28,6 +32,9 @@ const unauthedStaffMaker = (staffObject) => {
     <img src="${staffObject.image}" id="${staffObject.firebaseKey}" class="card-img-top card-img" alt="${staffObject.name}">
     <div>
       <h3 class="card-header">${staffObject.name}</h3>
+    </div>
+    <div class="card-body" id="assigned-equipment">
+      No Assigned Tools
     </div>
   </div>`;
   return domString;

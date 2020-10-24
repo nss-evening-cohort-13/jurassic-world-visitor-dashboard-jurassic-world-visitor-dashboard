@@ -9,6 +9,7 @@ import editStaffForm from '../components/forms/editStaffForm';
 import updateDinoView from '../components/views/updateDinoView';
 import updateRideView from '../components/views/updateRideView';
 import chaosView from '../components/views/chaosView';
+import assignToolsView from '../components/views/assignToolsView';
 
 const toastView = () => {
   $('body').on('click', 'p.nav-item', () => {
@@ -42,6 +43,8 @@ const viewHelper = (id, arg) => {
       return updateDinoView.updateDinoView(arg);
     case 'update-ride-link':
       return updateRideView.updateRideView(arg);
+    case 'assign-tools-link':
+      return assignToolsView.assignTools(arg);
     default:
       return console.warn('nothing clicked');
   }
@@ -74,6 +77,11 @@ const viewListeners = (view) => {
   $('body').on('click', '.update-ride', (e) => {
     const rideFirebaseKey = e.currentTarget.id;
     viewHelper('update-ride-link', rideFirebaseKey);
+    e.stopImmediatePropagation();
+  });
+  $('body').on('click', '.assign-tools-staff', (e) => {
+    const equipFirebaseKey = e.currentTarget.id;
+    viewHelper('assign-tools-link', equipFirebaseKey);
     e.stopImmediatePropagation();
   });
 };

@@ -3,6 +3,7 @@ import 'firebase/auth';
 import staffForm from '../forms/addStaffForm';
 import staffCards from '../cards/staffCards';
 import staffData from '../../helpers/data/staffData';
+// import equipmentData from '../../helpers/data/equipmentData';
 
 const staffView = () => {
   const user = firebase.auth().currentUser;
