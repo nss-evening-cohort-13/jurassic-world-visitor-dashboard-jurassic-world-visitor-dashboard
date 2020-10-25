@@ -10,6 +10,7 @@ import updateDinoView from '../components/views/updateDinoView';
 import updateRideView from '../components/views/updateRideView';
 import chaosView from '../components/views/chaosView';
 import singleStaffView from '../components/views/singleStaffView';
+import assignToolsView from '../components/views/assignToolsView';
 
 const toastView = () => {
   $('body').on('click', 'p.nav-item', () => {
@@ -45,6 +46,8 @@ const viewHelper = (id, arg) => {
       return updateRideView.updateRideView(arg);
     case 'single-staff':
       return singleStaffView.singleStaffViewDinos(arg);
+    case 'assign-tools-link':
+      return assignToolsView.assignTools(arg);
     default:
       return console.warn('nothing clicked');
   }
@@ -83,6 +86,11 @@ const viewListeners = (view) => {
     console.warn('click');
     const staffId = e.currentTarget.id;
     viewHelper('single-staff', staffId);
+  });
+  $('body').on('click', '.assign-tools-staff', (e) => {
+    const equipFirebaseKey = e.currentTarget.id;
+    viewHelper('assign-tools-link', equipFirebaseKey);
+    e.stopImmediatePropagation();
   });
 };
 

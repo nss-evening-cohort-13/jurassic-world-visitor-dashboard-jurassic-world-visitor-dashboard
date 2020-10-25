@@ -24,7 +24,9 @@ const addDinoForm = () => {
 </form>`);
   staffData.getStaff().then((response) => {
     response.forEach((item) => {
-      $('select').append(`<option value="${item.staffId}">${item.name}</option>`);
+      if ((item.staffId)) {
+        $('select').append(`<option value="${item.staffId}">${item.name}</option>`);
+      }
     });
   });
   $('#submitDino').on('click', (e) => {
