@@ -1,6 +1,10 @@
+import axios from 'axios';
+import apiKeys from '../../helpers/apiKeys.json';
 import dinoData from '../../helpers/data/dinoData';
 import staffData from '../../helpers/data/staffData';
 import dinoCards from '../cards/dinoCards';
+
+const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
 const addDinoForm = () => {
   $('#app').append(`
@@ -24,7 +28,7 @@ const addDinoForm = () => {
 </form>`);
   staffData.getStaff().then((response) => {
     response.forEach((item) => {
-      if ((item.staffId)) {
+      if (!(item.dinoId)) {
         $('select').append(`<option value="${item.staffId}">${item.name}</option>`);
       }
     });
@@ -59,6 +63,7 @@ const addDinoForm = () => {
             </div>
           </div>`);
             dinoCards.dinoCardBuilder();
+            axios.patch(`${baseUrl}/staff/${data.staffId}.json`, { dinoId: response.data.name });
           }
         })
         .catch((error) => console.warn(error));

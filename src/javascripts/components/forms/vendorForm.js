@@ -1,5 +1,9 @@
+import axios from 'axios';
+import apiKeys from '../../helpers/apiKeys.json';
 import vendorData from '../../helpers/data/vendorData';
 import staffData from '../../helpers/data/staffData';
+
+const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
 const vendorForm = () => {
   $('#app').append(`
@@ -51,6 +55,7 @@ const vendorForm = () => {
               <button type="button" class="btn btn-light delete-vendor card-btns" id="${response.data.name}"><i class="fas fa-trash-alt"></i></button>
             </div>
           </div>`);
+            axios.patch(`${baseUrl}/staff/${data.staffId}.json`, { vendorId: response.data.name });
           }
         }).catch((error) => console.warn(error));
 

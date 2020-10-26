@@ -1,6 +1,10 @@
+import axios from 'axios';
+import apiKeys from '../../helpers/apiKeys.json';
 import rideData from '../../helpers/data/rideData';
 import staffData from '../../helpers/data/staffData';
 import rideCards from '../cards/rideCards';
+
+const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
 const rideForm = () => {
   $('#app').append(
@@ -59,6 +63,7 @@ const rideForm = () => {
             </div>
           </div>`);
             rideCards.rideCardBuilder();
+            axios.patch(`${baseUrl}/staff/${data.staffId}.json`, { rideId: response.data.name });
           }
         })
         .catch((error) => console.warn(error));

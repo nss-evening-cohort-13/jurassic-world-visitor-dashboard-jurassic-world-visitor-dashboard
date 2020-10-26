@@ -1,6 +1,10 @@
+import axios from 'axios';
+import apiKeys from '../../helpers/apiKeys.json';
 import dinoData from '../../helpers/data/dinoData';
 import dinoCards from '../cards/dinoCards';
 import staffData from '../../helpers/data/staffData';
+
+const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
 const editDinoForm = (dinoObject) => {
   $('#addDinoBtn').attr('disabled', true);
@@ -25,11 +29,13 @@ const editDinoForm = (dinoObject) => {
 </form>`);
   staffData.getStaff().then((response) => {
     response.forEach((item) => {
-      $('select').append(
-        `<option value="${item.staffId}" ${
-          dinoObject.staffId === item.staffId ? "selected ='selected'" : ''
-        }>${item.name}</option>`
-      );
+      if (!(item.dinoId)) {
+        $('select').append(
+          `<option value="${item.staffId}" ${
+            dinoObject.staffId === item.staffId ? "selected ='selected'" : ''
+          }>${item.name}</option>`
+        );
+      }
     });
   });
 
@@ -42,6 +48,7 @@ const editDinoForm = (dinoObject) => {
     };
     if (document.querySelector('#editDinoForm').checkValidity()) {
       $('#dinoErrorMsg').html('');
+      staffData.updateStaff(data.staffId, dinoObject.dinoId);
       dinoData
         .editDino(dinoObject.dinoId, data)
         .then((response) => {
@@ -52,6 +59,8 @@ const editDinoForm = (dinoObject) => {
             );
             $('#addDinoBtn').removeAttr('disabled');
             dinoCards.dinoCardBuilder();
+            console.warn(response.data);
+            axios.patch(`${baseUrl}/staff/${data.staffId}.json`, { dinoId: dinoObject.dinoId });
           }
         })
         .catch((error) => console.warn(error));
