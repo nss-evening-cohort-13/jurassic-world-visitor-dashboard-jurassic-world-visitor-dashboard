@@ -46,6 +46,8 @@ const staffView = () => {
               axios.delete(`${baseUrl}/equipment/${equipId}/staffId.json`);
               axios.delete(`${baseUrl}/staff/${firebaseKey}/equipmentName.json`);
               axios.delete(`${baseUrl}/staff/${firebaseKey}/equipmentId.json`);
+              $(`.staff-info-div#${firebaseKey}`).append(`<button type="button" class="btn btn-light card-btns assign-tools-staff" id="${firebaseKey}">
+              <i class="fas fa-tools"></i></button>`);
             });
           }
         });

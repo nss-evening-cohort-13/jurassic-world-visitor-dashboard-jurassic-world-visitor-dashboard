@@ -6,7 +6,7 @@ const authedStaffCardMaker = (staffObject) => {
                         <div class="staff-img-container">
                           <img src="${staffObject.image}" class="card-img-top staff-img" alt="${staffObject.name}">
                         </div>
-                        <div class="staff-info-div">
+                        <div class="staff-info-div" id="${staffObject.staffId}">
                             <h3 class="card-text card-header staff-name">${staffObject.name}</h3>
                             <button type="button" class="btn btn-light card-btns edit-staff" id="${staffObject.staffId}"><i class="fas fa-pen"></i></button>
                             <button type="button" class="btn btn-light card-btns delete-staff" id="${staffObject.staffId}"><i class="fas fa-trash-alt"></i></button>
