@@ -29,6 +29,7 @@ const staffView = () => {
           const equipId = staff.equipmentId;
           $('#cards').append(staffCards.authedStaffCardMaker(staff));
           if (staff.equipmentName) {
+            $(`.assign-tools-staff#${staff.staffId}`).remove();
             $(`.assigned-equipment#${staff.staffId}`).html(`
             <div id="display-assigned-tools-area">
                 <i class="fas fa-toolbox"></i> Assigned ${staff.equipmentName}
