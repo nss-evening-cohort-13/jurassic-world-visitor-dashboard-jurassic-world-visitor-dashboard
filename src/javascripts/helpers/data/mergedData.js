@@ -32,9 +32,9 @@ const getDataForDinosView = () => new Promise((resolve, reject) => {
 });
 
 const getSingleStaffViewForDinos = (staffUid) => new Promise((resolve, reject) => {
-  console.warn(staffUid);
   staffData.getSingleStaff(staffUid)
     .then((staffResponse) => {
+      console.warn(staffUid);
       dinoData.getStaffDinos(staffResponse.staffId)
         .then((dinoResponse) => {
           const finalObject = { staff: staffResponse, dinos: dinoResponse };

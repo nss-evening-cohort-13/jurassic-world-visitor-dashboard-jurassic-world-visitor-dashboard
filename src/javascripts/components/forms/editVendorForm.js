@@ -13,6 +13,8 @@ const submitUpdatedVendor = (vendorId) => {
 
     if (document.getElementById('editVendorForm').checkValidity()) {
       $('#error-message').html('');
+      staffData.deleteValueFromStaff(vendorId.staffId, 'vendorId');
+      staffData.updateStaff(data.staffId, vendorId.vendorId);
 
       vendorData.updateVendor(vendorId, data)
         .then((response) => {
@@ -60,11 +62,14 @@ const editVendorForm = (vendorId) => {
     });
   staffData.getStaff().then((response) => {
     response.forEach((item) => {
-      $('select').append(
-        `<option value="${item.staffId}" ${
-          vendorId.staffId === item.staffId ? "selected ='selected'" : ''
-        }>${item.name}</option>`
-      );
+      console.warn(response);
+      if (!(item.vendorId && response.vendorId !== item.vendorId)) {
+        $('select').append(
+          `<option value="${item.staffId}" ${
+            vendorId.staffId === item.staffId ? "selected ='selected'" : ''
+          }>${item.name}</option>`
+        );
+      }
     });
   }).catch((error) => console.warn(error));
 };

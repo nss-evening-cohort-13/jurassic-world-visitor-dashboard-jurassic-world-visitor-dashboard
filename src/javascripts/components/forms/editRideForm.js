@@ -27,11 +27,13 @@ const editRideForm = (rideObject) => {
 </form>`);
   staffData.getStaff().then((response) => {
     response.forEach((item) => {
-      $('select').append(
-        `<option value="${item.staffId}" ${
-          rideObject.staffId === item.staffId ? "selected ='selected'" : ''
-        }>${item.name}</option>`
-      );
+      if (!(item.rideId && rideObject.rideId !== item.rideId)) {
+        $('select').append(
+          `<option value="${item.staffId}" ${
+            rideObject.staffId === item.staffId ? "selected ='selected'" : ''
+          }>${item.name}</option>`
+        );
+      }
     });
   });
   $('#submitEditRide').on('click', (e) => {
@@ -43,6 +45,9 @@ const editRideForm = (rideObject) => {
     };
     if (document.querySelector('#editRideForm').checkValidity()) {
       $('#rideErrorMessage').html('');
+      console.warn(rideObject.rideId);
+      staffData.deleteValueFromStaff(rideObject.staffId, 'rideId');
+      staffData.updateStaff(data.staffId, `rideId: ${rideObject.rideId}`);
       rideData
         .editRide(rideObject.rideId, data)
         .then((response) => {

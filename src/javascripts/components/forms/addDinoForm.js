@@ -28,6 +28,7 @@ const addDinoForm = () => {
 </form>`);
   staffData.getStaff().then((response) => {
     response.forEach((item) => {
+      // This retrieves a staff name only if it is not assigned with a dinoId
       if (!(item.dinoId)) {
         $('select').append(`<option value="${item.staffId}">${item.name}</option>`);
       }
@@ -63,6 +64,7 @@ const addDinoForm = () => {
             </div>
           </div>`);
             dinoCards.dinoCardBuilder();
+            // This patch, adds a dinoId to the staff object
             axios.patch(`${baseUrl}/staff/${data.staffId}.json`, { dinoId: response.data.name });
           }
         })

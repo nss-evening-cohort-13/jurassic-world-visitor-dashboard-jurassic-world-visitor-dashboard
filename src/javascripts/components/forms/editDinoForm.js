@@ -29,7 +29,8 @@ const editDinoForm = (dinoObject) => {
 </form>`);
   staffData.getStaff().then((response) => {
     response.forEach((item) => {
-      if (!(item.dinoId)) {
+      // This retrieves a staff name only if it is not assigned with a dinoId
+      if (!(item.dinoId && dinoObject.dinoId !== item.dinoId)) {
         $('select').append(
           `<option value="${item.staffId}" ${
             dinoObject.staffId === item.staffId ? "selected ='selected'" : ''
@@ -48,6 +49,7 @@ const editDinoForm = (dinoObject) => {
     };
     if (document.querySelector('#editDinoForm').checkValidity()) {
       $('#dinoErrorMsg').html('');
+      staffData.deleteValueFromStaff(dinoObject.staffId, 'dinoId');
       staffData.updateStaff(data.staffId, dinoObject.dinoId);
       dinoData
         .editDino(dinoObject.dinoId, data)
@@ -60,6 +62,7 @@ const editDinoForm = (dinoObject) => {
             $('#addDinoBtn').removeAttr('disabled');
             dinoCards.dinoCardBuilder();
             console.warn(response.data);
+            // This updates the staff object with the dinoId
             axios.patch(`${baseUrl}/staff/${data.staffId}.json`, { dinoId: dinoObject.dinoId });
           }
         })

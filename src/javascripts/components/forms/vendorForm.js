@@ -26,7 +26,9 @@ const vendorForm = () => {
   </form>`);
   staffData.getStaff().then((response) => {
     response.forEach((item) => {
-      $('select').append(`<option value="${item.staffId}">${item.name}</option>`);
+      if (!(item.vendorId)) {
+        $('select').append(`<option value="${item.staffId}">${item.name}</option>`);
+      }
     });
   });
   $('#submit-vendor-btn').on('click', (e) => {
@@ -36,6 +38,7 @@ const vendorForm = () => {
       name: $('#name').val(),
       imageUrl: $('#image').val(),
       staffId: $('#staff').val(),
+      staffName: $('select option:selected').text() || false,
     };
 
     if (document.getElementById('addVendorForm').checkValidity()) {
@@ -51,6 +54,9 @@ const vendorForm = () => {
             <img src="${data.imageUrl}" id="${data.firebaseKey}" class="card-img-top card-img" alt="${data.name}">
             <div>
               <h3 class="card-header">${data.name}</h3>
+              <div>
+          <h6 class="card-text card-header">Staff: ${data.staffName}</h6>
+              </div>
               <button type="button" class="btn btn-light edit-vendor card-btns" id="${response.data.name}"><i class="fas fa-pen"></i></button>
               <button type="button" class="btn btn-light delete-vendor card-btns" id="${response.data.name}"><i class="fas fa-trash-alt"></i></button>
             </div>

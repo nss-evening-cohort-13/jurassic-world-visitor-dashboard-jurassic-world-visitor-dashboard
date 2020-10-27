@@ -18,10 +18,10 @@ const authedDinoCardView = (dinoObject) => {
         <button type="button" id="${dinoObject.dinoId}" class="btn btn-info delete-dino card-btns"><i class="fas fa-trash-alt"></i></button>
       </div>
     </div>`;
-  const dinoId = 'dinoId';
   $('body').on('click', 'button.delete-dino', (e) => {
     const firebaseKey = e.currentTarget.id;
-    staffData.deleteValueFromStaff(dinoObject.staffId, dinoId);
+    // Below, deletes the dinoId node from the staff object breaking the relationship
+    staffData.deleteValueFromStaff(dinoObject.staffId, 'dinoId');
     $(`.card#${firebaseKey}`).remove();
     dinoData.deleteDino(firebaseKey);
   });

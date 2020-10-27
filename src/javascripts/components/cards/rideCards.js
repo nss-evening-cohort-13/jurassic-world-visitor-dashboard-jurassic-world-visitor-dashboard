@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import rideData from '../../helpers/data/rideData';
 import mergedData from '../../helpers/data/mergedData';
+import staffData from '../../helpers/data/staffData';
 
 const rideCardMaker = (rideObject) => {
   const domString = `<div class="card card-body" id="${rideObject.rideId}" style="width: 18rem;">
@@ -19,6 +20,7 @@ const rideCardMaker = (rideObject) => {
   $('body').on('click', '.delete-rides', (e) => {
     e.stopImmediatePropagation();
     const firebaseKey = e.currentTarget.id;
+    staffData.deleteValueFromStaff(rideObject.staffId, 'rideId');
     $(`.card#${firebaseKey}`).remove();
     rideData.deleteRides(firebaseKey);
   });

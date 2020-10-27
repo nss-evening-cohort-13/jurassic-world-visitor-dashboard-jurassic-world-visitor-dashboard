@@ -40,7 +40,6 @@ const getSingleStaff = (staffId) => new Promise((resolve, reject) => {
     .get(`${baseUrl}/staff/${staffId}.json`)
     .then((response) => {
       resolve(response.data);
-      console.warn(response);
     })
     .catch((error) => reject(error));
 });
