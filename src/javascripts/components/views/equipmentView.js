@@ -1,8 +1,12 @@
+import axios from 'axios';
 import firebase from 'firebase/app';
+import apiKeys from '../../helpers/apiKeys.json';
 import 'firebase/auth';
 import equipmentForm from '../forms/addEquipmentForm';
 import equipmentCards from '../cards/equipmentCards';
 import equipmentData from '../../helpers/data/equipmentData';
+
+const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
 const equipmentView = () => {
   const user = firebase.auth().currentUser;
@@ -21,8 +25,14 @@ const equipmentView = () => {
     // We are calling the getEquipment function and making the class of invisible persistent on page load.
       .then((response) => {
         response.forEach((item) => {
+          // const firebaseKey = e.currentTarget.id;
           if (item.chaos === true) {
+            console.warn(item);
             $(`.button-body#${item.equipmentId}`).addClass('invisible');
+            //     $(`.card-body#${item.equipmentId}`).append(`<div class="alert alert-warning" role="alert">
+            //     This Tool is out of commission
+            //  </div>`);
+            axios.patch(`${baseUrl}/equipment/${item.equipmentId}.json`, { staffId: 'disabled' });
           }
         });
       });
