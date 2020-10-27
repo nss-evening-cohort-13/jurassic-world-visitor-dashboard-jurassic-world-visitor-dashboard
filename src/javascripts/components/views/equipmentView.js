@@ -18,6 +18,7 @@ const equipmentView = () => {
     });
     equipmentCards.equipmentCardBuilder();
     equipmentData.getEquipment()
+    // We are calling the getEquipment function and making the class of invisible persistent on page load.
       .then((response) => {
         response.forEach((item) => {
           if (item.chaos === true) {

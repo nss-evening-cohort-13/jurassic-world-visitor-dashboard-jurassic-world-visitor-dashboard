@@ -50,12 +50,10 @@ const chaosMonkey = () => new Promise((resolve, reject) => {
         }
       } if (category === 'equipment') {
         selectedCat = `broken the ${response.name}`;
-        // if the category of equipment is called then the buttons on the card selected will be invisible and not able to click.
+        // The selected category of equipment will take the function of class equipment take the item(response and name), then if the object of chaos returns true it will add a class of invisible.
         equipmentData.classEquipment(response.equipmentId)
           .then((invisibleChaos) => {
-            // console.warn(invisibleChaos);
             if (invisibleChaos === true) {
-              // console.warn('firebase key', response.equipmentId);
               $(`.button-body#${response.equipmentId}`).addClass('invisible');
             }
           });
