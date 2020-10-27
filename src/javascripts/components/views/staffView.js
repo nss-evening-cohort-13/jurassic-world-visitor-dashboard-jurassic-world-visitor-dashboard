@@ -26,8 +26,10 @@ const staffView = () => {
     staffData.getStaff().then((response) => {
       if (response.length) {
         response.forEach((staff) => {
+          const equipId = staff.equipmentId;
           $('#cards').append(staffCards.authedStaffCardMaker(staff));
           if (staff.equipmentName) {
+            $(`.assign-tools-staff#${staff.staffId}`).remove();
             $(`.assigned-equipment#${staff.staffId}`).html(`
             <div id="display-assigned-tools-area">
                 <i class="fas fa-toolbox"></i> Assigned ${staff.equipmentName}
@@ -36,8 +38,7 @@ const staffView = () => {
             <button type="button" class="btn btn-light card-btns unassign-stafftools-btn" id="${staff.staffId}"><i class="fas fa-minus-square"></i></button>
             </div>
             `);
-            $('body').on('click', '.unassign-stafftools-btn', (e) => {
-              const equipId = staff.equipmentId;
+            $(`.unassign-stafftools-btn#${staff.staffId}`).on('click', (e) => {
               e.stopImmediatePropagation();
               const firebaseKey = e.currentTarget.id;
               // firebaseKey is the staff UID!!!
@@ -45,6 +46,8 @@ const staffView = () => {
               axios.delete(`${baseUrl}/equipment/${equipId}/staffId.json`);
               axios.delete(`${baseUrl}/staff/${firebaseKey}/equipmentName.json`);
               axios.delete(`${baseUrl}/staff/${firebaseKey}/equipmentId.json`);
+              $(`.staff-info-div#${firebaseKey}`).append(`<button type="button" class="btn btn-light card-btns assign-tools-staff" id="${firebaseKey}">
+              <i class="fas fa-tools"></i></button>`);
             });
           }
         });
