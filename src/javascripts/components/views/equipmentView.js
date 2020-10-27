@@ -25,13 +25,8 @@ const equipmentView = () => {
     // We are calling the getEquipment function and making the class of invisible persistent on page load.
       .then((response) => {
         response.forEach((item) => {
-          // const firebaseKey = e.currentTarget.id;
           if (item.chaos === true) {
-            console.warn(item);
             $(`.button-body#${item.equipmentId}`).addClass('invisible');
-            //     $(`.card-body#${item.equipmentId}`).append(`<div class="alert alert-warning" role="alert">
-            //     This Tool is out of commission
-            //  </div>`);
             axios.patch(`${baseUrl}/equipment/${item.equipmentId}.json`, { staffId: 'disabled' });
           }
         });
