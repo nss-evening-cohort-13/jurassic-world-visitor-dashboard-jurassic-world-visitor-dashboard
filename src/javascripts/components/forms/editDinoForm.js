@@ -50,7 +50,7 @@ const editDinoForm = (dinoObject) => {
     if (document.querySelector('#editDinoForm').checkValidity()) {
       $('#dinoErrorMsg').html('');
       staffData.deleteValueFromStaff(dinoObject.staffId, 'dinoId');
-      staffData.updateStaff(data.staffId, dinoObject.dinoId);
+      // staffData.updateStaff(data.staffId, dinoObject.dinoId);
       dinoData
         .editDino(dinoObject.dinoId, data)
         .then((response) => {
@@ -64,6 +64,7 @@ const editDinoForm = (dinoObject) => {
             console.warn(response.data);
             // This updates the staff object with the dinoId
             axios.patch(`${baseUrl}/staff/${data.staffId}.json`, { dinoId: dinoObject.dinoId });
+            console.warn(data.staffId);
           }
         })
         .catch((error) => console.warn(error));

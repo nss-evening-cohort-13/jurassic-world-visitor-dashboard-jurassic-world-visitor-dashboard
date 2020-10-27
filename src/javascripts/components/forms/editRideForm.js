@@ -1,7 +1,11 @@
+import axios from 'axios';
+import apiKeys from '../../helpers/apiKeys.json';
 import rideData from '../../helpers/data/rideData';
 import rideCards from '../cards/rideCards';
 import rideView from '../views/rideView';
 import staffData from '../../helpers/data/staffData';
+
+const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
 const editRideForm = (rideObject) => {
   rideView.rideView();
@@ -45,9 +49,8 @@ const editRideForm = (rideObject) => {
     };
     if (document.querySelector('#editRideForm').checkValidity()) {
       $('#rideErrorMessage').html('');
-      console.warn(rideObject.rideId);
       staffData.deleteValueFromStaff(rideObject.staffId, 'rideId');
-      staffData.updateStaff(data.staffId, `rideId: ${rideObject.rideId}`);
+      axios.patch(`${baseUrl}/staff/${data.staffId}.json`, { rideId: rideObject.rideId });
       rideData
         .editRide(rideObject.rideId, data)
         .then((response) => {
