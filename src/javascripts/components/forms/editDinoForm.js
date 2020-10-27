@@ -7,7 +7,7 @@ import staffData from '../../helpers/data/staffData';
 const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
 const editDinoForm = (dinoObject) => {
-  $('#addDinoBtn').attr('disabled', true);
+  // $('#addDinoBtn').attr('disabled', true);
   $('#app').append(`
   <form id="editDinoForm">
   <h1>Edit Dino</h1>
