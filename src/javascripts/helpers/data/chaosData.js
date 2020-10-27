@@ -1,4 +1,5 @@
 import axios from 'axios';
+import equipmentData from './equipmentData';
 import staffData from './staffData';
 
 //  Gets data from firebase based on category specified in chaosMonkey
@@ -23,11 +24,11 @@ const randomItem = (category) => new Promise((resolve, reject) => {
 
 //  chaosMonkey first selects a staff, ride or equipment to affect
 const chaosMonkey = () => new Promise((resolve, reject) => {
-  const chaosArray = ['staff', 'equipment', 'rides'];
-  const category = chaosArray[Math.floor(Math.random() * 3)];
-
+  // const chaosArray = ['staff', 'equipment', 'rides'];
+  // const category = chaosArray[Math.floor(Math.random() * 3)];
+  const category = 'equipment';
   // then it passes that category into randomItem so that the correct database node can be returned
-  randomItem('rides')
+  randomItem(category)
     .then((response) => {
       //  a variable called selectedCat is defined here and defaults to broken the (name of object) since both rides and equipment break
       let selectedCat = `broken the ${response.name}`;
@@ -50,15 +51,21 @@ const chaosMonkey = () => new Promise((resolve, reject) => {
       } if (category === 'equipment') {
         selectedCat = `broken the ${response.name}`;
         // if the category of equipment is called then the buttons on the card selected will be invisible and not able to click.
-        $(`.button-body#${response.equipmentId}`).addClass('invisible');
-        resolve(selectedCat);
-      } else if (category === 'rides') {
-        // if the category of equipment is called then the buttons on the card selected will be invisible and not able to click. as well as the selected card faded to show that the ride is inoperable.
-        $(`.button-body#${response.rideId}`).addClass('invisible');
-        $(`.card#${response.rideId}`).addClass('card-fade');
+        equipmentData.classEquipment(response.equipmentId)
+          .then((invisibleChaos) => {
+            // console.warn(invisibleChaos);
+            if (invisibleChaos === true) {
+              // console.warn('firebase key', response.equipmentId);
+              $(`.button-body#${response.equipmentId}`).addClass('invisible');
+            }
+          });
       }
+      resolve(selectedCat);
+      // } else if (category === 'rides') {
+      //   $(`.button-body#${response.rideId}`).addClass('invisible');
+      //   $(`.card#${response.rideId}`).addClass('card-fade');
+      // }
     })
     .catch((error) => reject(error));
 });
-
 export default { chaosMonkey };

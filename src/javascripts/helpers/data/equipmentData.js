@@ -7,7 +7,7 @@ const addEquipment = (equipmentData) => new Promise((resolve, reject) => {
   axios
     .post(`${baseUrl}/equipment.json`, equipmentData)
     .then((response) => {
-      const fbKey = { equipmentId: response.data.name };
+      const fbKey = { equipmentId: response.data.name, chaos: false };
       axios.patch(`${baseUrl}/equipment/${response.data.name}.json`, fbKey);
       resolve(response);
     })
@@ -39,6 +39,20 @@ const editEquipment = (firebaseKey, equipmentObject) => axios.patch(`${baseUrl}/
 
 const deleteEquipment = (equipmentId) => axios.delete(`${baseUrl}/equipment/${equipmentId}.json`);
 
+const classEquipment = (equipmentId) => new Promise((resolve, reject) => {
+  axios.patch(`${baseUrl}/equipment/${equipmentId}.json`, { chaos: true })
+    .then((response) => {
+      const chaosMonkey = response.data.chaos;
+      console.warn(chaosMonkey);
+      resolve(chaosMonkey);
+    }).catch((error) => reject(error));
+});
+
 export default {
-  addEquipment, getEquipment, getSingleEquipment, editEquipment, deleteEquipment
+  addEquipment,
+  getEquipment,
+  getSingleEquipment,
+  editEquipment,
+  deleteEquipment,
+  classEquipment
 };

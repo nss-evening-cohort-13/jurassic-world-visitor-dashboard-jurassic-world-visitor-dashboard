@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import equipmentForm from '../forms/addEquipmentForm';
 import equipmentCards from '../cards/equipmentCards';
+import equipmentData from '../../helpers/data/equipmentData';
 
 const equipmentView = () => {
   const user = firebase.auth().currentUser;
@@ -16,6 +17,14 @@ const equipmentView = () => {
       $('#addEquipmentBtn').attr('disabled', true);
     });
     equipmentCards.equipmentCardBuilder();
+    equipmentData.getEquipment()
+      .then((response) => {
+        response.forEach((item) => {
+          if (item.chaos === true) {
+            $(`.button-body#${item.equipmentId}`).addClass('invisible');
+          }
+        });
+      });
   } else {
     equipmentCards.equipmentCardBuilder();
   }
