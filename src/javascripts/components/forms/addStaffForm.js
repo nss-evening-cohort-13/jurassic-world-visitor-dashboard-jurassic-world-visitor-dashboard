@@ -42,6 +42,7 @@ const addStaffForm = () => {
       setTimeout(() => {
         $('#staffSuccessMsg').html('');
       }, 2000);
+      staffCards.staffCardBuilder();
     } else {
       $('#staffErrorMsg').html(
         '<div class="alert alert-danger" role="alert">Please fill out all fields correctly.</div>'

@@ -1,4 +1,8 @@
+import axios from 'axios';
+import apiKeys from '../../helpers/apiKeys.json';
 import staffData from '../../helpers/data/staffData';
+
+const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
 const authedStaffCardMaker = (staffObject) => {
   const domString = `<div class="card card-body staff-cards" id="${staffObject.staffId}">
@@ -9,7 +13,8 @@ const authedStaffCardMaker = (staffObject) => {
                         <div class="staff-info-div" id="${staffObject.staffId}">
                             <h3 class="card-text card-header staff-name">${staffObject.name}</h3>
                             <button type="button" class="btn btn-light card-btns edit-staff" id="${staffObject.staffId}"><i class="fas fa-pen"></i></button>
-                            <button type="button" class="btn btn-light card-btns delete-staff" id="${staffObject.staffId}"><i class="fas fa-trash-alt"></i></button>
+                            <button type="button" class="btn btn-light card-btns delete-staff" data-equip="${staffObject.equipmentId}" 
+                            id="${staffObject.staffId}"><i class="fas fa-trash-alt"></i></button>
                             <button type="button" class="btn btn-light card-btns assign-tools-staff" id="${staffObject.staffId}"><i class="fas fa-tools"></i></button>
                         </div>
                         <div class="card-body assigned-equipment" id="${staffObject.staffId}">
@@ -20,7 +25,10 @@ const authedStaffCardMaker = (staffObject) => {
 
   $('body').on('click', '.delete-staff', (e) => {
     e.stopImmediatePropagation();
+    const equipmentid = $('.delete-staff').data('equip');
+    axios.delete(`${baseUrl}/equipment/${equipmentid}/staffId.json`);
     const firebaseKey = e.currentTarget.id;
+    // firebase key is staffObject UID
     $(`.card#${firebaseKey}`).remove();
     staffData.deleteStaff(firebaseKey);
   });
