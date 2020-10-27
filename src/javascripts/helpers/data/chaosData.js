@@ -1,5 +1,6 @@
 import axios from 'axios';
 import equipmentData from './equipmentData';
+import rideData from './rideData';
 import staffData from './staffData';
 
 //  Gets data from firebase based on category specified in chaosMonkey
@@ -26,7 +27,7 @@ const randomItem = (category) => new Promise((resolve, reject) => {
 const chaosMonkey = () => new Promise((resolve, reject) => {
   // const chaosArray = ['staff', 'equipment', 'rides'];
   // const category = chaosArray[Math.floor(Math.random() * 3)];
-  const category = 'equipment';
+  const category = 'rides';
   // then it passes that category into randomItem so that the correct database node can be returned
   randomItem(category)
     .then((response) => {
@@ -55,6 +56,14 @@ const chaosMonkey = () => new Promise((resolve, reject) => {
           .then((invisibleChaos) => {
             if (invisibleChaos === true) {
               $(`.button-body#${response.equipmentId}`).addClass('invisible');
+            }
+          });
+      } else if (category === 'rides') {
+        rideData.breakRides(response.rideId)
+          .then((fadedRide) => {
+            if (fadedRide === true) {
+              $(`.button-body#${response.rideId}`).addClass('invisible');
+              $(`.card#${response.rideId}`).addClass('card-fade');
             }
           });
       }

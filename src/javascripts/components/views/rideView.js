@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import form from '../forms/addRideForm';
 import rideCards from '../cards/rideCards';
+import rideData from '../../helpers/data/rideData';
 
 const rideView = () => {
   const user = firebase.auth().currentUser;
@@ -18,6 +19,14 @@ const rideView = () => {
     });
   }
   rideCards.rideCardBuilder();
+  rideData.getAllRides()
+    .then((response) => {
+      response.forEach((item) => {
+        if (item.chaos === true) {
+          $(`.button-body#${item.rideId}`).addClass('invisible');
+          $(`.card#${item.rideId}`).addClass('card-fade');
+        }
+      });
+    });
 };
-
 export default { rideView };
