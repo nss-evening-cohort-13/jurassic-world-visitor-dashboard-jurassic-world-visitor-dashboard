@@ -47,7 +47,6 @@ const breakRides = (rideId) => new Promise((resolve, reject) => {
   axios.patch(`${baseUrl}/rides/${rideId}.json`, { chaos: true })
     .then((response) => {
       const chaosRides = response.data.chaos;
-      console.warn(chaosRides);
       resolve(chaosRides);
     }).catch((error) => reject(error));
 });
