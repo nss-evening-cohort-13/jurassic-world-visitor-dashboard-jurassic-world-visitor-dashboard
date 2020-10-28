@@ -1,12 +1,8 @@
 import axios from 'axios';
 import firebase from 'firebase/app';
-// import apiKeys from '../../helpers/apiKeys.json';
 import 'firebase/auth';
 import dinoData from '../../helpers/data/dinoData';
 import mergedData from '../../helpers/data/mergedData';
-// import staffData from '../../helpers/data/staffData';
-
-// const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
 const authedDinoCardView = (dinoObject) => {
   const domString = `<div class="card card-body" id="${dinoObject.dinoId}">
@@ -52,7 +48,6 @@ const dinoCardBuilder = () => {
   mergedData
     .getDataForDinosView()
     .then((response) => {
-      console.warn(response);
       response.forEach((item) => {
         if (response.length) {
           if (user) {
