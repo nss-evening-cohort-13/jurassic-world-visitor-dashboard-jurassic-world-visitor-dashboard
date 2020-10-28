@@ -58,7 +58,12 @@ const chaosMonkey = () => new Promise((resolve, reject) => {
           .then((invisibleChaos) => {
             if (invisibleChaos === true) {
               $(`.button-body#${response.equipmentId}`).addClass('invisible');
-              axios.patch(`${baseUrl}/equipment/${response.equipmentId}.json`, { staffId: 'disabled' });
+              axios.patch(`${baseUrl}/equipment/${response.equipmentId}.json`, { staffId: 'disabled' })
+                .then(() => {
+                  axios.delete(`${baseUrl}/staff/${response.equipmentId}.json`);
+                  axios.delete(`${baseUrl}/staff/${response.staffId}/equipmentId.json`);
+                  axios.delete(`${baseUrl}/staff/${response.staffId}/equipmentName.json`);
+                });
             }
           });
       }
