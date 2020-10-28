@@ -58,7 +58,6 @@ const editDinoForm = (dinoObject) => {
       dinoData
         .editDino(dinoObject.dinoId, data)
         .then((response) => {
-          console.warn(response);
           if (response.status === 200) {
             $('#editDinoForm').remove();
             $('#dinoSuccessMsg').append(
