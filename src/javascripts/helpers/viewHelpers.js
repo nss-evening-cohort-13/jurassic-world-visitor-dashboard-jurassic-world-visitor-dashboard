@@ -43,8 +43,6 @@ const viewHelper = (id, arg) => {
       return updateDinoView.updateDinoView(arg);
     case 'update-ride-link':
       return updateRideView.updateRideView(arg);
-    // case 'single-staff':
-    //   return singleStaffView.singleStaffViewDinos(arg);
     case 'assign-tools-link':
       return assignToolsView.assignTools(arg);
     default:
