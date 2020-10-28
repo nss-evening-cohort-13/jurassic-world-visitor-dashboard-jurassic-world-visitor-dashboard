@@ -43,7 +43,6 @@ const classEquipment = (equipmentId) => new Promise((resolve, reject) => {
   axios.patch(`${baseUrl}/equipment/${equipmentId}.json`, { chaos: true })
     .then((response) => {
       const chaosMonkey = response.data.chaos;
-      console.warn(chaosMonkey);
       resolve(chaosMonkey);
     }).catch((error) => reject(error));
 });
