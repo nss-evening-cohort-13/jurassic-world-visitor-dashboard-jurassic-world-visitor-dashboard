@@ -2,19 +2,20 @@ import vendorData from '../../helpers/data/vendorData';
 import vendorView from '../views/vendorView';
 import staffData from '../../helpers/data/staffData';
 
-const submitUpdatedVendor = (vendorId) => {
+const submitUpdatedVendor = (vendorId, oldResponse) => {
   $('#submit-vendor-btn').on('click', (e) => {
     e.preventDefault();
     const data = {
       name: $('#name').val(),
       imageUrl: $('#image').val(),
       staffId: $('#staff').val(),
+      staffName: $('select option:selected').text() || false,
     };
-
+    const newStaffId = $('#staff').val();
     if (document.getElementById('editVendorForm').checkValidity()) {
       $('#error-message').html('');
-      staffData.deleteValueFromStaff(vendorId.staffId, 'vendorId');
-      staffData.updateStaff(data.staffId, vendorId.vendorId);
+      staffData.deleteValueFromStaff(oldResponse.staffId, 'vendorId');
+      staffData.updateStaff(newStaffId, { vendorId });
 
       vendorData.updateVendor(vendorId, data)
         .then((response) => {
@@ -58,16 +59,13 @@ const editVendorForm = (vendorId) => {
         </div>
         <button id="submit-vendor-btn" type="submit" class="btn btn-info"><i class="fas fa-plus-circle"></i> Update Vendor</button>
       </form>`);
-      submitUpdatedVendor(vendorId);
+      submitUpdatedVendor(vendorId, response);
     });
   staffData.getStaff().then((response) => {
     response.forEach((item) => {
-      console.warn(response);
-      if (!(item.vendorId && response.vendorId !== item.vendorId)) {
+      if (!(item.vendorId)) {
         $('select').append(
-          `<option value="${item.staffId}" ${
-            vendorId.staffId === item.staffId ? "selected ='selected'" : ''
-          }>${item.name}</option>`
+          `<option value="${item.staffId}">${item.name}</option>`
         );
       }
     });
