@@ -1,21 +1,21 @@
-import mergetdData from '../../helpers/data/mergedData';
+// import mergetdData from '../../helpers/data/mergedData';
 
-const singleStaffViewDinos = (staffUid) => {
-  mergetdData.getSingleStaffViewForDinos(staffUid)
-    .then((response) => {
-      const { staff, dinos } = response;
-      $('#assignment').append(`<div id="single-view">
-                          <h1>${staff.name}'s Dinos!</h1>
-                        </div>`);
-      if (dinos.length) {
-        dinos.forEach((dino) => {
-          $('#single-view').append(`<h3>${dino.name}</h3>`);
-        });
-      } else {
-        $('#single-view').append('<h1>NO DINOS</h1>');
-      }
-    });
-};
+// const singleStaffViewDinos = (staffUid) => {
+//   mergetdData.getSingleStaffViewForDinos(staffUid)
+//     .then((response) => {
+//       const { staff, dinos } = response;
+//       $('#assignment').append(`<div id="single-view">
+//                           <h1>${staff.name}'s Dinos!</h1>
+//                         </div>`);
+//       if (dinos.length) {
+//         dinos.forEach((dino) => {
+//           $('#single-view').append(`<h3>${dino.name}</h3>`);
+//         });
+//       } else {
+//         $('#single-view').append('<h1>NO DINOS</h1>');
+//       }
+//     });
+// };
 
 // const singleStaffViewRides = (staffUid) => {
 //   mergetdData.getSingleStaffView(staffUid)
@@ -51,4 +51,4 @@ const singleStaffViewDinos = (staffUid) => {
 //     });
 // };
 
-export default { singleStaffViewDinos };
+// export default { singleStaffViewDinos };

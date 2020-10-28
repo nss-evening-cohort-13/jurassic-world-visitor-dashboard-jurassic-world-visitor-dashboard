@@ -1,6 +1,10 @@
+import axios from 'axios';
+import apiKeys from '../../helpers/apiKeys.json';
 import vendorData from '../../helpers/data/vendorData';
 import vendorView from '../views/vendorView';
 import staffData from '../../helpers/data/staffData';
+
+const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
 const submitUpdatedVendor = (vendorId) => {
   $('#submit-vendor-btn').on('click', (e) => {
@@ -14,8 +18,7 @@ const submitUpdatedVendor = (vendorId) => {
     if (document.getElementById('editVendorForm').checkValidity()) {
       $('#error-message').html('');
       staffData.deleteValueFromStaff(vendorId.staffId, 'vendorId');
-      staffData.updateStaff(data.staffId, vendorId.vendorId);
-
+      axios.patch(`${baseUrl}/staff/${vendorId.staffId}.json`, { vendorId: vendorId.vendorId });
       vendorData.updateVendor(vendorId, data)
         .then((response) => {
           if (response.statusText === 'OK') {
@@ -24,7 +27,6 @@ const submitUpdatedVendor = (vendorId) => {
             $('#success-message').html('<div class="alert alert-success" role="alert">The vendor has been updated!</div>');
           }
         }).catch((error) => console.warn(error));
-
       setTimeout(() => {
         $('#success-message').html('');
       }, 2000);
@@ -52,7 +54,7 @@ const editVendorForm = (vendorId) => {
         </div>
         <div class="form-group">
          <label for="staff">Staff</label>
-          <select class="form-control" id="staff">
+          <select class="form-control" id="staff" required>
           <option value="">Select Staff</option>
          </select>
         </div>
@@ -61,9 +63,9 @@ const editVendorForm = (vendorId) => {
       submitUpdatedVendor(vendorId);
     });
   staffData.getStaff().then((response) => {
+    console.warn(response);
     response.forEach((item) => {
-      console.warn(response);
-      if (!(item.vendorId && response.vendorId !== item.vendorId)) {
+      if (!(item.vendorId)) {
         $('select').append(
           `<option value="${item.staffId}" ${
             vendorId.staffId === item.staffId ? "selected ='selected'" : ''

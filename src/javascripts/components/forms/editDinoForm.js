@@ -21,7 +21,7 @@ const editDinoForm = (dinoObject) => {
   </div>
   <div class="form-group">
   <label for="staff">Staff</label>
-    <select class="form-control" id="staff">
+    <select class="form-control" id="staff" required>
       <option value="">Select Staff</option>
     </select>
 </div>
@@ -50,7 +50,6 @@ const editDinoForm = (dinoObject) => {
     if (document.querySelector('#editDinoForm').checkValidity()) {
       $('#dinoErrorMsg').html('');
       staffData.deleteValueFromStaff(dinoObject.staffId, 'dinoId');
-      // staffData.updateStaff(data.staffId, dinoObject.dinoId);
       dinoData
         .editDino(dinoObject.dinoId, data)
         .then((response) => {
@@ -61,10 +60,8 @@ const editDinoForm = (dinoObject) => {
             );
             $('#addDinoBtn').removeAttr('disabled');
             dinoCards.dinoCardBuilder();
-            console.warn(response.data);
             // This updates the staff object with the dinoId
             axios.patch(`${baseUrl}/staff/${data.staffId}.json`, { dinoId: dinoObject.dinoId });
-            console.warn(data.staffId);
           }
         })
         .catch((error) => console.warn(error));

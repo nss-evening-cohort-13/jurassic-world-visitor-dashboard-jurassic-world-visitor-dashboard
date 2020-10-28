@@ -21,7 +21,7 @@ const rideForm = () => {
               </div>
               <div class="form-group">
               <label for="staff">Staff</label>
-              <select class="form-control" id="staff">
+              <select class="form-control" id="staff" required>
                   <option value="">Select Staff</option>
                </select>
                  </div>
