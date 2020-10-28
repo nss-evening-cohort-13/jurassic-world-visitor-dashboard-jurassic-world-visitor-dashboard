@@ -13,8 +13,10 @@ const rideCardMaker = (rideObject) => {
     <div>
           <h6 class="card-text card-header">Staff: ${rideObject.staffName}</h6>
     </div>
+    <div class="button-body" id="${rideObject.rideId}">
     <button type="button" class="btn btn-light update-ride card-btns" id="${rideObject.rideId}"><i class="fas fa-pen"></i></button>
     <button type="button" data-staff="${rideObject.staffId}" class="btn btn-light delete-rides card-btns" id="${rideObject.rideId}"><i class="fas fa-trash-alt"></i></button>
+    </div>
   </div>
 </div>`;
 

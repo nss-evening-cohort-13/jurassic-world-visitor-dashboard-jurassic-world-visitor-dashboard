@@ -27,7 +27,9 @@ const editRideForm = (rideObject) => {
       <option value="">Select Staff</option>
     </select>
 </div>
+  <div class="button-body id="${rideObject.rideId}">
   <button type="submit" class="btn btn-outline-dark buttons" id="submitEditRide">Update</button>
+  </div>
 </form>`);
   staffData.getStaff().then((response) => {
     response.forEach((item) => {

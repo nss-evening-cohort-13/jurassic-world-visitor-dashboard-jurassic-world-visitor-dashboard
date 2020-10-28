@@ -7,7 +7,7 @@ const addRide = (data) => new Promise((resolve, reject) => {
   axios
     .post(`${baseUrl}/rides.json`, data)
     .then((response) => {
-      const update = { rideId: response.data.name };
+      const update = { rideId: response.data.name, chaos: false };
       axios.patch(`${baseUrl}/rides/${response.data.name}.json`, update);
       resolve(response);
     })
@@ -58,6 +58,19 @@ const editRide = (firebaseKey, rideObject) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
+const breakRides = (rideId) => new Promise((resolve, reject) => {
+  axios.patch(`${baseUrl}/rides/${rideId}.json`, { chaos: true })
+    .then((response) => {
+      const chaosRides = response.data.chaos;
+      resolve(chaosRides);
+    }).catch((error) => reject(error));
+});
 export default {
-  addRide, getAllRides, editRide, getSingleRide, deleteRides, getStaffRides
+  addRide,
+  getAllRides,
+  editRide,
+  getSingleRide,
+  deleteRides,
+  breakRides,
+  getStaffRides
 };

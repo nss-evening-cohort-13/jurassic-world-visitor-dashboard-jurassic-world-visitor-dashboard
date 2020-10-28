@@ -1,5 +1,10 @@
 import axios from 'axios';
+import apiKeys from '../apiKeys.json';
+import equipmentData from './equipmentData';
+import rideData from './rideData';
 import staffData from './staffData';
+
+const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
 //  Gets data from firebase based on category specified in chaosMonkey
 const randomItem = (category) => new Promise((resolve, reject) => {
@@ -23,9 +28,9 @@ const randomItem = (category) => new Promise((resolve, reject) => {
 
 //  chaosMonkey first selects a staff, ride or equipment to affect
 const chaosMonkey = () => new Promise((resolve, reject) => {
-  const chaosArray = ['staff', 'equipment', 'rides'];
-  const category = chaosArray[Math.floor(Math.random() * 3)];
-
+  // const chaosArray = ['staff', 'equipment', 'rides'];
+  // const category = chaosArray[Math.floor(Math.random() * 3)];
+  const category = 'rides';
   // then it passes that category into randomItem so that the correct database node can be returned
   randomItem(category)
     .then((response) => {
@@ -47,9 +52,38 @@ const chaosMonkey = () => new Promise((resolve, reject) => {
         } else {
           resolve(selectedCat);
         }
+      } if (category === 'equipment') {
+        selectedCat = `broken the ${response.name}`;
+        // The selected category of equipment will take the function of class equipment take the item(response and name), then if the object of chaos returns true it will add a class of invisible.
+        equipmentData.classEquipment(response.equipmentId)
+          .then((invisibleChaos) => {
+            if (invisibleChaos === true) {
+              $(`.button-body#${response.equipmentId}`).addClass('invisible');
+              axios.patch(`${baseUrl}/equipment/${response.equipmentId}.json`, { staffId: 'disabled' })
+                .then(() => {
+                  axios.delete(`${baseUrl}/staff/${response.equipmentId}.json`);
+                  axios.delete(`${baseUrl}/staff/${response.staffId}/equipmentId.json`);
+                  axios.delete(`${baseUrl}/staff/${response.staffId}/equipmentName.json`);
+                });
+            }
+          });
+      } else if (category === 'rides') {
+        rideData.breakRides(response.rideId)
+          .then((fadedRide) => {
+            if (fadedRide === true) {
+              $(`.button-body#${response.rideId}`).addClass('invisible');
+              $(`.card#${response.rideId}`).addClass('card-fade');
+              axios.patch(`${baseUrl}/rides/${response.rideId}.json`, { staffId: 'disabled' })
+                .then(() => {
+                  axios.delete(`${baseUrl}/staff/${response.equipmentId}.json`);
+                  axios.delete(`${baseUrl}/staff/${response.staffId}/rideId.json`);
+                  axios.delete(`${baseUrl}/staff/${response.staffId}/rideName.json`);
+                });
+            }
+          });
       }
+      resolve(selectedCat);
     })
     .catch((error) => reject(error));
 });
-
 export default { chaosMonkey };
