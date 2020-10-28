@@ -13,7 +13,7 @@ const authedStaffCardMaker = (staffObject) => {
                         <div class="staff-info-div" id="${staffObject.staffId}">
                             <h3 class="card-text card-header staff-name">${staffObject.name}</h3>
                             <button type="button" class="btn btn-light card-btns edit-staff" id="${staffObject.staffId}"><i class="fas fa-pen"></i></button>
-                            <button type="button" class="btn btn-light card-btns delete-staff" data-equip="${staffObject.equipmentId}" 
+                            <button type="button" class="btn btn-light card-btns delete-staff" data-equip="${staffObject.equipmentId}" data-ride="${staffObject.rideId}" 
                             id="${staffObject.staffId}"><i class="fas fa-trash-alt"></i></button>
                             <button type="button" class="btn btn-light card-btns assign-tools-staff" id="${staffObject.staffId}"><i class="fas fa-tools"></i></button>
                         </div>

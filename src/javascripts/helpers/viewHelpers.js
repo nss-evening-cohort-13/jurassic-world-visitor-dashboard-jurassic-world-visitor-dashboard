@@ -79,6 +79,11 @@ const viewListeners = (view) => {
     viewHelper('update-ride-link', rideFirebaseKey);
     e.stopImmediatePropagation();
   });
+  $('body').on('click', 'button.assign-vendor', (e) => {
+    console.warn('click');
+    const staffId = e.currentTarget.id;
+    viewHelper('single-staff', staffId);
+  });
   $('body').on('click', '.assign-tools-staff', (e) => {
     const equipFirebaseKey = e.currentTarget.id;
     viewHelper('assign-tools-link', equipFirebaseKey);
