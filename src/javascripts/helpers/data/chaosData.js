@@ -73,14 +73,16 @@ const chaosMonkey = () => new Promise((resolve, reject) => {
             if (fadedRide === true) {
               $(`.button-body#${response.rideId}`).addClass('invisible');
               $(`.card#${response.rideId}`).addClass('card-fade');
+              axios.patch(`${baseUrl}/rides/${response.rideId}.json`, { staffId: 'disabled' })
+                .then(() => {
+                  axios.delete(`${baseUrl}/staff/${response.equipmentId}.json`);
+                  axios.delete(`${baseUrl}/staff/${response.staffId}/rideId.json`);
+                  axios.delete(`${baseUrl}/staff/${response.staffId}/rideName.json`);
+                });
             }
           });
       }
       resolve(selectedCat);
-      // } else if (category === 'rides') {
-      //   $(`.button-body#${response.rideId}`).addClass('invisible');
-      //   $(`.card#${response.rideId}`).addClass('card-fade');
-      // }
     })
     .catch((error) => reject(error));
 });

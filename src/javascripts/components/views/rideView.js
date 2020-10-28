@@ -1,8 +1,12 @@
+import axios from 'axios';
 import firebase from 'firebase/app';
+import apiKeys from '../../helpers/apiKeys.json';
 import 'firebase/auth';
 import form from '../forms/addRideForm';
 import rideCards from '../cards/rideCards';
 import rideData from '../../helpers/data/rideData';
+
+const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
 const rideView = () => {
   const user = firebase.auth().currentUser;
@@ -25,6 +29,7 @@ const rideView = () => {
         if (item.chaos === true) {
           $(`.button-body#${item.rideId}`).addClass('invisible');
           $(`.card#${item.rideId}`).addClass('card-fade');
+          axios.patch(`${baseUrl}/rides/${item.rideId}.json`, { staffId: 'disabled' });
         }
       });
     });
