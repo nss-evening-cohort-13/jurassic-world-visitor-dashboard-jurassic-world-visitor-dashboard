@@ -25,7 +25,6 @@ const submitUpdatedVendor = (vendorId, oldResponse) => {
             $('#success-message').html('<div class="alert alert-success" role="alert">The vendor has been updated!</div>');
           }
         }).catch((error) => console.warn(error));
-
       setTimeout(() => {
         $('#success-message').html('');
       }, 2000);
@@ -53,7 +52,7 @@ const editVendorForm = (vendorId) => {
         </div>
         <div class="form-group">
          <label for="staff">Staff</label>
-          <select class="form-control" id="staff">
+          <select class="form-control" id="staff" required>
           <option value="">Select Staff</option>
          </select>
         </div>
@@ -62,6 +61,7 @@ const editVendorForm = (vendorId) => {
       submitUpdatedVendor(vendorId, response);
     });
   staffData.getStaff().then((response) => {
+    console.warn(response);
     response.forEach((item) => {
       if (!(item.vendorId)) {
         $('select').append(

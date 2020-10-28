@@ -18,7 +18,7 @@ const vendorForm = () => {
       <input type="url" class="form-control" id="image" placeholder="Enter Image URL" required>
     </div>
     <label for="staff">Staff</label>
-    <select class="form-control" id="staff">
+    <select class="form-control" id="staff" required>
       <option value="">Select Staff</option>
     </select>
     </div>

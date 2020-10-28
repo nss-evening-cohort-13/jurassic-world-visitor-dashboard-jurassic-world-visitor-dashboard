@@ -20,10 +20,17 @@ const authedDinoCardView = (dinoObject) => {
     </div>`;
   $('body').on('click', 'button.delete-dino', (e) => {
     const firebaseKey = e.currentTarget.id;
+    const deleteDinoObjAndStaffNode = () => new Promise((resolve, reject) => {
+      console.warn(dinoObject.staffId);
+      const staffNode = staffData.deleteValueFromStaff(dinoObject.staffId, 'dinoId');
+      const dinoObj = dinoData.deleteDino(dinoObject.dinoId);
+      Promise.all([staffNode, dinoObj]).then(([staffResponse, dinoResponse]) => {
+        resolve(staffResponse, dinoResponse);
+      }).catch(((error) => reject(error)));
+    });
+    deleteDinoObjAndStaffNode();
     // Below, deletes the dinoId node from the staff object breaking the relationship
-    staffData.deleteValueFromStaff(dinoObject.staffId, 'dinoId');
     $(`.card#${firebaseKey}`).remove();
-    dinoData.deleteDino(firebaseKey);
   });
 
   return domString;

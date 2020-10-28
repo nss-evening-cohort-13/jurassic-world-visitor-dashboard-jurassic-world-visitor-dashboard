@@ -1,12 +1,10 @@
 import axios from 'axios';
 import apiKeys from '../../helpers/apiKeys.json';
 import staffData from '../../helpers/data/staffData';
-import staffAssignment from '../views/singleStaffView';
 
 const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
 const authedStaffCardMaker = (staffObject) => {
-  staffAssignment.singleStaffViewDinos();
   const domString = `<div class="card card-body staff-cards" id="${staffObject.staffId}">
                       <div class="staff-card-body">
                         <div class="staff-img-container">
