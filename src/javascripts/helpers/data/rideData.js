@@ -8,10 +8,8 @@ const addRide = (data) => new Promise((resolve, reject) => {
     .post(`${baseUrl}/rides.json`, data)
     .then((response) => {
       const update = { rideId: response.data.name };
-      axios.patch(`${baseUrl}/rides/${response.data.name}.json`, update)
-        .then((patchResponse) => {
-          resolve(patchResponse);
-        });
+      axios.patch(`${baseUrl}/rides/${response.data.name}.json`, update);
+      resolve(response);
     })
     .catch((error) => reject(error));
 });
