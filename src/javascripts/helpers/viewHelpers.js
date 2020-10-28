@@ -9,7 +9,6 @@ import editStaffForm from '../components/forms/editStaffForm';
 import updateDinoView from '../components/views/updateDinoView';
 import updateRideView from '../components/views/updateRideView';
 import chaosView from '../components/views/chaosView';
-import singleStaffView from '../components/views/singleStaffView';
 import assignToolsView from '../components/views/assignToolsView';
 
 const toastView = () => {
@@ -44,8 +43,8 @@ const viewHelper = (id, arg) => {
       return updateDinoView.updateDinoView(arg);
     case 'update-ride-link':
       return updateRideView.updateRideView(arg);
-    case 'single-staff':
-      return singleStaffView.singleStaffViewDinos(arg);
+    // case 'single-staff':
+    //   return singleStaffView.singleStaffViewDinos(arg);
     case 'assign-tools-link':
       return assignToolsView.assignTools(arg);
     default:
