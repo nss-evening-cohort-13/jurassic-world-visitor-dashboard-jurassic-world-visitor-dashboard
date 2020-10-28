@@ -7,8 +7,10 @@ const rideCardMaker = (rideObject) => {
   <img src="${rideObject.image}" class="card-img-top" alt="...">
   <div>
     <h3 class="card-header">${rideObject.name}</h3>
+    <div class="button-body" id="${rideObject.rideId}">
     <button type="button" class="btn btn-light update-ride card-btns" id="${rideObject.rideId}"><i class="fas fa-pen"></i></button>
     <button type="button" class="btn btn-light delete-rides card-btns" id="${rideObject.rideId}"><i class="fas fa-trash-alt"></i></button>
+    </div>
   </div>
 </div>`;
 
