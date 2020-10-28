@@ -25,11 +25,19 @@ const getDataForRidesView = () => new Promise((resolve, reject) => {
       const rideStuff = [];
       rideResponse.forEach((ride) => {
         const staffObject = staffResponse.find((staff) => staff.staffId === ride.staffId);
-        const staffUse = {
-          staffName: staffObject.name,
-        };
-        rideStuff.push({ ...ride, ...staffUse });
-        resolve(rideStuff);
+        if (staffObject !== undefined) {
+          const staffUse = {
+            staffName: staffObject.name,
+          };
+          rideStuff.push({ ...ride, ...staffUse });
+          resolve(rideStuff);
+        } else {
+          const staffUse = {
+            staffName: 'No Staff Assigned',
+          };
+          rideStuff.push({ ...ride, ...staffUse });
+          resolve(rideStuff);
+        }
       });
     });
   }).catch((error) => reject(error));
