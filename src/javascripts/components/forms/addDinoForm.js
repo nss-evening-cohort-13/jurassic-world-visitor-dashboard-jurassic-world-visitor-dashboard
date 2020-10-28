@@ -53,19 +53,9 @@ const addDinoForm = () => {
               '<div class="alert alert-success" role="alert">The dino has been added!</div>'
             );
             $('#addDinoBtn').removeAttr('disabled');
-            $('#cards').append(`<div class="card card-body" id="${response.data.name}">
-            <div>
-              <img src="${data.imageUrl}" class="card-img-top" alt="${data.name}">
-              <div>
-                <h3 class="card-text card-header">${data.name}</h3>
-              </div>
-              <button type="button" id="${response.data.name}" class="btn btn-info update-dino card-btns"><i class="fas fa-pen"></i></button>
-              <button type="button" id="${response.data.name}" class="btn btn-info delete-dino card-btns"><i class="fas fa-trash-alt"></i></button>
-            </div>
-          </div>`);
-            dinoCards.dinoCardBuilder();
             // This patch, adds a dinoId to the staff object
-            axios.patch(`${baseUrl}/staff/${data.staffId}.json`, { dinoId: response.data.name });
+            axios.patch(`${baseUrl}/staff/${data.staffId}.json`, { dinoId: response.data.name })
+              .then(() => dinoCards.dinoCardBuilder());
           }
         })
         .catch((error) => console.warn(error));

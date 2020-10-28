@@ -1,8 +1,12 @@
+import axios from 'axios';
 import firebase from 'firebase/app';
+// import apiKeys from '../../helpers/apiKeys.json';
 import 'firebase/auth';
 import dinoData from '../../helpers/data/dinoData';
 import mergedData from '../../helpers/data/mergedData';
-import staffData from '../../helpers/data/staffData';
+// import staffData from '../../helpers/data/staffData';
+
+// const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
 const authedDinoCardView = (dinoObject) => {
   const domString = `<div class="card card-body" id="${dinoObject.dinoId}">
@@ -15,21 +19,15 @@ const authedDinoCardView = (dinoObject) => {
           <h6 class="card-text card-header">Staff: ${dinoObject.staffName}</h6>
         </div>
         <button type="button" id="${dinoObject.dinoId}" class="btn btn-info update-dino card-btns"><i class="fas fa-pen"></i></button>
-        <button type="button" id="${dinoObject.dinoId}" class="btn btn-info delete-dino card-btns"><i class="fas fa-trash-alt"></i></button>
+        <button type="button" data-staff="${dinoObject.staffId}" id="${dinoObject.dinoId}" class="btn btn-info delete-dino card-btns"><i class="fas fa-trash-alt"></i></button>
       </div>
     </div>`;
   $('body').on('click', 'button.delete-dino', (e) => {
+    e.stopImmediatePropagation();
     const firebaseKey = e.currentTarget.id;
-    const deleteDinoObjAndStaffNode = () => new Promise((resolve, reject) => {
-      console.warn(dinoObject.staffId);
-      const staffNode = staffData.deleteValueFromStaff(dinoObject.staffId, 'dinoId');
-      const dinoObj = dinoData.deleteDino(dinoObject.dinoId);
-      Promise.all([staffNode, dinoObj]).then(([staffResponse, dinoResponse]) => {
-        resolve(staffResponse, dinoResponse);
-      }).catch(((error) => reject(error)));
-    });
-    deleteDinoObjAndStaffNode();
-    // Below, deletes the dinoId node from the staff object breaking the relationship
+    const staffid = $(`.delete-dino#${firebaseKey}`).data('staff');
+    axios.delete(`https://nutshell-part-two.firebaseio.com/staff/${staffid}/dinoId.json`);
+    dinoData.deleteDino(firebaseKey);
     $(`.card#${firebaseKey}`).remove();
   });
 
@@ -54,6 +52,7 @@ const dinoCardBuilder = () => {
   mergedData
     .getDataForDinosView()
     .then((response) => {
+      console.warn(response);
       response.forEach((item) => {
         if (response.length) {
           if (user) {
