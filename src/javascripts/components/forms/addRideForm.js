@@ -64,8 +64,9 @@ const rideForm = () => {
               <button type="button" class="btn btn-light delete-rides card-btns" id="${response.data.name}"><i class="fas fa-trash-alt"></i></button>
             </div>
           </div>`);
-            rideCards.rideCardBuilder();
-            axios.patch(`${baseUrl}/staff/${data.staffId}.json`, { rideId: response.data.name });
+            axios.patch(`${baseUrl}/staff/${data.staffId}.json`, { rideId: response.data.name }).then(() => {
+              rideCards.rideCardBuilder();
+            });
           }
         })
         .catch((error) => console.warn(error));

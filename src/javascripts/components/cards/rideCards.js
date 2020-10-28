@@ -19,7 +19,6 @@ const rideCardMaker = (rideObject) => {
 
   $('body').on('click', '.delete-rides', (e) => {
     e.stopImmediatePropagation();
-    console.warn(rideObject.staffId);
     const firebaseKey = e.currentTarget.id;
     $(`.card#${firebaseKey}`).remove();
     staffData.deleteValueFromStaff(rideObject.staffId, 'rideId');
