@@ -1,6 +1,7 @@
 import axios from 'axios';
 import apiKeys from '../apiKeys.json';
 import equipmentData from './equipmentData';
+import rideData from './rideData';
 import staffData from './staffData';
 
 const baseUrl = apiKeys.firebaseKeys.databaseURL;
@@ -29,7 +30,7 @@ const randomItem = (category) => new Promise((resolve, reject) => {
 const chaosMonkey = () => new Promise((resolve, reject) => {
   // const chaosArray = ['staff', 'equipment', 'rides'];
   // const category = chaosArray[Math.floor(Math.random() * 3)];
-  const category = 'equipment';
+  const category = 'rides';
   // then it passes that category into randomItem so that the correct database node can be returned
   randomItem(category)
     .then((response) => {
@@ -66,12 +67,22 @@ const chaosMonkey = () => new Promise((resolve, reject) => {
                 });
             }
           });
+      } else if (category === 'rides') {
+        rideData.breakRides(response.rideId)
+          .then((fadedRide) => {
+            if (fadedRide === true) {
+              $(`.button-body#${response.rideId}`).addClass('invisible');
+              $(`.card#${response.rideId}`).addClass('card-fade');
+              axios.patch(`${baseUrl}/rides/${response.rideId}.json`, { staffId: 'disabled' })
+                .then(() => {
+                  axios.delete(`${baseUrl}/staff/${response.equipmentId}.json`);
+                  axios.delete(`${baseUrl}/staff/${response.staffId}/rideId.json`);
+                  axios.delete(`${baseUrl}/staff/${response.staffId}/rideName.json`);
+                });
+            }
+          });
       }
       resolve(selectedCat);
-      // } else if (category === 'rides') {
-      //   $(`.button-body#${response.rideId}`).addClass('invisible');
-      //   $(`.card#${response.rideId}`).addClass('card-fade');
-      // }
     })
     .catch((error) => reject(error));
 });
