@@ -1,7 +1,10 @@
 import axios from 'axios';
+import apiKeys from '../apiKeys.json';
 import equipmentData from './equipmentData';
 import rideData from './rideData';
 import staffData from './staffData';
+
+const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
 //  Gets data from firebase based on category specified in chaosMonkey
 const randomItem = (category) => new Promise((resolve, reject) => {
@@ -56,6 +59,12 @@ const chaosMonkey = () => new Promise((resolve, reject) => {
           .then((invisibleChaos) => {
             if (invisibleChaos === true) {
               $(`.button-body#${response.equipmentId}`).addClass('invisible');
+              axios.patch(`${baseUrl}/equipment/${response.equipmentId}.json`, { staffId: 'disabled' })
+                .then(() => {
+                  axios.delete(`${baseUrl}/staff/${response.equipmentId}.json`);
+                  axios.delete(`${baseUrl}/staff/${response.staffId}/equipmentId.json`);
+                  axios.delete(`${baseUrl}/staff/${response.staffId}/equipmentName.json`);
+                });
             }
           });
       } else if (category === 'rides') {

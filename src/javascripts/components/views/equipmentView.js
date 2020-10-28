@@ -1,8 +1,12 @@
+import axios from 'axios';
 import firebase from 'firebase/app';
+import apiKeys from '../../helpers/apiKeys.json';
 import 'firebase/auth';
 import equipmentForm from '../forms/addEquipmentForm';
 import equipmentCards from '../cards/equipmentCards';
 import equipmentData from '../../helpers/data/equipmentData';
+
+const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
 const equipmentView = () => {
   const user = firebase.auth().currentUser;
@@ -23,6 +27,7 @@ const equipmentView = () => {
         response.forEach((item) => {
           if (item.chaos === true) {
             $(`.button-body#${item.equipmentId}`).addClass('invisible');
+            axios.patch(`${baseUrl}/equipment/${item.equipmentId}.json`, { staffId: 'disabled' });
           }
         });
       });
