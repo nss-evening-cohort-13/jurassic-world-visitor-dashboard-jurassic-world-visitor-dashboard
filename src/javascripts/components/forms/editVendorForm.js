@@ -61,7 +61,6 @@ const editVendorForm = (vendorId) => {
       submitUpdatedVendor(vendorId, response);
     });
   staffData.getStaff().then((response) => {
-    console.warn(response);
     response.forEach((item) => {
       if (!(item.vendorId)) {
         $('select').append(

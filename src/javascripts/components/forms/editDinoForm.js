@@ -7,7 +7,12 @@ import staffData from '../../helpers/data/staffData';
 const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
 const editDinoForm = (dinoObject) => {
-  // $('#addDinoBtn').attr('disabled', true);
+  $('#app').html(`<div id="addDinoDiv">
+      <div id="dinoSuccessMsg"></div>
+      <div id="dinoErrorMsg"></div>
+      <button type="button" class="btn btn-outline-dark add-btn" id="addDinoBtn">Add a Dino</button>
+      </div>`);
+  $('#addDinoBtn').attr('disabled', true);
   $('#app').append(`
   <form id="editDinoForm">
   <h1>Edit Dino</h1>
@@ -53,6 +58,7 @@ const editDinoForm = (dinoObject) => {
       dinoData
         .editDino(dinoObject.dinoId, data)
         .then((response) => {
+          console.warn(response);
           if (response.status === 200) {
             $('#editDinoForm').remove();
             $('#dinoSuccessMsg').append(
