@@ -5,7 +5,6 @@ import dinoData from '../../helpers/data/dinoData';
 import mergedData from '../../helpers/data/mergedData';
 
 const authedDinoCardView = (dinoObject) => {
-  console.warn(dinoObject);
   const domString = `<div class="card card-body" id="${dinoObject.dinoId}">
       <div>
         <img src="${dinoObject.imageUrl}" class="card-img-top" alt="${dinoObject.name}">
