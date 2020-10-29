@@ -35,7 +35,7 @@ const editDinoForm = (dinoObject) => {
   staffData.getStaff().then((response) => {
     response.forEach((item) => {
       // This retrieves a staff name only if it is not assigned with a dinoId
-      if (!(item.dinoId && dinoObject.dinoId !== item.dinoId)) {
+      if (!(item.rideId || item.vendorId || item.dinoId || dinoObject.dinoId === item.dinoId)) {
         $('select').append(
           `<option value="${item.staffId}" ${
             dinoObject.staffId === item.staffId ? "selected ='selected'" : ''

@@ -29,7 +29,7 @@ const addDinoForm = () => {
   staffData.getStaff().then((response) => {
     response.forEach((item) => {
       // This retrieves a staff name only if it is not assigned with a dinoId
-      if (!(item.dinoId)) {
+      if (!(item.dinoId || item.rideId || item.vendorId)) {
         $('select').append(`<option value="${item.staffId}">${item.name}</option>`);
       }
     });
