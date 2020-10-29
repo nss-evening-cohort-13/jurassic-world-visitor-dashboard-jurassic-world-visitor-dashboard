@@ -14,6 +14,9 @@ const authedDinoCardView = (dinoObject) => {
         <div>
           <h6 class="card-text card-header">Staff: ${dinoObject.staffName}</h6>
         </div>
+        <div>
+          <h6 class="card-text card-header">Staff 2: ${dinoObject.staffName2}</h6>
+        </div>
         <button type="button" id="${dinoObject.dinoId}" class="btn btn-info update-dino card-btns"><i class="fas fa-pen"></i></button>
         <button type="button" data-staff="${dinoObject.staffId}" id="${dinoObject.dinoId}" class="btn btn-info delete-dino card-btns"><i class="fas fa-trash-alt"></i></button>
       </div>

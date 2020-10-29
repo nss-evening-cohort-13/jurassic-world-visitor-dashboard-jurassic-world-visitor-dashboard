@@ -24,12 +24,18 @@ const addDinoForm = () => {
                   <option value="">Select Staff</option>
                </select>
                  </div>
+  <div class="form-group">
+                <label for="staff2">Staff 2</label>
+               <select class="form-control" id="staff2" required>
+                   <option value="">Select Staff 2</option>
+                </select>
+                  </div>
   <button type="submit" class="btn btn-outline-dark buttons" id="submitDino">Submit</button>
 </form>`);
   staffData.getStaff().then((response) => {
     response.forEach((item) => {
       // This retrieves a staff name only if it is not assigned with a dinoId
-      if (!(item.dinoId)) {
+      if (!(item.dinoId || item.rideId || item.vendorId)) {
         $('select').append(`<option value="${item.staffId}">${item.name}</option>`);
       }
     });
@@ -40,9 +46,10 @@ const addDinoForm = () => {
       name: $('#dinoName').val(),
       imageUrl: $('#dinoImage').val(),
       staffId: $('#staff').val(),
+      staffId2: $('#staff2').val(),
     };
 
-    if (document.querySelector('#addDinoForm').checkValidity()) {
+    if (document.querySelector('#addDinoForm').checkValidity() && data.staffId !== data.staffId2) {
       $('#dinoErrorMsg').html('');
       dinoData
         .addDino(data)
@@ -54,7 +61,8 @@ const addDinoForm = () => {
             );
             $('#addDinoBtn').removeAttr('disabled');
             // This patch, adds a dinoId to the staff object
-            axios.patch(`${baseUrl}/staff/${data.staffId}.json`, { dinoId: response.data.name })
+            axios.patch(`${baseUrl}/staff/${data.staffId}.json`, { dinoId: response.data.name });
+            axios.patch(`${baseUrl}/staff/${data.staffId2}.json`, { dinoId: response.data.name })
               .then(() => dinoCards.dinoCardBuilder());
           }
         })

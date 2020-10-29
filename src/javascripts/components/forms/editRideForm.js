@@ -33,7 +33,7 @@ const editRideForm = (rideObject) => {
 </form>`);
   staffData.getStaff().then((response) => {
     response.forEach((item) => {
-      if (!(item.rideId && rideObject.rideId !== item.rideId)) {
+      if (!(item.rideId || item.dinoId || item.vendorId)) {
         $('select').append(
           `<option value="${item.staffId}" ${
             rideObject.staffId === item.staffId ? "selected ='selected'" : ''

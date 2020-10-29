@@ -26,7 +26,7 @@ const vendorForm = () => {
   </form>`);
   staffData.getStaff().then((response) => {
     response.forEach((item) => {
-      if (!(item.vendorId)) {
+      if (!(item.dinoId || item.rideId || item.vendorId)) {
         $('select').append(`<option value="${item.staffId}">${item.name}</option>`);
       }
     });
