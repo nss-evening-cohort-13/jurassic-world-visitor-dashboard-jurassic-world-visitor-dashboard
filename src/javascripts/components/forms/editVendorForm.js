@@ -62,7 +62,7 @@ const editVendorForm = (vendorId) => {
     });
   staffData.getStaff().then((response) => {
     response.forEach((item) => {
-      if (!(item.vendorId)) {
+      if (!(item.vendorId || item.dinoId || item.rideId)) {
         $('select').append(
           `<option value="${item.staffId}">${item.name}</option>`
         );
