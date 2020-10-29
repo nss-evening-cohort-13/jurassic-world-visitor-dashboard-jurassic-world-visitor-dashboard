@@ -30,7 +30,7 @@ const rideForm = () => {
   );
   staffData.getStaff().then((response) => {
     response.forEach((item) => {
-      if (!(item.rideId)) {
+      if (!(item.dinoId || item.rideId || item.vendorId)) {
         $('select').append(`<option value="${item.staffId}">${item.name}</option>`);
       }
     });
