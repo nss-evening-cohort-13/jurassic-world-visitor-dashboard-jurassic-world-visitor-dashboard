@@ -24,7 +24,6 @@ const getDataForDinosView = () => new Promise((resolve, reject) => {
             staffName: staffObject.name,
             staffName2: 'No second staff'
           };
-          console.warn('A staff has been kidnapped!');
           dinoStuff.push({ ...dino, ...staffUse });
           resolve(dinoStuff);
         } else if (dino.staffId2 && !(dino.staff)) {
@@ -33,7 +32,6 @@ const getDataForDinosView = () => new Promise((resolve, reject) => {
             staffName: 'No staff',
             staffName2: staffObject2.name,
           };
-          console.warn('A staff has been kidnapped!');
           dinoStuff.push({ ...dino, ...staffUse });
           resolve(dinoStuff);
         } else {
@@ -41,7 +39,6 @@ const getDataForDinosView = () => new Promise((resolve, reject) => {
             staffName: 'No staff',
             staffName2: 'No second staff'
           };
-          console.warn('A staff has been kidnapped!');
           dinoStuff.push({ ...dino, ...staffUse });
           resolve(dinoStuff);
         }
