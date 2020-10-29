@@ -47,6 +47,8 @@ const chaosMonkey = () => new Promise((resolve, reject) => {
           selectedCat = `kidnapped ${response.name}`;
           $(`.card#${response.staffId}`).remove();
           staffData.deleteStaff(response.staffId);
+          axios.patch(`${baseUrl}/dinos/${response.dinoId}/staffId.json`, { staffId: 'No Staff' });
+          axios.patch(`${baseUrl}/dinos/${response.dinoId}/staffId2.json`, { staffId: 'No Staff' });
           resolve(selectedCat);
         } else {
           resolve(selectedCat);
