@@ -28,9 +28,8 @@ const randomItem = (category) => new Promise((resolve, reject) => {
 
 //  chaosMonkey first selects a staff, ride or equipment to affect
 const chaosMonkey = () => new Promise((resolve, reject) => {
-  // const chaosArray = ['staff', 'equipment', 'rides'];
-  // const category = chaosArray[Math.floor(Math.random() * 3)];
-  const category = 'rides';
+  const chaosArray = ['staff', 'equipment', 'rides'];
+  const category = chaosArray[Math.floor(Math.random() * 3)];
   // then it passes that category into randomItem so that the correct database node can be returned
   randomItem(category)
     .then((response) => {
