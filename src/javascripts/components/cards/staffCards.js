@@ -25,11 +25,19 @@ const authedStaffCardMaker = (staffObject) => {
 
   $('body').on('click', '.delete-staff', (e) => {
     e.stopImmediatePropagation();
+    const dinoKey = staffObject.dinoId;
     const equipmentid = $('.delete-staff').data('equip');
     axios.delete(`${baseUrl}/equipment/${equipmentid}/staffId.json`);
     const firebaseKey = e.currentTarget.id;
     // firebase key is staffObject UID
     $(`.card#${firebaseKey}`).remove();
+    axios.get(`${baseUrl}/dinos/${dinoKey}.json`).then((response) => {
+      if (response.data.staffId === staffObject.staffId) {
+        axios.delete(`${baseUrl}/dinos/${dinoKey}/staffId.json`);
+      } else {
+        axios.delete(`${baseUrl}/dinos/${dinoKey}/staffId2.json`);
+      }
+    });
     staffData.deleteStaff(firebaseKey);
   });
   return domString;
