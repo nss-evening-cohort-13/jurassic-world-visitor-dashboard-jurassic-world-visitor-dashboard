@@ -12,8 +12,7 @@ const randomItem = (category) => new Promise((resolve, reject) => {
   axios
     .get(`https://nutshell-part-two.firebaseio.com/${category}.json`)
     .then((response) => {
-      console.warn(response);
-      if (response.data !== null || response.data !== { undefined: { chaos: true, staffId: 'disabled' } }) {
+      if (response.data !== null) {
         //  if there is data in the response, a random object from the array is passed into chaosMonkey
         const arrayLength = Object.values(response.data).length;
         const randomNumber = Math.floor(Math.random() * arrayLength);
@@ -39,7 +38,7 @@ const chaosMonkey = () => new Promise((resolve, reject) => {
       let selectedCat = `broken the ${response.name}`;
       //  if the response.name is noStaff, then the staff node is empty and has returned null. selectedCat is changed to an appropriate string to display
       if (response.name === 'noStaff') {
-        selectedCat = 'no staff to kidnap';
+        selectedCat = 'taken a day off';
         resolve(selectedCat);
       } else {
         //  selected can is redefined to the same default string here because the linter gets upset if you go straight into an if statement
@@ -59,41 +58,40 @@ const chaosMonkey = () => new Promise((resolve, reject) => {
           });
           staffData.deleteStaff(response.staffId);
           resolve(selectedCat);
-        } else {
-          resolve(selectedCat);
+        } else if (category === 'equipment') {
+          selectedCat = `broken the ${response.name}`;
+          // The selected category of equipment will take the function of class equipment take the item(response and name), then if the object of chaos returns true it will add a class of invisible.
+          equipmentData.classEquipment(response.equipmentId)
+            .then((invisibleChaos) => {
+              if (invisibleChaos === true) {
+                $(`.button-body#${response.equipmentId}`).addClass('invisible');
+                axios.patch(`${baseUrl}/equipment/${response.equipmentId}.json`, { staffId: 'disabled' })
+                  .then(() => {
+                    axios.delete(`${baseUrl}/staff/${response.equipmentId}.json`);
+                    axios.delete(`${baseUrl}/staff/${response.staffId}/equipmentId.json`);
+                    axios.delete(`${baseUrl}/staff/${response.staffId}/equipmentName.json`);
+                  });
+              }
+            });
+        } else if (category === 'rides') {
+          selectedCat = `broken the ${response.name}`;
+          rideData.breakRides(response.rideId)
+            .then((fadedRide) => {
+              if (fadedRide === true) {
+                $(`.button-body#${response.rideId}`).addClass('invisible');
+                $(`.staff-name#${response.rideId}`).addClass('invisible');
+                $(`.card#${response.rideId}`).addClass('card-fade');
+                axios.patch(`${baseUrl}/rides/${response.rideId}.json`, { staffId: 'disabled' })
+                  .then(() => {
+                    axios.delete(`${baseUrl}/staff/${response.equipmentId}.json`);
+                    axios.delete(`${baseUrl}/staff/${response.staffId}/rideId.json`);
+                    axios.delete(`${baseUrl}/staff/${response.staffId}/rideName.json`);
+                  });
+              }
+            });
         }
-      } if (category === 'equipment') {
-        selectedCat = `broken the ${response.name}`;
-        // The selected category of equipment will take the function of class equipment take the item(response and name), then if the object of chaos returns true it will add a class of invisible.
-        equipmentData.classEquipment(response.equipmentId)
-          .then((invisibleChaos) => {
-            if (invisibleChaos === true) {
-              $(`.button-body#${response.equipmentId}`).addClass('invisible');
-              axios.patch(`${baseUrl}/equipment/${response.equipmentId}.json`, { staffId: 'disabled' })
-                .then(() => {
-                  axios.delete(`${baseUrl}/staff/${response.equipmentId}.json`);
-                  axios.delete(`${baseUrl}/staff/${response.staffId}/equipmentId.json`);
-                  axios.delete(`${baseUrl}/staff/${response.staffId}/equipmentName.json`);
-                });
-            }
-          });
-      } else if (category === 'rides' && response !== undefined) {
-        rideData.breakRides(response.rideId)
-          .then((fadedRide) => {
-            if (fadedRide === true) {
-              $(`.button-body#${response.rideId}`).addClass('invisible');
-              $(`.card#${response.rideId}`).addClass('card-fade');
-              $(`.staff-name#${response.rideId}`).addClass('invisible');
-              axios.patch(`${baseUrl}/rides/${response.rideId}.json`, { staffId: 'disabled' })
-                .then(() => {
-                  axios.delete(`${baseUrl}/staff/${response.equipmentId}.json`);
-                  axios.delete(`${baseUrl}/staff/${response.staffId}/rideId.json`);
-                  axios.delete(`${baseUrl}/staff/${response.staffId}/rideName.json`);
-                });
-            }
-          });
+        resolve(selectedCat);
       }
-      resolve(selectedCat);
     })
     .catch((error) => reject(error));
 });
