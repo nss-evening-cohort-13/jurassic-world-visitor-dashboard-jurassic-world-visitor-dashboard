@@ -1,9 +1,12 @@
-import Axios from 'axios';
+import axios from 'axios';
 import firebase from 'firebase/app';
+import apiKeys from '../../helpers/apiKeys.json';
 import 'firebase/auth';
 import rideData from '../../helpers/data/rideData';
 import mergedData from '../../helpers/data/mergedData';
 // import staffData from '../../helpers/data/staffData';
+
+const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
 const rideCardMaker = (rideObject) => {
   const domString = `<div class="card card-body" id="${rideObject.rideId}" style="width: 18rem;">
@@ -24,7 +27,7 @@ const rideCardMaker = (rideObject) => {
     e.stopImmediatePropagation();
     const firebaseKey = e.currentTarget.id;
     const staffId = $(`.delete-rides#${firebaseKey}`).data('staff');
-    Axios.delete(`https://nutshell-part-two.firebaseio.com/staff/${staffId}/rideId.json`);
+    axios.delete(`https://nutshell-part-two.firebaseio.com/staff/${staffId}/rideId.json`);
     rideData.deleteRides(firebaseKey);
     $(`.card#${firebaseKey}`).remove();
   });
@@ -52,6 +55,16 @@ const rideCardBuilder = () => {
     .then((response) => {
       response.forEach((item) => {
         if (response.length) {
+          rideData.getAllRides()
+            .then((newResponse) => {
+              newResponse.forEach((index) => {
+                if (index.chaos === true) {
+                  $(`.button-body#${index.rideId}`).addClass('invisible');
+                  $(`.card#${index.rideId}`).addClass('card-fade');
+                  axios.patch(`${baseUrl}/rides/${index.rideId}.json`, { staffId: 'disabled' });
+                }
+              });
+            });
           if (user) {
             $('#cards').append(rideCardMaker(item));
           } else {

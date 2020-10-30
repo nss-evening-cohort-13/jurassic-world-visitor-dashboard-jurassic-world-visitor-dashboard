@@ -3,6 +3,7 @@ import apiKeys from '../apiKeys.json';
 import equipmentData from './equipmentData';
 import rideData from './rideData';
 import staffData from './staffData';
+import dinoData from './dinoData';
 
 const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
@@ -28,9 +29,8 @@ const randomItem = (category) => new Promise((resolve, reject) => {
 
 //  chaosMonkey first selects a staff, ride or equipment to affect
 const chaosMonkey = () => new Promise((resolve, reject) => {
-  // const chaosArray = ['staff', 'equipment', 'rides'];
-  // const category = chaosArray[Math.floor(Math.random() * 3)];
-  const category = 'rides';
+  const chaosArray = ['staff', 'equipment', 'rides'];
+  const category = chaosArray[Math.floor(Math.random() * 3)];
   // then it passes that category into randomItem so that the correct database node can be returned
   randomItem(category)
     .then((response) => {
@@ -47,6 +47,15 @@ const chaosMonkey = () => new Promise((resolve, reject) => {
           //  if the category is staff, the string updates, the card with a matching id is removed from the dom and deleted from the database
           selectedCat = `kidnapped ${response.name}`;
           $(`.card#${response.staffId}`).remove();
+          dinoData.getDino(response.staffId).then((dinoResponse) => {
+            dinoResponse.forEach((dino) => {
+              if (response.staffId === dino.staffId) {
+                axios.delete(`${baseUrl}/dinos/${response.dinoId}/staffId.json`);
+              } else if (response.staffId === dino.staffId2) {
+                axios.delete(`${baseUrl}/dinos/${response.dinoId}/staffId2.json`);
+              }
+            });
+          });
           staffData.deleteStaff(response.staffId);
           resolve(selectedCat);
         } else {

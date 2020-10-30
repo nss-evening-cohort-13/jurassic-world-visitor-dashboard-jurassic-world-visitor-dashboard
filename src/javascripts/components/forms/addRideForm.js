@@ -5,7 +5,7 @@ import staffData from '../../helpers/data/staffData';
 import rideCards from '../cards/rideCards';
 
 const baseUrl = apiKeys.firebaseKeys.databaseURL;
-
+// This is where I added the code from rideView to make the code static
 const rideForm = () => {
   $('#app').append(
     `

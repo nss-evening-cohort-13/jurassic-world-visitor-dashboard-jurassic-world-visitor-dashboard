@@ -45,7 +45,6 @@ const equipmentCardBuilder = () => {
           if (user) {
             $('#cards').append(authedEquipmentCardView(item));
             $(`.delete-equipment#${item.equipmentId}`).on('click', (e) => {
-              console.warn('clicked');
               const firebaseKey = e.currentTarget.id;
               // firebaseKey is Equipment UID!!!
               const deleteKey = item.staffId;
