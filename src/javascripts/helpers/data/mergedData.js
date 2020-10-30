@@ -77,11 +77,19 @@ const getDataForVendorsView = () => new Promise((resolve, reject) => {
       const vendorStuff = [];
       vendorResponse.forEach((vendor) => {
         const staffObject = staffResponse.find((staff) => staff.staffId === vendor.staffId);
-        const staffUse = {
-          staffName: staffObject.name,
-        };
-        vendorStuff.push({ ...vendor, ...staffUse });
-        resolve(vendorStuff);
+        if (staffObject !== undefined) {
+          const staffUse = {
+            staffName: staffObject.name,
+          };
+          vendorStuff.push({ ...vendor, ...staffUse });
+          resolve(vendorStuff);
+        } else {
+          const staffUse = {
+            staffName: 'No Staff Assigned',
+          };
+          vendorStuff.push({ ...vendor, ...staffUse });
+          resolve(vendorStuff);
+        }
       });
     });
   }).catch((error) => reject(error));
