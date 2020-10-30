@@ -79,6 +79,7 @@ const chaosMonkey = () => new Promise((resolve, reject) => {
             .then((fadedRide) => {
               if (fadedRide === true) {
                 $(`.button-body#${response.rideId}`).addClass('invisible');
+                $(`.staff-name#${response.rideId}`).addClass('invisible');
                 $(`.card#${response.rideId}`).addClass('card-fade');
                 axios.patch(`${baseUrl}/rides/${response.rideId}.json`, { staffId: 'disabled' })
                   .then(() => {
