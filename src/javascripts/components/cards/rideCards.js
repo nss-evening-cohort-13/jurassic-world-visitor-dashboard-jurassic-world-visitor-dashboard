@@ -13,7 +13,7 @@ const rideCardMaker = (rideObject) => {
   <img src="${rideObject.image}" class="card-img-top" alt="...">
   <div>
     <h3 class="card-header">${rideObject.name}</h3>
-    <div>
+    <div class="staff-name" id="${rideObject.staffName}">
           <h6 class="card-text card-header">Staff: ${rideObject.staffName}</h6>
     </div>
     <div class="button-body" id="${rideObject.rideId}">
@@ -61,6 +61,7 @@ const rideCardBuilder = () => {
                 if (index.chaos === true) {
                   $(`.button-body#${index.rideId}`).addClass('invisible');
                   $(`.card#${index.rideId}`).addClass('card-fade');
+                  $(`.staff-name#${index.rideId}`).addClass('hide');
                   axios.patch(`${baseUrl}/rides/${index.rideId}.json`, { staffId: 'disabled' });
                 }
               });

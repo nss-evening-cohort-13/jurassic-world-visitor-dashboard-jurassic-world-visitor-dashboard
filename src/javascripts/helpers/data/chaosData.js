@@ -12,7 +12,8 @@ const randomItem = (category) => new Promise((resolve, reject) => {
   axios
     .get(`https://nutshell-part-two.firebaseio.com/${category}.json`)
     .then((response) => {
-      if (response.data !== null) {
+      console.warn(response);
+      if (response.data !== null || response.data !== { undefined: { chaos: true, staffId: 'disabled' } }) {
         //  if there is data in the response, a random object from the array is passed into chaosMonkey
         const arrayLength = Object.values(response.data).length;
         const randomNumber = Math.floor(Math.random() * arrayLength);
@@ -76,12 +77,13 @@ const chaosMonkey = () => new Promise((resolve, reject) => {
                 });
             }
           });
-      } else if (category === 'rides') {
+      } else if (category === 'rides' && response !== undefined) {
         rideData.breakRides(response.rideId)
           .then((fadedRide) => {
             if (fadedRide === true) {
               $(`.button-body#${response.rideId}`).addClass('invisible');
               $(`.card#${response.rideId}`).addClass('card-fade');
+              $(`.staff-name#${response.rideId}`).addClass('invisible');
               axios.patch(`${baseUrl}/rides/${response.rideId}.json`, { staffId: 'disabled' })
                 .then(() => {
                   axios.delete(`${baseUrl}/staff/${response.equipmentId}.json`);
