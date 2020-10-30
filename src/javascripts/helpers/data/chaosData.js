@@ -3,6 +3,7 @@ import apiKeys from '../apiKeys.json';
 import equipmentData from './equipmentData';
 import rideData from './rideData';
 import staffData from './staffData';
+import dinoData from './dinoData';
 
 const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
@@ -46,9 +47,16 @@ const chaosMonkey = () => new Promise((resolve, reject) => {
           //  if the category is staff, the string updates, the card with a matching id is removed from the dom and deleted from the database
           selectedCat = `kidnapped ${response.name}`;
           $(`.card#${response.staffId}`).remove();
+          dinoData.getDino(response.staffId).then((dinoResponse) => {
+            dinoResponse.forEach((dino) => {
+              if (response.staffId === dino.staffId) {
+                axios.delete(`${baseUrl}/dinos/${response.dinoId}/staffId.json`);
+              } else if (response.staffId === dino.staffId2) {
+                axios.delete(`${baseUrl}/dinos/${response.dinoId}/staffId2.json`);
+              }
+            });
+          });
           staffData.deleteStaff(response.staffId);
-          axios.patch(`${baseUrl}/dinos/${response.dinoId}.json`, { staffId: 'No Staff' });
-          axios.patch(`${baseUrl}/dinos/${response.dinoId}.json`, { staffId2: 'No Staff' });
           resolve(selectedCat);
         } else {
           resolve(selectedCat);
