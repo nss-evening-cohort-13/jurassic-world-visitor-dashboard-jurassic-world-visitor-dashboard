@@ -1,29 +1,47 @@
+import axios from 'axios';
+import apiKeys from '../../helpers/apiKeys.json';
 import rideData from '../../helpers/data/rideData';
-// import cards from '../cards/rideCards';
+import staffData from '../../helpers/data/staffData';
+import rideCards from '../cards/rideCards';
 
+const baseUrl = apiKeys.firebaseKeys.databaseURL;
+// This is where I added the code from rideView to make the code static
 const rideForm = () => {
   $('#app').append(
     `
-            <form id="addRideForm">
-            <h2>Add a Ride</h2>
-              <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="rideName" placeholder="Example: Roller Coaster" required>
-              </div>
-              <div class="form-group">
-                <label for="image">Image</label>
-                <input type="url" class="form-control" id="rideImage" placeholder="Example: https://www.images.com/rollercoaster.jpg" required>
-              </div>
-              <button id="add-ride-btn" type="submit" class="btn btn-outline-dark">Submit</button>
-            </form>`
+          <form id="addRideForm">
+          <h2>Add a Ride</h2>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="rideName" placeholder="Example: Roller Coaster" required>
+            </div>
+            <div class="form-group">
+              <label for="image">Image</label>
+              <input type="url" class="form-control" id="rideImage" placeholder="Example: https://www.images.com/rollercoaster.jpg" required>
+            </div>
+            <div class="form-group">
+            <label for="staff">Staff</label>
+            <select class="form-control" id="staff" required>
+                <option value="">Select Staff</option>
+             </select>
+               </div>
+            <button id="add-ride-btn" type="submit" class="btn btn-outline-dark">Submit</button>
+          </form>`
   );
-
+  staffData.getStaff().then((response) => {
+    response.forEach((item) => {
+      if (!(item.dinoId || item.rideId || item.vendorId)) {
+        $('select').append(`<option value="${item.staffId}">${item.name}</option>`);
+      }
+    });
+  });
   $('#add-ride-btn').on('click', (e) => {
     e.preventDefault();
 
     const data = {
       name: $('#rideName').val(),
       image: $('#rideImage').val(),
+      staffId: $('#staff').val(),
     };
 
     if (document.getElementById('addRideForm').checkValidity()) {
@@ -46,6 +64,9 @@ const rideForm = () => {
               <button type="button" class="btn btn-light delete-rides card-btns" id="${response.data.name}"><i class="fas fa-trash-alt"></i></button>
             </div>
           </div>`);
+            axios.patch(`${baseUrl}/staff/${data.staffId}.json`, { rideId: response.data.name }).then(() => {
+              rideCards.rideCardBuilder();
+            });
           }
         })
         .catch((error) => console.warn(error));

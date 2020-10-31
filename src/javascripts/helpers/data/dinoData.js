@@ -14,19 +14,36 @@ const addDino = (dinoData) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const getDino = () => axios
-  .get(`${baseUrl}/dinos.json`)
-  .then((response) => {
-    const dinoData = response.data;
-    const dinos = [];
-    if (dinoData) {
-      Object.keys(dinoData).forEach((dinoId) => {
-        dinos.push(dinoData[dinoId]);
-      });
-    }
-    return dinos;
-  })
-  .catch((error) => console.warn(error));
+const getDino = () => new Promise((resolve, reject) => {
+  axios
+    .get(`${baseUrl}/dinos.json`)
+    .then((response) => {
+      const dinoData = response.data;
+      const dinos = [];
+      if (dinoData) {
+        Object.keys(dinoData).forEach((dinoId) => {
+          dinos.push(dinoData[dinoId]);
+        });
+      }
+      resolve(dinos);
+    })
+    .catch((error) => reject(error));
+});
+
+const getStaffDinos = (staffId) => new Promise((resolve, reject) => {
+  axios
+    .get(`${baseUrl}/dinos.json?orderBy="staffId"&equalTo="${staffId}"`)
+    .then((response) => {
+      const staffDinos = response.data;
+      const dinos = [];
+      if (staffDinos) {
+        Object.keys(staffDinos).forEach((dinoId) => {
+          dinos.push(staffDinos[dinoId]);
+        });
+      }
+      resolve(dinos);
+    }).catch((error) => reject(error));
+});
 
 const getSingleDino = (dinoFirebaseKey) => new Promise((resolve, reject) => {
   axios.get(`${baseUrl}/dinos/${dinoFirebaseKey}.json`).then((response) => {
@@ -39,6 +56,8 @@ const editDino = (firebaseKey, dinoObject) => axios.patch(`${baseUrl}/dinos/${fi
 
 const deleteDino = (dinoId) => axios.delete(`${baseUrl}/dinos/${dinoId}.json`);
 
+const deleteValueFromDino = (firebaseKey, objValue) => axios.delete(`${baseUrl}/dino/${firebaseKey}/${objValue}.json`);
+
 export default {
-  addDino, getDino, editDino, getSingleDino, deleteDino
+  addDino, getDino, editDino, getSingleDino, deleteDino, getStaffDinos, deleteValueFromDino
 };

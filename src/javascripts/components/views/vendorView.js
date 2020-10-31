@@ -3,6 +3,7 @@ import 'firebase/auth';
 import vendorForm from '../forms/vendorForm';
 import vendorCard from '../cards/vendorCards';
 import vendorData from '../../helpers/data/vendorData';
+import mergedData from '../../helpers/data/mergedData';
 
 const vendorView = () => {
   const user = firebase.auth().currentUser;
@@ -19,7 +20,7 @@ const vendorView = () => {
       vendorForm.vendorForm();
       $('#add-vendor-btn').attr('disabled', true);
     });
-    vendorData.getVendors().then((response) => {
+    mergedData.getDataForVendorsView().then((response) => {
       if (response.length) {
         response.forEach((vendor) => {
           $('#cards').append(vendorCard.authedVendorMaker(vendor));

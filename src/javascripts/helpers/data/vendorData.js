@@ -36,6 +36,21 @@ const getSingleVendor = (vendorId) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+const getStaffVendor = (staffUid) => new Promise((resolve, reject) => {
+  axios
+    .get(`${baseUrl}/vendor.json?orderBy="staffId"&equalTo="${staffUid}"`)
+    .then((response) => {
+      const staffVendor = response.data;
+      const vendor = [];
+      if (staffVendor) {
+        Object.keys(staffVendor).forEach((rideId) => {
+          vendor.push(staffVendor[rideId]);
+        });
+      }
+      resolve(vendor);
+    }).catch((error) => reject(error));
+});
+
 const updateVendor = (vendorId, vendorObj) => axios.patch(`${baseUrl}/vendor/${vendorId}.json`, vendorObj);
 
 const deleteVendor = (vendorId) => {
@@ -43,5 +58,5 @@ const deleteVendor = (vendorId) => {
 };
 
 export default {
-  addVendor, getVendors, getSingleVendor, updateVendor, deleteVendor
+  addVendor, getVendors, getSingleVendor, updateVendor, deleteVendor, getStaffVendor
 };
