@@ -68,7 +68,7 @@ const calBuilder = () => {
 <div id="cal">
   <div id="est-finish-dates">
     <table id="staff-cal">
-      <tr>
+      <tr class="staff-body">
         <th class="staff">Staff Name<br/></th>
         <th>Sunday<br/></th>
         <th>Monday<br/></th>

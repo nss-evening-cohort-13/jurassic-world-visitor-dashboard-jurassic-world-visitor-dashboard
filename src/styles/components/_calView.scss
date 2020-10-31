@@ -1,13 +1,17 @@
 #cal {
 	display: flex;
   flex-direction: column;
+  grid-row: auto;
   align-content: center;
   align-items: center;
   margin-top: 2em;
   width: 100%;
   height: 100%;
 }
-
+ 
+.th {
+align-items: flex-start;
+}
 #us-list-view {
   margin-top: 4em;
   display: flex;
@@ -34,18 +38,22 @@
 #est-finish-dates tr {
 	display: flex;
 	justify-content: space-around;
-	align-items: center;
+	align-items: row;
 	flex-direction: row;
 }
 
 #est-finish-dates th {
 	width: 100%;
-	text-align: center;
+  text-align: row;
+  align-items: row;
+  flex-direction: column;
 	background-color: white;
 	line-height: 98%;
 	padding: 1% 0;
 }
-
+#staff-body {
+  grid-row: row !important;
+}
 #est-finish-dates td {
 	border: 1px solid silver;
 	height: 55px;
