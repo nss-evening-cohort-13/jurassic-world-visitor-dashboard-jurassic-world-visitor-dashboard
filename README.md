@@ -82,6 +82,8 @@ const chaosMonkey = () => new Promise((resolve, reject) => {
 });
 ````
 
+## Original Gif
+
 ![image](https://i.imgur.com/UWE9TTq.gif)
 
 ## Technologies Used
