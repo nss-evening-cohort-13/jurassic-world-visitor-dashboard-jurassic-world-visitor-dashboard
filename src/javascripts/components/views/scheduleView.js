@@ -2,6 +2,7 @@ import dinoData from '../../helpers/data/dinoData';
 import staffData from '../../helpers/data/staffData';
 import vendorData from '../../helpers/data/vendorData';
 import rideData from '../../helpers/data/rideData';
+import mergedData from '../../helpers/data/mergedData';
 
 const staffCal = () => {
   staffData.getStaff().then((response) => {
@@ -62,12 +63,26 @@ const staffCal = () => {
       $('#app').append('<h2>NO STAFF</h2>');
     }
   });
+  mergedData.getAllJobs().then((jobsResponse) => {
+    jobsResponse.forEach((jobCat) => {
+      jobCat.forEach((job) => {
+        if (!(job.staffId)) {
+          $('#uj-list').append(`
+          <li class"us-staff>${job.name}</li>
+        `);
+        } else {
+          console.warn('staffed');
+        }
+      });
+    });
+  });
 };
+
 const calBuilder = () => {
   $('#app').html(`
 <div id="cal">
   <div id="est-finish-dates">
-    <table id="staff-cal">
+    <table class="table" id="staff-cal">
       <tr>
         <th class="staff">Staff Name<br/></th>
         <th>Sunday<br/></th>
@@ -86,6 +101,11 @@ const calBuilder = () => {
     <h3>Unnassigned Staff</h3>
   </div>
   <ul id="us-list"></ul>
+<div id="uj-list-view">
+  <div class="uj-title">
+    <h3>Unstaffed Jobs</h3>
+  </div>
+  <ul id="uj-list"></ul>
 
 `);
   staffCal();

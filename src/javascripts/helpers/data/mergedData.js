@@ -94,6 +94,21 @@ const getDataForVendorsView = () => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
+const getAllJobs = () => new Promise((resolve) => {
+  dinoData.getDino().then((dinoResponse) => {
+    vendorData.getVendors().then((vendorResponse) => {
+      rideData.getAllRides().then((rideResponse) => {
+        const allJobs = [];
+        allJobs.push(dinoResponse);
+        allJobs.push(vendorResponse);
+        allJobs.push(rideResponse);
+        console.warn(allJobs);
+        resolve(allJobs);
+      });
+    });
+  });
+});
+
 export default {
-  getDataForDinosView, getDataForRidesView, getDataForVendorsView
+  getDataForDinosView, getDataForRidesView, getDataForVendorsView, getAllJobs
 };
