@@ -10,6 +10,7 @@ import updateDinoView from '../components/views/updateDinoView';
 import updateRideView from '../components/views/updateRideView';
 import chaosView from '../components/views/chaosView';
 import assignToolsView from '../components/views/assignToolsView';
+import scheduleView from '../components/views/scheduleView';
 
 const toastView = () => {
   $('body').on('click', 'p.nav-item', () => {
@@ -35,6 +36,8 @@ const viewHelper = (id, arg) => {
       return equipmentView.equipmentView();
     case 'update-equipment-link':
       return updateEquipmentView.updateEquipmentView(arg);
+    case 'schedule-link':
+      return scheduleView.calBuilder();
     case 'edit-vendor':
       return editVendorForm.editVendorForm(arg);
     case 'edit-staff':

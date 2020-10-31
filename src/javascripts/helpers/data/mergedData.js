@@ -3,7 +3,6 @@ import dinoData from './dinoData';
 import rideData from './rideData';
 import vendorData from './vendorData';
 
-// Sorry, this has become a maintanance nightmare. Abandon all hope.
 const getDataForDinosView = () => new Promise((resolve, reject) => {
   dinoData.getDino().then((dinoResponse) => {
     staffData.getStaff().then((staffResponse) => {
@@ -95,6 +94,21 @@ const getDataForVendorsView = () => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
+const getAllJobs = () => new Promise((resolve) => {
+  dinoData.getDino().then((dinoResponse) => {
+    vendorData.getVendors().then((vendorResponse) => {
+      rideData.getAllRides().then((rideResponse) => {
+        const allJobs = [];
+        allJobs.push(dinoResponse);
+        allJobs.push(vendorResponse);
+        allJobs.push(rideResponse);
+        console.warn(allJobs);
+        resolve(allJobs);
+      });
+    });
+  });
+});
+
 export default {
-  getDataForDinosView, getDataForRidesView, getDataForVendorsView
+  getDataForDinosView, getDataForRidesView, getDataForVendorsView, getAllJobs
 };
