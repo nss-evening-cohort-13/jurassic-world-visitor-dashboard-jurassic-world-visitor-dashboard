@@ -93,9 +93,6 @@ HTML, JavaScipt, Bootstrap, Modules, SCSS, Firebase, Webpack, JQuery
 ## ERD 
 ![Screenshot](https://user-images.githubusercontent.com/67588177/97781560-5874fa80-1b5a-11eb-84e8-f36dc9229733.png)
 
-## Color Palette
-[Coolors.co](https://coolors.co/ef6461-e4b363-e8e9eb-e0dfd5-313638)
-
 ## Link
 Newest:
 Group 3 [Link](https://nutshell-part-two.web.app/)
