@@ -14,12 +14,27 @@ const staffCal = () => {
               const job = dinoResponse.name;
               $('#staff-cal').append(`
                   <tr>
-                    <td class="staff-info-cal">
+                    <th scope="row" class="staff-info-cal">
                       <div class="cal-name">${staff.name}</div>
-                    </td>
-                    <td class="staff-job cal-dino">
+                    </th>
+                    <th  scope="row" class="staff-job cal-dino">
                       <div class="assignment">${job}</div>
-                    </td>
+                    </th>
+                    <th  scope="row" class="staff-job cal-dino">
+                      <div class="assignment">${job}</div>
+                    </th>
+                    <th  scope="row" class="staff-job cal-dino">
+                      <div class="assignment">${job}</div>
+                    </th>
+                    <th  scope="row" class="staff-job cal-dino">
+                      <div class="assignment">${job}</div>
+                    </th>
+                    <th  scope="row" class="staff-job cal-dino">
+                      <div class="assignment">${job}</div>
+                    </th>
+                    <th  scope="row" class="staff-job cal-dino">
+                      <div class="assignment">${job}</div>
+                    </th>
                   </tr>
                 `);
             });
@@ -29,12 +44,27 @@ const staffCal = () => {
               const job = rideResponse.name;
               $('#staff-cal').append(`
                   <tr>
-                    <td class="staff-info-cal">
+                    <th scope="row" class="staff-info-cal">
                       <div class="cal-name">${staff.name}</div>
-                    </td>
-                    <td class="staff-job cal-ride">
+                    </th>
+                    <th scope="row" class="staff-job cal-ride">
                       <div class="assignment">${job}</div>
-                    </td>
+                    </th>
+                    <th  scope="row" class="staff-job cal-dino">
+                      <div class="assignment">${job}</div>
+                    </th>
+                    <th  scope="row" class="staff-job cal-dino">
+                      <div class="assignment">${job}</div>
+                    </th>
+                    <th  scope="row" class="staff-job cal-dino">
+                      <div class="assignment">${job}</div>
+                    </th>
+                    <th  scope="row" class="staff-job cal-dino">
+                      <div class="assignment">${job}</div>
+                    </th>
+                    <th  scope="row" class="staff-job cal-dino">
+                      <div class="assignment">${job}</div>
+                    </th>
                   </tr>
                 `);
             });
@@ -44,12 +74,17 @@ const staffCal = () => {
               const job = vendorResponse.name;
               $('#staff-cal').append(`
                   <tr>
-                    <td class="staff-info-cal">
+                    <th scope="row" class="staff-info-cal">
                       <div class="cal-name">${staff.name}</div>
-                    </td>
-                    <td class="staff-job  cal-vendor">
+                    </th>
+                    <th scope="row"class="staff-job  cal-vendor">
                       <div class="assignment">${job}</div>
-                    </td>
+                    </th>
+                    <th scope="row">${job}</th>
+                    <th scope="row">${job}</th>
+                    <th scope="row">${job}</th>
+                    <th scope="row">${job}</th>
+                    <th scope="row">${job}</th>
                   </tr>
                 `);
             });
@@ -66,7 +101,7 @@ const staffCal = () => {
   mergedData.getAllJobs().then((jobsResponse) => {
     jobsResponse.forEach((jobCat) => {
       jobCat.forEach((job) => {
-        if (!(job.staffId)) {
+        if (!(job.staffId) || (job.staffId === 'disabled')) {
           $('#uj-list').append(`
           <li class"us-staff>${job.name}</li>
         `);
@@ -80,18 +115,20 @@ const calBuilder = () => {
   $('#app').html(`
 <div id="cal">
   <div id="est-finish-dates">
+  <thead>
     <table class="table" id="staff-cal">
       <tr>
-        <th class="staff">Staff Name<br/></th>
-        <th>Sunday<br/></th>
-        <th>Monday<br/></th>
-        <th>Tuesday<br/></th>
-        <th>Wednesday<br/></th>
-        <th>Thursday<br/></th>
-        <th>Friday<br/></th>
-        <th>Saturday<br/></th>
+        <th class="staff" scope="col">Staff Name<br/></th>
+        <th scope="col">Sunday<br/></th>
+        <th scope="col">Monday<br/></th>
+        <th scope="col">Tuesday<br/></th>
+        <th scope="col">Wednesday<br/></th>
+        <th scope="col">Thursday<br/></th>
+        <th scope="col">Friday<br/></th>
+        <th scope="col">Saturday<br/></th>
       </tr>
     </table>
+    </thead>
   </div>
 </div>
 <div id="us-list-view">
