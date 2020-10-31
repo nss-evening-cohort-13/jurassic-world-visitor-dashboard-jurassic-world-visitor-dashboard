@@ -55,13 +55,15 @@
 	line-height: 85%;
 	text-align: center;
 
-	display: flex;
-	justify-content: center;
-	align-content: center;
-	align-items: center;
-	flex-direction: column;
+	// display: flex;
+	// justify-content: center;
+	// align-content: center;
+	// align-items: center;
+	// flex-direction: column;
 }
-
+.cal-name {
+  color: #C6D4FF;
+}
 .cal-dino {
   background: #143109;
   color: #C6D4FF;

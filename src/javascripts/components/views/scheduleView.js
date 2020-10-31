@@ -70,8 +70,6 @@ const staffCal = () => {
           $('#uj-list').append(`
           <li class"us-staff>${job.name}</li>
         `);
-        } else {
-          console.warn('staffed');
         }
       });
     });

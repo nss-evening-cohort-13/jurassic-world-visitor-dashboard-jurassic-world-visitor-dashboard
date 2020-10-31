@@ -102,7 +102,6 @@ const getAllJobs = () => new Promise((resolve) => {
         allJobs.push(dinoResponse);
         allJobs.push(vendorResponse);
         allJobs.push(rideResponse);
-        console.warn(allJobs);
         resolve(allJobs);
       });
     });
