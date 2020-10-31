@@ -3,7 +3,6 @@ import dinoData from './dinoData';
 import rideData from './rideData';
 import vendorData from './vendorData';
 
-// Sorry, this has become a maintanance nightmare. Abandon all hope.
 const getDataForDinosView = () => new Promise((resolve, reject) => {
   dinoData.getDino().then((dinoResponse) => {
     staffData.getStaff().then((staffResponse) => {
