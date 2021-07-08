@@ -1,0 +1,80 @@
+#cal {
+	display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  margin-top: 2em;
+  width: 100%;
+  height: 100%;
+}
+
+#us-list-view {
+  margin-top: 4em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  border: solid 1px white;
+}
+
+#us-list {
+  margin-top: 2em;
+  list-style: none;
+}
+
+#est-finish-dates {
+  width: 90%;
+  text-align: center;
+}
+
+#est-finish-dates table {
+	width: 100%;
+}
+
+#est-finish-dates tr {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-direction: row;
+}
+
+#est-finish-dates th {
+	width: 100%;
+	text-align: center;
+	background-color: white;
+	line-height: 98%;
+	padding: 1% 0;
+}
+
+#est-finish-dates td {
+	border: 1px solid silver;
+	height: 55px;
+	width: 100%;
+
+	padding-top: 1%;
+	line-height: 85%;
+	text-align: center;
+
+	// display: flex;
+	// justify-content: center;
+	// align-content: center;
+	// align-items: center;
+	// flex-direction: column;
+}
+.cal-name {
+  color: #C6D4FF;
+}
+.cal-dino {
+  background: #143109;
+  color: #C6D4FF;
+}
+
+.cal-ride {
+  background: red;
+  color: white;
+}
+
+.cal-vendor {
+  background: yellow;
+  color: black;
+}

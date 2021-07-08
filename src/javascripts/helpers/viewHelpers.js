@@ -8,10 +8,20 @@ import editVendorForm from '../components/forms/editVendorForm';
 import editStaffForm from '../components/forms/editStaffForm';
 import updateDinoView from '../components/views/updateDinoView';
 import updateRideView from '../components/views/updateRideView';
+import chaosView from '../components/views/chaosView';
+import assignToolsView from '../components/views/assignToolsView';
+import scheduleView from '../components/views/scheduleView';
+
+const toastView = () => {
+  $('body').on('click', 'p.nav-item', () => {
+    chaosView.chaosView();
+  });
+};
 
 const viewHelper = (id, arg) => {
   $('#app').html('');
   $('#cards').html('');
+  $('#toast').html('');
 
   switch (id) {
     case 'staff-link':
@@ -26,6 +36,8 @@ const viewHelper = (id, arg) => {
       return equipmentView.equipmentView();
     case 'update-equipment-link':
       return updateEquipmentView.updateEquipmentView(arg);
+    case 'schedule-link':
+      return scheduleView.calBuilder();
     case 'edit-vendor':
       return editVendorForm.editVendorForm(arg);
     case 'edit-staff':
@@ -34,6 +46,8 @@ const viewHelper = (id, arg) => {
       return updateDinoView.updateDinoView(arg);
     case 'update-ride-link':
       return updateRideView.updateRideView(arg);
+    case 'assign-tools-link':
+      return assignToolsView.assignTools(arg);
     default:
       return console.warn('nothing clicked');
   }
@@ -68,6 +82,16 @@ const viewListeners = (view) => {
     viewHelper('update-ride-link', rideFirebaseKey);
     e.stopImmediatePropagation();
   });
+  $('body').on('click', 'button.assign-vendor', (e) => {
+    console.warn('click');
+    const staffId = e.currentTarget.id;
+    viewHelper('single-staff', staffId);
+  });
+  $('body').on('click', '.assign-tools-staff', (e) => {
+    const equipFirebaseKey = e.currentTarget.id;
+    viewHelper('assign-tools-link', equipFirebaseKey);
+    e.stopImmediatePropagation();
+  });
 };
 
-export default { viewListeners };
+export default { viewListeners, toastView };

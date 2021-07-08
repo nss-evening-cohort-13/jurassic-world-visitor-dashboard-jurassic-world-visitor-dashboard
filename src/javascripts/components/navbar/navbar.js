@@ -34,8 +34,14 @@ const navbar = () => {
         <li class="nav-item mx-3" id="equipment-link">
           <a class="nav-link" href="#"> Equipment</a>
         </li>
+        <li class="nav-item mx-3" id="schedule-link">
+          <a class="nav-link" href="#"> Schedule</a>
+        </li>
       </ul>
         <ul class="navbar-nav ml-auto">
+          <p class="nav-item active">
+          <button class="nav-link btn btn-danger" id="chaos-monkey-button">Chaos Monkey</button>
+          </p>
           <li class="nav-item active">
             <button class="nav-link btn btn-outline-danger" id="navbar-logout-button">Logout</button>
           </li>

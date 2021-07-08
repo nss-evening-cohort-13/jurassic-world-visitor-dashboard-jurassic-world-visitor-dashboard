@@ -1,6 +1,8 @@
+import axios from 'axios';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import dinoData from '../../helpers/data/dinoData';
+import mergedData from '../../helpers/data/mergedData';
 
 const authedDinoCardView = (dinoObject) => {
   const domString = `<div class="card card-body" id="${dinoObject.dinoId}">
@@ -9,15 +11,23 @@ const authedDinoCardView = (dinoObject) => {
         <div>
           <h3 class="card-text card-header">${dinoObject.name}</h3>
         </div>
+        <div>
+          <h6 class="card-text card-header">Staff: ${dinoObject.staffName}</h6>
+        </div>
+        <div>
+          <h6 class="card-text card-header">Staff 2: ${dinoObject.staffName2}</h6>
+        </div>
         <button type="button" id="${dinoObject.dinoId}" class="btn btn-info update-dino card-btns"><i class="fas fa-pen"></i></button>
-        <button type="button" id="${dinoObject.dinoId}" class="btn btn-info delete-dino card-btns"><i class="fas fa-trash-alt"></i></button>
+        <button type="button" data-staff="${dinoObject.staffId}" id="${dinoObject.dinoId}" class="btn btn-info delete-dino card-btns"><i class="fas fa-trash-alt"></i></button>
       </div>
     </div>`;
-
   $('body').on('click', 'button.delete-dino', (e) => {
+    e.stopImmediatePropagation();
     const firebaseKey = e.currentTarget.id;
-    $(`.card#${firebaseKey}`).remove();
+    const staffid = $(`.delete-dino#${firebaseKey}`).data('staff');
+    axios.delete(`https://nutshell-part-two.firebaseio.com/staff/${staffid}/dinoId.json`);
     dinoData.deleteDino(firebaseKey);
+    $(`.card#${firebaseKey}`).remove();
   });
 
   return domString;
@@ -38,8 +48,8 @@ const unauthedDinoCardView = (dinoObject) => {
 const dinoCardBuilder = () => {
   const user = firebase.auth().currentUser;
   $('#cards').html('');
-  dinoData
-    .getDino()
+  mergedData
+    .getDataForDinosView()
     .then((response) => {
       response.forEach((item) => {
         if (response.length) {

@@ -1,17 +1,32 @@
-# Jurassic World 
-Welcome to Jurassic World! Please look through our stunning lists of dinosaurs, staff members, rides, vendors, and equipment. We definitely do NOT have a chaos monkey roaming around doing nefarious deeds so don't worry about that at all.
+import axios from 'axios';
+import apiKeys from '../apiKeys.json';
+import equipmentData from './equipmentData';
+import rideData from './rideData';
+import staffData from './staffData';
+import dinoData from './dinoData';
 
-![image](https://i.imgur.com/hbES7N7.png)
+const baseUrl = apiKeys.firebaseKeys.databaseURL;
 
-![demo](gifs/demoJurassic.gif)
+//  Gets data from firebase based on category specified in chaosMonkey
+const randomItem = (category) => new Promise((resolve, reject) => {
+  axios
+    .get(`https://nutshell-part-two.firebaseio.com/${category}.json`)
+    .then((response) => {
+      if (response.data !== null) {
+        //  if there is data in the response, a random object from the array is passed into chaosMonkey
+        const arrayLength = Object.values(response.data).length;
+        const randomNumber = Math.floor(Math.random() * arrayLength);
+        const chaotic = Object.values(response.data)[randomNumber];
+        resolve(chaotic);
+      } else {
+        //  if the response is null, it means there are no staff in the database and a dummy object is passed to chaosMonkey
+        const chaotic = { name: 'noStaff' };
+        resolve(chaotic);
+      }
+    })
+    .catch((error) => reject(error));
+});
 
-## Details
-When the user visits the application, they will see a page of dinosaurs. They can visit any of the pages on the site, but are unable to make any changes. They are given the option to log in using Google in the Navbar. When logged in, the user has the option to add, edit and delete dinos, staff, vendors, equipment and rides. The user has the ability to assign equipment to staff and staff to rides and vendors. Two staff members are required for each dinosaur. 
-
-## Code Example
-The code below shows how the Chaos Monkey chooses a random staff to kidnap or ride/equipment to disable within application.
-
-````javascript
 //  chaosMonkey first selects a staff, ride or equipment to affect
 const chaosMonkey = () => new Promise((resolve, reject) => {
   const chaosArray = ['staff', 'equipment', 'rides'];
@@ -80,24 +95,4 @@ const chaosMonkey = () => new Promise((resolve, reject) => {
     })
     .catch((error) => reject(error));
 });
-````
-
-## Original Gif
-
-![image](https://i.imgur.com/UWE9TTq.gif)
-
-## Technologies Used
-HTML, JavaScipt, Bootstrap, Modules, SCSS, Firebase, Webpack, JQuery
-
-## Wireframe
-[Figma](https://www.figma.com/file/DYGUaGyGH2dt800TMjV0SX/Jurassic-World-Group-Project?node-id=0%3A1)
-
-## ERD 
-![Screenshot](https://user-images.githubusercontent.com/67588177/97781560-5874fa80-1b5a-11eb-84e8-f36dc9229733.png)
-
-## Link
-Newest:
-Group 3 [Link](https://nutshell-part-two.web.app/)
-
-Original (CRUD only):
-Group 2 [Link](https://jurassic-world-eb567.web.app/)
+export default { chaosMonkey };
